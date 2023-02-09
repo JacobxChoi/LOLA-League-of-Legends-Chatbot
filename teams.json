@@ -1,0 +1,24 @@
+{
+  "ontology": {
+    "region": ["lpl", "lec", "lcs", "lck"],
+
+    "lpl": ["edward gaming", "royal never give up", "jd gaming"],
+    "lck": ["gen.g esports", "t1", "damwon gaming", "drx"],
+    "lec": ["rogue", "g2 esports", "fnatic"],
+    "lcs": ["cloud9", "100 thieves", "evil geniuses"],
+
+    "edward gaming": ["flandre", "jiejie", "scout", "viper", "meiko"],
+    "royal never give up": ["breathe", "wei", "xiaohu", "gala", "ming"],
+    "jd gaming": ["369", "kanavi", "yagao", "hope", "missing"],
+    "gen.g esports": ["doran", "peanut", "chovy", "rule", "lehends"],
+    "t1": ["zeus", "oner", "faker", "gumayusi", "keria"],
+    "damwon gaming": ["nuguri", "canyon", "showmaker", "deokdam", "kellin"],
+    "drx": ["kingen", "pyosik", "zeka", "deft", "beryl"],
+    "rogue": ["odoamne", "malrang", "larssen", "comp", "trymbi"],
+    "g2 esports": ["brokenblade", "jankos", "caps", "flakked", "targamas"],
+    "fnatic": ["wunder", "razork", "humanoid", "upset", "hylissang"],
+    "cloud9": ["fudge", "blaber", "jensen", "berserker", "zven"],
+    "100 thieves": ["ssumday", "closer", "abbedagge", "fbi", "huhi"],
+    "evil geniuses": ["impact", "inspired", "jojopyun", "kaori", "vulcan"]
+  }
+}
