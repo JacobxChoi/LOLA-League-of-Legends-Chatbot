@@ -7,8 +7,8 @@ doesntKnowLeague = doesntKnowLeague()
 
 transitions = {
     'state':'start',
-    '`Do you know anything  about League of Legends?`':{
-        '[yes]':'knowsLeague', #change 'yes' to something like: yeah, I like playing league.
+    '`Do you know much about League of Legends esports??`':{
+        '[yes]':'knowsLeague', #change 'yes' to something like: yeah, I keep up with LCS
         '[no]':'doesntKnowLeague', #change 'no' to something like: no, I don't really play league.
         'error':{
             '`Sorry, I didn\'t understand you.`':'start'
