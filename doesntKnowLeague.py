@@ -11,8 +11,9 @@ def doesntKnowLeague():
                     'error':'end'
                 }
             },
-            '[no]':{
-                '`League of Legends is an online 5 v 5 game, where players play \'champions\' that each have unique abilites. The objective of the game is to kill the enemy player\'s nexus. Does that make sense?`':{
+            '[{no, not, dont}]':{
+                'state':'explainLeague',
+                '``That\'s fine. League is just an online 5 v 5 game, where players play champions that each have unique abilites, and the objective of the game is to kill the enemy player\'s nexus. Does that make sense?`':{
                     '[yes]': {
                         '`Nice! What got you interested in League?`':{
                             '[any response]':{
