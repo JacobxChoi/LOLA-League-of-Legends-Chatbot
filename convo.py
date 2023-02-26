@@ -13,6 +13,7 @@ transitions = {
             '`nice.`': 'favRegion', #error. I thought it would pick randomly, but only picks the bottom option, so 'favTeam' in this example
             '`nice.`': 'favTeam'
         },
+        '#IF(#LEAGUE)':'explainLeague',
         '[{no, not, dont}]':'doesntKnowLeague', #change 'no' to something like: no, I don't really play league.
         'error':{
             '`Sorry, I didn\'t understand you.`':'start'
@@ -21,7 +22,7 @@ transitions = {
 }
 
 macros = {
-    'esportsOrLeague' :  MacroEsportsOrLeague()
+    'LEAGUE' :  MacroEsportsOrLeague()
 }
 
 df = DialogueFlow('start', end_state='end')
