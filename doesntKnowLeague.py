@@ -1,23 +1,12 @@
 def doesntKnowLeague():
     doesntKnowLeague = {
         'state':'doesntKnowLeague',
-        '`That\'s fine. Are you familiar with the game League of Legends?.`': {
+        '`That\'s fine. Do you play League of Legends?.`': {
             '[yes]':{
                 'state':'familiarity',
-                '`Do you have a general idea of what esports is?`':{
-                    '[yes]':{
-                        '`Have you ever heard of C9?`':'end' #continue conversation
-                    },
-                    '[no]':{
-                        '`Esports is a competitive gaming league where teams play games like League of Legends and compete for prizes. Does that make sense?`': {
-                            '[yes]':{
-                                '`Awesome!`''end'
-                            },
-                            '[no]':{
-                                '`What are you confused about?`':'end' #continue conversation
-                            },
-                            'error':'end'
-                        }
+                '`Who\'s your favorite champion?`':{
+                    '[favorite champion]':{
+                        '`nice!`':'end'
                     },
                     'error':'end'
                 }
