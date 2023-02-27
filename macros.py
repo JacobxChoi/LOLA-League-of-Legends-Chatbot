@@ -1,6 +1,7 @@
 from emora_stdm import Macro, Ngrams
 from typing import Dict, Any, List
 import re
+import random
 
 class MacroEsportsOrLeague(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
@@ -11,3 +12,12 @@ class MacroEsportsOrLeague(Macro):
             if m.group(1) or m.group(2) is not None:
                 hasLeague = True
         return hasLeague
+
+class MacroRandNum(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        randomNum = random.randint(0,1)
+        if randomNum==1:
+            print('yes')
+            return True
+        else:
+            return False

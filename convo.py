@@ -1,7 +1,7 @@
 from emora_stdm import DialogueFlow
 from src.project.knowsLeague import knowsLeague
 from src.project.doesntKnowLeague import doesntKnowLeague
-from src.project.macros import MacroEsportsOrLeague
+from src.project.macros import MacroEsportsOrLeague, MacroRandNum
 
 favoriteTeam, favoriteRegion = knowsLeague()
 doesntKnowLeague = doesntKnowLeague()
@@ -10,7 +10,7 @@ transitions = {
     'state':'start',
     '`Do you know much about League of Legends esports?`':{
         '[yes]': {
-            '`nice.`': 'favRegion', #error. I thought it would pick randomly, but only picks the bottom option, so 'favTeam' in this example
+            '#IF(#NUM) `nice.`': 'favRegion', #error. I thought it would pick randomly, but only picks the bottom option, so 'favTeam' in this example
             '`nice.`': 'favTeam'
         },
         '#IF(#LEAGUE)':'explainLeague',
@@ -22,7 +22,8 @@ transitions = {
 }
 
 macros = {
-    'LEAGUE' :  MacroEsportsOrLeague()
+    'LEAGUE' :  MacroEsportsOrLeague(),
+    'NUM' : MacroRandNum()
 }
 
 df = DialogueFlow('start', end_state='end')
