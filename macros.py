@@ -5,7 +5,7 @@ import random
 
 class MacroEsportsOrLeague(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        r = re.compile(r"(play)|([lL]eague(?:\s)*(?:[oO]f [lL]egend(?:s)?)?)?")
+        r = re.compile(r"(dont.*play(?:ing)*)|([lL]eague(?:\s)*(?:[oO]f [lL]egend(?:s)?)?)?")
         # m = r.search(ngrams.text())
         hasLeague = False
         for m in re.finditer(r, ngrams.text()):

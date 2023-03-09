@@ -3,10 +3,10 @@ def knowsLeague():
     favoriteTeam = {
         'state': 'favTeam',
         '`Do you have a favorite professional player?`': {
-            '[yes]':{
+            '[{yes, yeah}]':{
                 'state':'whichFavoritePlayer',
                 '`Who is this player?`': {
-                    '[faker]':{
+                    '[{faker}]':{
                         'state':'teamCondition',
                         '`What do you think about how they\'ve been doing lately?`':'end' #continue conversation
                     },
@@ -15,6 +15,7 @@ def knowsLeague():
                     }
                 }
             },
+            '[{faker}]':'teamCondition',
             'error':'favRegion'
         }
     }

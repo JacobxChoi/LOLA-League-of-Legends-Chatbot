@@ -2,7 +2,7 @@ def doesntKnowLeague():
     doesntKnowLeague = {
         'state':'doesntKnowLeague',
         '`That\'s fine. Do you play League of Legends?.`': {
-            '[yes]':{
+            '[{yes, yeah}]':{
                 'state':'familiarity',
                 '`Who\'s your favorite champion?`':{
                     '[favorite champion]':{ #ontology for favorite champion
