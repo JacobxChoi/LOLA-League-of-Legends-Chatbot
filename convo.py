@@ -9,9 +9,8 @@ doesntKnowLeague = doesntKnowLeague()
 transitions = {
     'state':'start',
     '`Do you know much about League of Legends esports?`':{
-        '[yes]': {
-            '#IF(#NUM) `nice.`': 'favRegion', #error. I thought it would pick randomly, but only picks the bottom option, so 'favTeam' in this example
-            '`nice.`': 'favTeam'
+        '[{yes, yeah}]': {
+            '`nice.`': 'favTeam',
         },
         '#IF(#LEAGUE)':'explainLeague',
         '[{no, not, dont}]':'doesntKnowLeague', #change 'no' to something like: no, I don't really play league.
