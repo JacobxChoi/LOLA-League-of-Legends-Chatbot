@@ -9,7 +9,7 @@ doesntKnowLeague = doesntKnowLeague()
 transitions = {
     'state':'start',
     '`Do you know much about League of Legends esports?`':{
-        '[{yes, yeah}]': {
+        '[{yes, yeah, know}]': {
             '`nice.`': 'favTeam',
         },
         '#IF(#LEAGUE)':'explainLeague',

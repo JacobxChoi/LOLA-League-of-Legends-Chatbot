@@ -2,21 +2,22 @@
 def knowsLeague():
     favoriteTeam = {
         'state': 'favTeam',
-        '`Do you have a favorite professional player?`': {
-            '[{yes, yeah}]':{
-                'state':'whichFavoritePlayer',
-                '`Who is this player?`': {
-                    '[{faker}]':{
-                        'state':'teamCondition',
-                        '`What do you think about how they\'ve been doing lately?`':'end' #continue conversation
+        '`Who\'s your favorite professional player?`': {
+            '[{faker}]':{ #$FAV_PLAYER
+                'state':'teamCondition',
+                '`What do you think about how they\'ve been doing lately?`': {
+                   '[{good, well, great, decent, nice, okay}]': {
+                        '`That\'s valid, but I think (fav player) was better in YEAR`':'end'
                     },
-                    'error': {
-                        '`I don\'t think I know this player`': 'whichFavoritePlayer'
+                    '[{hasnt, not, bad}]':{
+                        '`I agree. (fav player) was much better before`': 'end'
+                    },
+                    'error':{
+                        '`what.`':'end' #error condition not handled
                     }
                 }
             },
-            '[{faker}]':'teamCondition',
-            'error':'favRegion'
+            'error':'favRegion' #if user doesn't have favorite player, go to favorite region
         }
     }
     favoriteRegion = {
