@@ -1,19 +1,19 @@
 
 def knowsLeague():
     favoriteTeam = {
-        'state': 'favTeam',
+        'state': 'favPlayer',
         '`Who\'s your favorite professional player?`': {
-            '[{faker}]':{ #$FAV_PLAYER
-                'state':'teamCondition',
+            '[{#ONT(leagues)}]':{ #$FAV_PLAYER
+                'state':'playerCondition',
                 '`What do you think about how they\'ve been doing lately?`': {
                    '[{good, well, great, decent, nice, okay}]': {
-                        '`That\'s valid, but I think (fav player) was better in YEAR`':'end'
+                        '`That\'s valid, but I think jojopyun is in his prime right now.`':'end'
                     },
                     '[{hasnt, not, bad}]':{
                         '`I agree. (fav player) was much better before`': 'end'
                     },
                     'error':{
-                        '`what.`':'end' #error condition not handled
+                        '`I\'m sorry, I didn\'t quite get that.`':'playerCondition' #error condition not handled
                     }
                 }
             },

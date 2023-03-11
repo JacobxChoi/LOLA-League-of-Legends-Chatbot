@@ -10,9 +10,8 @@ transitions = {
     'state':'start',
     '`Do you know much about League of Legends esports?`':{
         '[{yes, yeah, know}]': {
-            '`nice.`': 'favTeam',
+            '`nice.`': 'favPlayer',
         },
-        '#IF(#LEAGUE)':'explainLeague',
         '[{no, not, dont}]':'doesntKnowLeague', #change 'no' to something like: no, I don't really play league.
         'error':{
             '`Sorry, I didn\'t understand you.`':'start'
@@ -26,7 +25,7 @@ macros = {
 }
 
 df = DialogueFlow('start', end_state='end')
-df.knowledge_base().load_json_file('teams.json')
+df.knowledge_base().load_json_file('resources/teams.json')
 df.load_transitions(transitions)
 df.load_transitions(favoriteTeam)
 df.load_transitions(favoriteRegion)

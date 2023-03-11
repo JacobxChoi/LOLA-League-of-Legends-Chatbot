@@ -13,6 +13,16 @@ class MacroEsportsOrLeague(Macro):
                 hasLeague = True
         return hasLeague
 
+class lolasFavChamp(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        r = re.compile(r"\s*([Jj]ojpyun)\s*")
+        # m = r.search(ngrams.text())
+        favChamp = False
+        for m in re.finditer(r, ngrams.text()):
+            if m.group(1) is not None:
+                favChamp = True
+        return favChamp
+
 class MacroRandNum(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         randomNum = random.randint(0,1)
