@@ -1,3 +1,5 @@
+import json
+
 from emora_stdm import Macro, Ngrams
 from typing import Dict, Any, List
 import re
@@ -13,15 +15,19 @@ class MacroEsportsOrLeague(Macro):
                 hasLeague = True
         return hasLeague
 
-class lolasFavChamp(Macro):
-    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        r = re.compile(r"\s*([Jj]ojpyun)\s*")
-        # m = r.search(ngrams.text())
-        favChamp = False
-        for m in re.finditer(r, ngrams.text()):
-            if m.group(1) is not None:
-                favChamp = True
-        return favChamp
+# class lolasFavChamp(Macro):
+#     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+#         # json.load('resources/teams.json')
+#         f = open('resources/teams.json')
+#         data = json.load(f)
+#
+#         for player in ngrams:
+#             for _, teams in data['ontology'].items():
+#                 for pro in teams:
+#                     if player == pro:
+#                         vars['FAV_PLAYER'] = pro
+#                         return True
+#         return False
 
 class MacroRandNum(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
