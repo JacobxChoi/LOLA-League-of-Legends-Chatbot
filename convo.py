@@ -1,7 +1,7 @@
 from emora_stdm import DialogueFlow
 from src.project.knowsLeague import knowsLeague
 from src.project.doesntKnowLeague import doesntKnowLeague
-from src.project.macros import MacroEsportsOrLeague, MacroRandNum, lolasFavChamp
+from src.project.macros import MacroEsportsOrLeague, MacroRandNum
 
 favoriteTeam, favoriteRegion = knowsLeague()
 doesntKnowLeague = doesntKnowLeague()
@@ -22,7 +22,6 @@ transitions = {
 macros = {
     'LEAGUE' :  MacroEsportsOrLeague(),
     'NUM' : MacroRandNum(),
-    'FAV_CHAMP' : lolasFavChamp()
 }
 
 df = DialogueFlow('start', end_state='end')
