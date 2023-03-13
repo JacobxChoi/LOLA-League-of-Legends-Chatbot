@@ -1,5 +1,5 @@
 from doesntKnowLeague.buildInfo import buildInfo
-from doesntKnowLeague.championInfo import championInfo
+from doesntKnowLeague.champInfo import championInfo
 from doesntKnowLeague.laneInfo import laneInfo
 
 
