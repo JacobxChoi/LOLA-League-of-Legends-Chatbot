@@ -3,7 +3,7 @@ from knowsLeague import knowsLeague
 from doesntKnowLeague.doesntKnowLeague import doesntKnowLeague
 from macros import MacroEsportsOrLeague, MacroRandNum
 from doesntKnowLeague.buildInfo import buildInfo
-from doesntKnowLeague.championInfo import championInfo
+from doesntKnowLeague.champInfo import championInfo
 from doesntKnowLeague.laneInfo import laneInfo
 
 
