@@ -1,10 +1,16 @@
 from emora_stdm import DialogueFlow
-from src.project.knowsLeague import knowsLeague
-from src.project.doesntKnowLeague import doesntKnowLeague
-from src.project.macros import MacroEsportsOrLeague, MacroRandNum
+from knowsLeague import knowsLeague
+from doesntKnowLeague.doesntKnowLeague import doesntKnowLeague
+from macros import MacroEsportsOrLeague, MacroRandNum
+from doesntKnowLeague.buildInfo import buildInfo
+from doesntKnowLeague.championInfo import championInfo
+from doesntKnowLeague.laneInfo import laneInfo
+
+
 
 favoriteTeam, favoriteRegion = knowsLeague()
-doesntKnowLeague = doesntKnowLeague()
+doesntKnowLeague, laneRole = doesntKnowLeague()
+
 
 transitions = {
     'state':'start',
@@ -30,6 +36,13 @@ df.load_transitions(transitions)
 df.load_transitions(favoriteTeam)
 df.load_transitions(favoriteRegion)
 df.load_transitions(doesntKnowLeague)
+df.load_transitions(laneRole)
+'''
+df.load_transitions(championInfo)
+df.load_transitions(laneInfo)
+df.load_transitions(buildInfo)
+'''
+
 df.add_macros(macros)
 
 if __name__ == '__main__':
