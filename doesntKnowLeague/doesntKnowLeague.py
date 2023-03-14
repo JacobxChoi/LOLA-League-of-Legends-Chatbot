@@ -1,6 +1,6 @@
-from doesntKnowLeague.buildInfo import buildInfo
-from doesntKnowLeague.champInfo import championInfo
-from doesntKnowLeague.laneInfo import laneInfo
+import buildInfo
+import champInfo
+import laneInfo
 
 
 def doesntKnowLeague():
