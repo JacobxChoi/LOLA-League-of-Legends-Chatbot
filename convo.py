@@ -6,8 +6,7 @@ from doesntKnowLeague.buildInfo import buildInfo
 from doesntKnowLeague.champInfo import championInfo
 from doesntKnowLeague.laneInfo import laneInfo
 
-
-
+# buildInfo = buildInfo()
 favoriteTeam, favoriteRegion = knowsLeague()
 doesntKnowLeague, laneRole = doesntKnowLeague()
 

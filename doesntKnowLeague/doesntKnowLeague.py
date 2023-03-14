@@ -1,7 +1,10 @@
-import buildInfo
-import champInfo
-import laneInfo
+from .buildInfo import buildInfo
+from .champInfo import championInfo
+from .laneInfo import laneInfo
 
+buildInfo = buildInfo()
+champInfo = championInfo()
+laneInfo = laneInfo()
 
 def doesntKnowLeague():
     doesntKnowLeague = {
