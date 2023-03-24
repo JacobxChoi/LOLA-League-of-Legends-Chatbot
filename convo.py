@@ -24,11 +24,10 @@ def load(df: DialogueFlow, varfile: str):
         df.vars().update(d)
         df.run()
         save(df, varfile)
-    # first time
+    # first time conversing
     else:
         df.run()
         save(df, varfile)
-
 
 transitions = {
     'state':'start',

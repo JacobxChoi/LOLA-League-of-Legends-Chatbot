@@ -77,6 +77,7 @@ class UserInputChampion(Macro):
                             #TODO keep track of recommended players
                             #TODO handle cases where user does not have favorite champ
                             #TODO handle cases where user misspells champion
+                            #TODO handle cases where user has multiple favorite champions
                             vars[fav_champ] = champion
                             vars[playerRec] = data['ontology'][token.text][0]
                             break
@@ -87,7 +88,6 @@ class UserInputChampion(Macro):
                 continue  # only executed if the inner loop did NOT break
             break
         return True
-
 
 class MacroRandNum(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
