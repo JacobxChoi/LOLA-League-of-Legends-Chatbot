@@ -32,36 +32,61 @@ class MacroEsportsOrLeague(Macro):
 
 class UserInfo(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        pass
+        #variables used in conversation so far.
+        #TODO We don't need to intialize the variables here, but it might be good to keep track of which variables we use
+        visits = 'VISITS'
+        player = 'FAV_PLAYER'
+        playerRec = 'PLAYER_RECOMMEND'
+        champ = 'FAV_CHAMP'
+        vars[champ] = ''
+        vars[player] = ''
+        vars[playerRec] = ''
+        vars[visits] = 1
 
 class UserInputChampion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
 
+        #variables
+        playerRec = 'PLAYER_RECOMMEND'
+        fav_champ = 'FAV_CHAMP'
+
+        #opening jason
         f = open('resources/champs.json', )
         data = json.load(f)
+        #takes user input as string
         mystr = ngrams.text()
+
+        #loads spacy model to tokenize string
         nlp = spacy.load("en_core_web_sm")
-        # doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
         doc = nlp(mystr)
 
+        #turns user input into a list of strings
         sentenceSplit = mystr.split()
 
-        # maybe we can iterate through the nouns.
-
+        #top, mid, jungle, bot, support
         for role in data['ontology']['lane']:
+            #iterates through each champion
             for champion in data['ontology'][role]:
+                #for each token in user's sentence
                 for token in doc:
+                    #champions are labeled as nouns by spacy
                     if token.pos_ == 'NOUN':
-                        if token.text in sentenceSplit:
-                            if token.text in data['ontology']:
-                                print(data['ontology'][token.text][0])
-                                break
+                        #if champion in ontology and player suggested champion is same as champion in iteration
+                        if token.text in data['ontology'] and champion == token.text:
+                            #keeps track of first player in ont who plays that champion in lcs
+                            #TODO keep track of recommended players
+                            #TODO handle cases where user does not have favorite champ
+                            #TODO handle cases where user misspells champion
+                            vars[fav_champ] = champion
+                            vars[playerRec] = data['ontology'][token.text][0]
+                            break
                 else:
                     continue  # only executed if the inner loop did NOT break
                 break
             else:
                 continue  # only executed if the inner loop did NOT break
             break
+        return True
 
 
 class MacroRandNum(Macro):
