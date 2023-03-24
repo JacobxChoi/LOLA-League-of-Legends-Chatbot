@@ -13,7 +13,7 @@ def doesntKnowLeague():
             '[{yes, yeah}]': {
                 'state': 'familiarity',
                 '`Who\'s your favorite champion?`': {
-                    '#Champion': {  # ontology for favorite champion
+                    '#UserChamp': {  # ontology for favorite champion
                         '`That champion is fun to play! This esports player plays them as well, and they\'re really fun to watch. I suggest watching them`': 'end'
                     },
                     'error': 'end'

@@ -1,4 +1,5 @@
 import json
+import spacy
 
 from emora_stdm import Macro, Ngrams
 from typing import Dict, Any, List
@@ -29,9 +30,38 @@ class MacroEsportsOrLeague(Macro):
 #                         return True
 #         return False
 
-class Champion(Macro):
+class UserInfo(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        return True
+        pass
+
+class UserInputChampion(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+
+        f = open('resources/champs.json', )
+        data = json.load(f)
+        mystr = ngrams.text()
+        nlp = spacy.load("en_core_web_sm")
+        # doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
+        doc = nlp(mystr)
+
+        sentenceSplit = mystr.split()
+
+        # maybe we can iterate through the nouns.
+
+        for role in data['ontology']['lane']:
+            for champion in data['ontology'][role]:
+                for token in doc:
+                    if token.pos_ == 'NOUN':
+                        if token.text in sentenceSplit:
+                            if token.text in data['ontology']:
+                                print(data['ontology'][token.text][0])
+                                break
+                else:
+                    continue  # only executed if the inner loop did NOT break
+                break
+            else:
+                continue  # only executed if the inner loop did NOT break
+            break
 
 
 class MacroRandNum(Macro):
