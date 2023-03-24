@@ -1,5 +1,6 @@
 {
     "ontology": {
+        "lane": ["top", "jungle", "mid", "bottom", "support"],
         "top": [
             "ksante",
             "jax",
@@ -29,7 +30,7 @@
             "sett",
             "akali",
             "udyr",
-            "monkeyking",
+            "wukong",
             "rumble",
             "kennen",
             "riven",
@@ -59,7 +60,7 @@
             "trundle"
         ],
         "jungle": [
-            "monkeyking",
+            "wukong",
             "viego",
             "sejuani",
             "vi",
@@ -412,7 +413,7 @@
             "paclo",
             "betao"
         ],
-        "monkeyking": [
+        "wukong": [
             "blaber",
             "river",
             "kenvi",
