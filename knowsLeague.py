@@ -11,8 +11,9 @@ def knowsLeague():
                 '`How do you think` $FAV_PLAYER `has been doing lately?`': {
                    '[{good, well, great, decent, nice, okay, not bad}]': {
                         '`That\'s valid. I would say that jojopyun is probably doing the best right now though.`':{
-                            '[agree, right, yeah]':'end',
-                            '[nah, dont, no, disagree]':'end'
+                            '[{agree, right, yeah}]':'end',
+                            '[{nah, dont, no, disagree}]':'end',
+                            '[{why}]':'end'
                         },
                        'error':'end'
                     },
