@@ -29,6 +29,11 @@ class MacroEsportsOrLeague(Macro):
 #                         return True
 #         return False
 
+class Champion(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        return True
+
+
 class MacroRandNum(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         randomNum = random.randint(0,1)

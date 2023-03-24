@@ -5,10 +5,29 @@ from macros import MacroEsportsOrLeague, MacroRandNum
 from doesntKnowLeague.buildInfo import buildInfo
 from doesntKnowLeague.champInfo import championInfo
 from doesntKnowLeague.laneInfo import laneInfo
+import pickle
+import os
 
 # buildInfo = buildInfo()
 favoriteTeam, favoriteRegion = knowsLeague()
 doesntKnowLeague, laneRole = doesntKnowLeague()
+
+def save(df: DialogueFlow, varfile: str):
+    df.run()
+    d = {k: v for k, v in df.vars().items() if not k.startswith('_')}
+    pickle.dump(d, open(varfile, 'wb'))
+
+def load(df: DialogueFlow, varfile: str):
+    #has conversed before
+    if os.path.isfile('resources/visits.pkl'):
+        d = pickle.load(open(varfile, 'rb'))
+        df.vars().update(d)
+        df.run()
+        save(df, varfile)
+    # first time
+    else:
+        df.run()
+        save(df, varfile)
 
 
 transitions = {
@@ -45,4 +64,4 @@ df.load_transitions(buildInfo)
 df.add_macros(macros)
 
 if __name__ == '__main__':
-    df.run()
+    load(df, 'resources/visits.pkl')
