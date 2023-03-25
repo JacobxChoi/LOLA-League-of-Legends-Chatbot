@@ -71,10 +71,10 @@ def doesntKnowLeague():
 
                         }
                     },
-                    'error' : 'end'
+                    'error': 'end'
                 }
             },
-            'error' : 'end'# TODO: modify the diagram flow for more flexible transitions
+            'error': 'end'# TODO: modify the diagram flow for more flexible transitions
 
         }
 

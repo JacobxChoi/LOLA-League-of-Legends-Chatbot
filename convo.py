@@ -1,10 +1,8 @@
 from emora_stdm import DialogueFlow
-from knowsLeague import knowsLeague
+from KnowLeague.knowsLeague import knowsLeague
 from doesntKnowLeague.doesntKnowLeague import doesntKnowLeague
 from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion
-from doesntKnowLeague.buildInfo import buildInfo
 from doesntKnowLeague.champInfo import championInfo
-from doesntKnowLeague.laneInfo import laneInfo
 import pickle
 import os
 
@@ -55,11 +53,11 @@ df.load_transitions(favoriteTeam)
 df.load_transitions(favoriteRegion)
 df.load_transitions(doesntKnowLeague)
 df.load_transitions(laneRole)
-'''
-df.load_transitions(championInfo)
-df.load_transitions(laneInfo)
-df.load_transitions(buildInfo)
-'''
+
+df.load_transitions(championInfo())
+# df.load_transitions(laneInfo)
+# df.load_transitions(buildInfo)
+
 
 df.add_macros(macros)
 
