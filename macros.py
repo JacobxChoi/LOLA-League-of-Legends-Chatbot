@@ -6,6 +6,62 @@ from typing import Dict, Any, List
 import re
 import random
 
+class MacroGetName(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+
+        ##TODO accept more expresisons
+        r = re.compile(r"(?:call me)?(mr|ms|mrs|dr)?(?:^|\s)([a-z']+)(?:\s([a-z']+))?")
+        m = r.search(ngrams.text())
+        if m is None: return False
+
+        title, firstname, lastname = None, None, None
+
+        if m.group(1):
+            title = m.group(1)
+            if m.group(3):
+                firstname = m.group(2)
+                lastname = m.group(3)
+            else:
+                firstname = m.group()
+                lastname = m.group(2)
+        else:
+            firstname = m.group(2)
+            lastname = m.group(3)
+
+        vars['TITLE'] = title
+        vars['LASTNAME'] = lastname
+        vn_FN = 'FIRSTNAME'
+
+        vn_firstname = firstname.capitalize()
+
+        if vn_FN not in vars:
+            vars[vn_FN] = firstname
+            vars[vn_firstname] = False
+
+        if vn_firstname not in vars['FIRSTNAME']:
+            vars['FIRSTNAME'] = vn_firstname
+            vars[vn_firstname] = False
+
+        else:
+            vars[vn_firstname] = True
+        return True
+
+
+class MacroGetOldName(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        vn = vars['FIRSTNAME']
+        return vars[vn]
+
+
+class MacroGetNewName(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        vn = vars['FIRSTNAME']
+        return not vars[vn]
+
+class MacroPushName(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        return vars['FIRSTNAME']
+
 class MacroEsportsOrLeague(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         r = re.compile(r"(dont.*play(?:ing)*)|([lL]eague(?:\s)*(?:[oO]f [lL]egend(?:s)?)?)?")

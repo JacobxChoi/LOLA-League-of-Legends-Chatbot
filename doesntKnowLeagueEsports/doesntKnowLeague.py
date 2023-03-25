@@ -8,7 +8,7 @@ laneInfo = laneInfo()
 
 def doesntKnowLeague():
     doesntKnowLeague = {
-        'state': 'doesntKnowLeague',
+        'state': 'doesntKnowLeagueEsports',
         '`That\'s fine. Do you play League of Legends?.`': {
             '[{yes, yeah}]': {
                 'state': 'familiarity',
@@ -38,7 +38,7 @@ def doesntKnowLeague():
                     'error': 'end'
                 }
             },
-            'error': 'doesntKnowLeague'
+            'error': 'doesntKnowLeagueEsports'
         }
     }
 
