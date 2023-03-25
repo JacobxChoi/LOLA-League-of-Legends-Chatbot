@@ -1,12 +1,24 @@
 from emora_stdm import DialogueFlow
+
+#knowLeague
 from KnowLeague.knowsLeague import knowsLeague
+from KnowLeague.advanced import advanced
+from KnowLeague.casual import casual
+
+#doesnKnowLeague
 from doesntKnowLeagueEsports.doesntKnowLeague import doesntKnowLeague
-from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion,MacroGetName,MacroGetOldName,MacroGetNewName,MacroPushName
 from doesntKnowLeagueEsports.champInfo import championInfo
+
+#macros
+from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion,MacroGetName,MacroGetOldName,MacroGetNewName,MacroPushName
+
+#convo.py imports
 import pickle
 import os
 
 # buildInfo = buildInfo()
+casual = casual()
+advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 doesntKnowLeague, laneRole = doesntKnowLeague()
 
@@ -34,7 +46,7 @@ def load(df: DialogueFlow, varfile: str):
 transitions = {
     'state': 'start',
     ##Welcoming section TODO: Intro can be modified
-    '`Hi, this is LoLa, your personal charbot for LoL esports dialogue, may I have your name`': {
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue, may I have your name`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: for the same user
@@ -66,19 +78,25 @@ macros = {
 }
 
 df = DialogueFlow('start', end_state='end')
+#ontology
 df.knowledge_base().load_json_file('resources/teams.json')
-df.load_transitions(transitionDiverging)
-df.load_transitions(transitions)
-df.load_transitions(favoriteTeam)
-df.load_transitions(favoriteRegion)
+
+#doesntKnowLeague transitions
 df.load_transitions(doesntKnowLeague)
 df.load_transitions(laneRole)
-
+df.load_transitions(transitionDiverging)
+df.load_transitions(transitions)
 df.load_transitions(championInfo())
 # df.load_transitions(laneInfo)
 # df.load_transitions(buildInfo)
 
+#knowsLeague transitions
+df.load_transitions(favoriteTeam)
+df.load_transitions(favoriteRegion)
+df.load_transitions(casual)
+df.load_transitions(advanced)
 
+#macros
 df.add_macros(macros)
 
 if __name__ == '__main__':
