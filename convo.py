@@ -10,7 +10,8 @@ from doesntKnowLeagueEsports.doesntKnowLeague import doesntKnowLeague
 from doesntKnowLeagueEsports.champInfo import championInfo
 
 #macros
-from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion,MacroGetName,MacroGetOldName,MacroGetNewName,MacroPushName
+from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
+    MacroGetNewName, MacroPushName, favRegion
 
 #convo.py imports
 import pickle
@@ -75,6 +76,7 @@ macros = {
     'GET_NAME': MacroGetName(),
     'GET_NEWNAME': MacroGetNewName(),
     'GET_OLDNAME': MacroGetOldName(),
+    'FAV_REGION': favRegion()
 }
 
 df = DialogueFlow('start', end_state='end')
