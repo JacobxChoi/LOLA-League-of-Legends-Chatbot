@@ -31,8 +31,8 @@ def knowsLeague():
     favoriteRegion = {
         'state':'favRegion',
         '`What\'s your favorite region to watch?`':{
-            '[favorite region]':{
-                '`What are your thoughts on that particular tournament?`':'end' #leads to open ended response
+            '#FAV_REGION':{
+                '`Did you watch the` $T_TOURNEY':'end' #leads to open ended response
             },
             'error':'end'
         }
