@@ -8,6 +8,7 @@ from KnowLeague.casual import casual
 #doesnKnowLeague
 from doesntKnowLeagueEsports.doesntKnowLeague import doesntKnowLeague
 from doesntKnowLeagueEsports.champInfo import championInfo
+from doesntKnowLeagueEsports.laneInfo import laneInfo
 
 #macros
 from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
@@ -21,7 +22,7 @@ import os
 casual = casual()
 advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
-doesntKnowLeague, laneRole = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo = doesntKnowLeague()
 
 
 def save(df: DialogueFlow, varfile: str):
@@ -85,11 +86,10 @@ df.knowledge_base().load_json_file('resources/teams.json')
 
 #doesntKnowLeague transitions
 df.load_transitions(doesntKnowLeague)
-df.load_transitions(laneRole)
 df.load_transitions(transitionDiverging)
 df.load_transitions(transitions)
 df.load_transitions(championInfo())
-# df.load_transitions(laneInfo)
+df.load_transitions(laneInfo)
 # df.load_transitions(buildInfo)
 
 #knowsLeague transitions

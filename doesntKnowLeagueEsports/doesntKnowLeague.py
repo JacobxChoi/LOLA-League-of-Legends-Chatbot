@@ -27,64 +27,26 @@ def doesntKnowLeague():
                 '`No problem. League is an online 5 vs 5 game, where players play "champions" that each have unique '
                 'abilites. The objective of the game is to get to the opposing team\'s base and destroy their nexus. '
                 'Do you have questions about any of that?`': {
-                    '[no, nope, not really]': {
+                    '[{no, nope, not really}]': {
                         '`Nice! What got you interested in League?`': {
                             'error': {
                                 '`That\'s awesome! If you want to learn more, you should watch this player. He\'s pretty famous in the community, and I think it would be a good way to learn about the community.`': 'end'
                             }
                         }
                     },
-                    '[yes, yeah, kind of, kinda]': {
+                    '[{yes, yeah, kind of, kinda}]': {
                         '`What are you confused about?`': {
-                            '[{lane, role}]': 'laneRole',
+                            '[{lane, role}]': 'laneInfo',
                             '[{item}]': 'items',
                             '[{champion, champ}]': 'championInfo',
                             '[{base, nexus}]': 'base'
                         }
                     },
-                    'error': 'end'
+                    'error': 'doesntKnowLeagueEsports'
                 }
             },
-            'error': 'doesntKnowLeagueEsports'
-        }
-    }
-
-    laneRole = {
-        'state': 'laneRole',
-        '`So there are 3 lanes in League, and the 5 players for each team each fill 1 role and are distributed across those 3 lanes`': {
-            '[{3, three}, lanes]': {
-                '`You maybe heard some of them, and they are Top, Jungle, Mid, ADC and Support. People often choose '
-                'their favorite lanes according to their personality and unique playing habits. They often jump '
-                ' between the roles for better team cooperation. `'
-                : {
-                    '[TOP]': {
-                        'state': 'topLane',
-                        '`TOP lane is often considered as the Lone Wolf. If you are a 1v1 enthusiasts who want to '
-                        'lean on your own skills and tactics to win the game by pouring tons of pressures on   '
-                        'your foes. It\'s a great choice for you!`': {
-
-                            '[{enjoy, yes}]': {
-                                'state': 'topArchetypes',
-                                '`Great! Sounds like you are an 1v1 combat fans who want to overwhelm you foes with '
-                                'superb skills. There are actually several archetypes for a typical top lane '
-                                'champion, like tanks and duelists. Do you want to know more about them? `': {
-                                    '[tank]': 'end',  # TODO: add infos on tank
-                                    '[duelist]': 'end',  # TODO: add infos on duelists
-                                    'error' : 'end'
-                                }
-
-                            },
-                            'error': 'end'
-
-                        }
-                    },
-                    'error': 'end'
-                }
-            },
-            'error': 'end'  # TODO: modify the diagram flow for more flexible transitions
 
         }
-
     }
 
     items = {
@@ -100,4 +62,4 @@ def doesntKnowLeague():
         'opponents nexus, they win the game.`': 'end'
     }
 
-    return doesntKnowLeague, laneRole, items, base
+    return doesntKnowLeague, items, base, laneInfo
