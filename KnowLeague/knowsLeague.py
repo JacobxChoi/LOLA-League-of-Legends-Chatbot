@@ -32,7 +32,9 @@ def knowsLeague():
         'state':'favRegion',
         '`What\'s your favorite region to watch?`':{
             '#FAV_REGION':{
-                '`Did you watch the` $T_TOURNEY':'end' #leads to open ended response
+                '`Did you watch the`$T_TOURNEY $T_MATCH `between` $T_TEAM1 `and` $T_TEAM2 `where` $T_WINNER `won?`': {
+                    'error':'end'
+                }
             },
             'error':'end'
         }
