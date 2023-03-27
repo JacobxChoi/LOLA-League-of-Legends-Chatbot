@@ -1,0 +1,6 @@
+{
+  "ontology": {
+    "gametype": ["adventure", "action", "rpg", "puzzle", "racing", "sports", "strategy", "fighting","survival","roguelike"]
+
+  }
+}

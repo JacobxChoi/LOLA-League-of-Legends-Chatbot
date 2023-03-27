@@ -83,6 +83,7 @@ macros = {
 df = DialogueFlow('start', end_state='end')
 #ontology
 df.knowledge_base().load_json_file('resources/teams.json')
+df.knowledge_base().load_json_file('resources/gameType.json')
 
 #doesntKnowLeague transitions
 df.load_transitions(doesntKnowLeague)

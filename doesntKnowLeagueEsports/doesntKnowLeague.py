@@ -23,30 +23,55 @@ def doesntKnowLeague():
                 }
             },
             '[{no, not, dont}]': {
-                'state': 'explainLeague',
-                '`No problem. League is an online 5 vs 5 game, where players play "champions" that each have unique '
-                'abilites. The objective of the game is to get to the opposing team\'s base and destroy their nexus. '
-                'Do you have questions about any of that?`': {
-                    '[{no, nope, not really}]': {
-                        '`Nice! What got you interested in League?`': {
-                            'error': {
-                                '`That\'s awesome! If you want to learn more, you should watch this player. He\'s pretty famous in the community, and I think it would be a good way to learn about the community.`': 'end'
-                            }
-                        }
+                'state': 'transit',
+                # Casual questions to collect related infos
+                '#GATE `What\'s your favorite game type`': {
+                    '[$FAV_GAME=#ONT(gametype)]': {
+                        '`I love` $FAV_GAME `too !`': 'transit'
                     },
-                    '[{yes, yeah, kind of, kinda}]': {
-                        '`What are you confused about?`': {
-                            '[{lane, role}]': 'laneInfo',
-                            '[{item}]': 'items',
-                            '[{champion, champ}]': 'championInfo',
-                            '[{base, nexus}]': 'base'
-                        }
+                    'error':{
+                        '`I love them too!`': 'transit',
+                    }
+                },
+
+                '#GATE `Why are you interested at league e-Sports`': {
+                    'state': 'interest',
+                    '[{friend,social,community}]': {
+                        '`Yeah, It\'s great to find some hallucinating identity in the online community `': 'transit'
                     },
-                    'error': 'doesntKnowLeagueEsports'
-                }
+                    '[{fun,challenging,exciting}]': {
+                        '`For sure! After all, the adrenaline rush after watching an exciting matches is true `': 'transit'
+                    },
+
+                    '[{waste, time}]': {
+                        '`Ha, Sounds like you have fallen into the trap of modernism. I guess there would be better '
+                        'ways to use time`': 'transit'
+                    },
+
+                    '[$FAV_PLAYER=#ONT(leagues)]': {
+                        '#IF($FAV_PLAYER = jojopyun) `Agree! Jojopyan is my favorite player too`': 'transit',
+                        '`I like` $FAV_PLAYER `too`': 'transit'
+                    },
+                    '[{not,not really, no}]': {
+                        '`Well, so I guess you just want to get some infos in the area`': 'transit'
+                    },
+                    'error': {
+                        '`Cool, I also love to watch league e-sports with friends. The exciting performance of the '
+                        'players always fascinates me`': 'transit'
+                    },
+                    '[{bye,exit}]': {
+                        'state': 'quit',
+                        '`Adieu,hope to see you again`': 'end'
+                    },
+                },
+                '`Do you want to know more about the game?`': 'end',
+            },
+            'error': {
+                'Sorry, human languages are sometimes mysterious for me. Could you repeat your request ?': 'transit'
             },
 
-        }
+        },
+
     }
 
     items = {
