@@ -34,6 +34,7 @@ def knowsLeague():
         '`What\'s your favorite region to watch?`':{
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
                 '`Did you watch the`$T_TOURNEY $T_MATCH `between` $T_TEAM1 `and` $T_TEAM2 `where` $T_WINNER `won?`': {
+                    '[{yes, did, watched}]':'advanced', #shows that user actively watches current esports games.
                     '[{no, did not, didnt}]':{ #next favorite region?
                         '`No Worries. How about this other match?`':{
                             '[{no, did not, didnt, havent, have not}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
@@ -41,7 +42,7 @@ def knowsLeague():
                             },
                             'error':'end'
                         }
-                    },
+                    }, #TODO user responds with "I didn't watch, but I know the outcome
                     'error':'end'
                 }
             },
