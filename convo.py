@@ -1,5 +1,8 @@
 from emora_stdm import DialogueFlow
 
+#global
+from globalState import globalState
+
 #knowLeague
 from KnowLeague.knowsLeague import knowsLeague
 from KnowLeague.advanced import advanced
@@ -18,11 +21,16 @@ from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroG
 import pickle
 import os
 
-# buildInfo = buildInfo()
+#knowsLeague
 casual = casual()
 advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
+
+#doesntKnowLeague
 doesntKnowLeague, items, base, laneInfo = doesntKnowLeague()
+
+#global transition
+globalState = globalState()
 
 
 def save(df: DialogueFlow, varfile: str):
@@ -98,6 +106,9 @@ df.load_transitions(favoriteTeam)
 df.load_transitions(favoriteRegion)
 df.load_transitions(casual)
 df.load_transitions(advanced)
+
+#global transition
+df.load_global_nlu(globalState)
 
 #macros
 df.add_macros(macros)
