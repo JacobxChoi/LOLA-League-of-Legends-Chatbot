@@ -1,0 +1,4 @@
+# created by virtualenv automatically
+.idea/
+venv/
+/resources/openai_api.txt
