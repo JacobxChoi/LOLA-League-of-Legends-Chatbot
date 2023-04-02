@@ -27,7 +27,7 @@ def doesntKnowLeague():
                 # Casual questions to collect related infos
                 '#GATE `What\'s your favorite game `': {
                     '[#FAV_GAMETYPE]': {
-                        '`I love` #GET_FAV_GAME `too !`': 'transit'
+                        '`I love` #GET_FAV_GAME `too !` #GET_REASON_FAV_GAME': 'transit'
                     },
                     'error':{
                         '`I love them too!`': 'transit',
@@ -64,10 +64,21 @@ def doesntKnowLeague():
                         '`Adieu,hope to see you again`': 'end'
                     },
                 },
-                '`Do you want to know more about the game?`': 'end',
+                'state': 'IntroduceLeague',
+                '`Do you want to know more about the league of legends. I can give you a brief introduction over the '
+                'game goal, champion selection and some advice for improving in-game skills`': {
+                    '[{goal, win}]': 'GameGoal',
+                    '[{#LEM(improve), enhance}]': 'howToImprove',
+                    '[{champion}]': 'champInfo',
+                    '[{role,lane}]': 'roleInfo',
+                    '[{map}]': 'mapInfo',
+                    'error':{
+                        '`Sorry, human languages are sometimes mysterious for me. Could you repeat your request ?`': 'IntroduceLeague'
+                    }
+                }
             },
             'error': {
-                'Sorry, human languages are sometimes mysterious for me. Could you repeat your request ?': 'transit'
+                '`Sorry, human languages are sometimes mysterious for me. Could you repeat your request ?`': 'transit'
             },
 
         },

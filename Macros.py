@@ -342,6 +342,11 @@ def gpt_completion(input: str, regex: Pattern = None) -> str:
 
     return output
 
+#Section: casual communication: What's your favorite game?
 
 def getFavGame(vars: Dict[str, Any]):
     return vars['GameType']
+
+
+def getReason(vars: Dict[str, Any]):
+    return vars['WhyInterest']
