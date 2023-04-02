@@ -9,7 +9,7 @@ from emora_stdm import Macro, Ngrams
 import openai
 import regexutils
 
-OPENAI_API_KEY_PATH = '../resources/openai_api.txt'
+OPENAI_API_KEY_PATH = 'resources/openai_api.txt'
 CHATGPT_MODEL = 'gpt-3.5-turbo'
 
 
@@ -320,12 +320,13 @@ class MacroGPTJSON(Macro):
 
         return True
 
-    class MacroNLG(Macro):
-        def __init__(self, generate: Callable[[Dict[str, Any]], str]):
-            self.generate = generate
 
-        def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-            return self.generate(vars)
+class MacroNLG(Macro):
+    def __init__(self, generate: Callable[[Dict[str, Any]], str]):
+        self.generate = generate
+
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        return self.generate(vars)
 
 
 def gpt_completion(input: str, regex: Pattern = None) -> str:
@@ -340,3 +341,7 @@ def gpt_completion(input: str, regex: Pattern = None) -> str:
         output = m.group().strip() if m else None
 
     return output
+
+
+def getFavGame(vars: Dict[str, Any]):
+    return vars['GameType']
