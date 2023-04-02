@@ -1,7 +1,7 @@
 
-from typing import List, Tuple, Dict, Union
+from typing import List, Tuple, Dict
 
-VALUE_TYPE = Union[bool, str, int, float, list, tuple, dict]
+VALUE_TYPE = bool | str | int | float | list | tuple | dict
 
 
 def generate(o: VALUE_TYPE) -> str:
