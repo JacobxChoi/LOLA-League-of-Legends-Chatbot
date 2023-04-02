@@ -1,5 +1,7 @@
+import openai
 from emora_stdm import DialogueFlow
 
+import Macros
 #global
 from globalState import globalState
 
@@ -14,8 +16,8 @@ from doesntKnowLeagueEsports.champInfo import championInfo
 from doesntKnowLeagueEsports.laneInfo import laneInfo
 
 #macros
-from macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
-    MacroGetNewName, MacroPushName, favRegion
+from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
+    MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG
 
 #convo.py imports
 import pickle
@@ -85,7 +87,13 @@ macros = {
     'GET_NAME': MacroGetName(),
     'GET_NEWNAME': MacroGetNewName(),
     'GET_OLDNAME': MacroGetOldName(),
-    'FAV_REGION': favRegion()
+    'FAV_REGION': favRegion(),
+    'FAV_GAMETYPE':MacroGPTJSON(
+            'What is the type of the game user mentioned',
+            {'GameType': 'Adventure game'},
+            {'GameType': 'N/A'}
+        ),
+    'GET_FAV_GAME': MacroNLG(getFavGame)
 }
 
 df = DialogueFlow('start', end_state='end')
@@ -114,4 +122,5 @@ df.load_global_nlu(globalState)
 df.add_macros(macros)
 
 if __name__ == '__main__':
+    openai.api_key_path = Macros.OPENAI_API_KEY_PATH
     load(df, 'resources/visits.pkl')
