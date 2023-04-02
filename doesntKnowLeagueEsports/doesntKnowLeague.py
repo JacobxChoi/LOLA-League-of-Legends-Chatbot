@@ -25,9 +25,9 @@ def doesntKnowLeague():
             '[{no, not, dont}]': {
                 'state': 'transit',
                 # Casual questions to collect related infos
-                '#GATE `What\'s your favorite game type`': {
-                    '[$FAV_GAME=#ONT(gametype)]': {
-                        '`I love` $FAV_GAME `too !`': 'transit'
+                '#GATE `What\'s your favorite game `': {
+                    '[#FAV_GAMETYPE]': {
+                        '`I love` #GET_FAV_GAME `too !`': 'transit'
                     },
                     'error':{
                         '`I love them too!`': 'transit',
