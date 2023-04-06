@@ -17,7 +17,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 
 #macros
 from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
-    MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason
+    MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends
 
 #convo.py imports
 import pickle
@@ -93,8 +93,16 @@ macros = {
             {'GameType': 'Adventure game', 'WhyInterest': 'They offer a unique and immersive gameplay experience that allows players to express their creativity, engage in friendly competition, and form lasting social connections.'},
             {'GameType': 'N/A', 'WhyInterest': 'N/A'}
         ),
+    'ACTIVITY_WITH_FRIENDS':MacroGPTJSON(
+            'What does the activity the speaker typically do with friends, the activity stored should start with an verb',
+            {'WithFriendActivities': 'Go hiking'},
+            {'WithFriendActivities': 'N/A'}
+        ),
     'GET_FAV_GAME': MacroNLG(getFavGame),
     'GET_REASON_FAV_GAME': MacroNLG(getReason),
+    'GET_ACTIVITY_FRIEND': MacroNLG(getActivityWithFriends),
+
+
 }
 
 df = DialogueFlow('start', end_state='end')

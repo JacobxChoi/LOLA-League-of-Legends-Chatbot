@@ -350,3 +350,5 @@ def getFavGame(vars: Dict[str, Any]):
 
 def getReason(vars: Dict[str, Any]):
     return vars['WhyInterest']
+def getActivityWithFriends(vars: Dict[str, Any]):
+    return vars['WithFriendActivities']
