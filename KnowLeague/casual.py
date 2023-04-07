@@ -8,10 +8,10 @@ def casual():
             '[{like}]':{ #USER: What do you like about them?
                 '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What do you think?`':{
                     '[{like}]':{ #I like Edward Gaming too!
-                        '`nice!`':'end'
+                        '`nice!`':'end' #TODO
                     },
                     '[{think}]':{ #I think they're good too, but I prefer ...
-                        '`That\'s fair.`':'end'
+                        '`That\'s fair.`':'end' #TODO
                     },
                     'error':'end'
                 }
@@ -35,7 +35,7 @@ def casual():
                 },
                 '`Nice! Who won the game? Was it close?`':{
                     '[{yes, yeah, close}]':{ #USER: yeah, it was a really close game!
-                        '`awesome!`':'end'
+                        '`awesome!`':'end' #TODO
                     },
                     '[{no, not}]':{ #USER: no, the game wasnt really close
                         '`Dang. I\'m not a fan of one-sided games either.`':'end'
@@ -56,8 +56,6 @@ def casual():
 
 
 #TODO connect these to convo.py
-
-
 
 def EdwardGaming():
     EDG = {
