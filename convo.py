@@ -62,7 +62,8 @@ transitions = {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: for the same user
-        }},
+        }
+    },
 }
 
 # This transition distrubutes the users to different branches of transitions based on their acquistion levels
