@@ -74,7 +74,7 @@ def advanced():
             '$UNDERPERFORMING = #ONT(teams)': {
                 '`What have they been struggling with the most lately?`': {
                     '$WORSE_SKILL = {laning, fighting, objective control, vision control, roaming, itemization, wave management}': {
-                        '`I agree. They have been lacking in that department. `': 'end'
+                        '`I agree. They have been lacking in that department.`': 'end'
                     }
                 }
             }
