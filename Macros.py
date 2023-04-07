@@ -48,7 +48,6 @@ class MacroGetName(Macro):
 
         else:
             vars[vn_firstname] = True
-        print(vars)
         return True
 
 
