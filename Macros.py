@@ -16,24 +16,21 @@ CHATGPT_MODEL = 'gpt-3.5-turbo'
 class MacroGetName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
 
-        ##TODO accept more expresisons
-        r = re.compile(r"(?:call me)?(mr|ms|mrs|dr)?(?:^|\s)([a-z']+)(?:\s([a-z']+))?")
-        m = r.search(ngrams.text())
-        if m is None: return False
+        r = re.compile(
+            r"(?:(?:hi)?(?:\,)?(?:\s)*my(?:\s)*(?:name|nickname)(?:\s)*(?:is)?(?:\s)*|(?:hi)?(?:\,)?(?:\s)*i(?:\s)*am(?:\s)*|(?:please|you(?:\s)*can|everyone)?(?:\s)*(?:call|calls)(?:\s)*me(?:\s)*?|(?:hi)?(?:\,)?(?:\s)*i(?:\')?(?:m)?(?:ts)?(?:t\'s)?(?:\s)*(?:go by)?)?(?:\s)*(mr|mrs|ms|dr|dr\.)?(?:^|\s)*([a-z']+)(?:\s([a-z']+))?(?:(?:\,)?(?:\s)*.*)?")
 
         title, firstname, lastname = None, None, None
 
-        if m.group(1):
-            title = m.group(1)
-            if m.group(3):
+        for m in re.finditer(r, ngrams.text()):
+            if m.group(1) is not None:
+                title = m.group(1)
+            if m.group(2) is not None:
                 firstname = m.group(2)
+            if m.group(3) is not None:
                 lastname = m.group(3)
-            else:
-                firstname = m.group()
-                lastname = m.group(2)
-        else:
-            firstname = m.group(2)
-            lastname = m.group(3)
+
+        if title is None and firstname is None and lastname is None:
+            return False
 
         vars['TITLE'] = title
         vars['LASTNAME'] = lastname
@@ -51,6 +48,7 @@ class MacroGetName(Macro):
 
         else:
             vars[vn_firstname] = True
+        print(vars)
         return True
 
 

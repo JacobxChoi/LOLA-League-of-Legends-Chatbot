@@ -27,7 +27,7 @@ def doesntKnowLeague():
             '[{no, not, dont, never}]': {
                 'state': 'transit',
                 # Casual questions to collect related infos
-                '#GATE `What\'s your favorite game `': {
+                '#GATE `What\'s your favorite game?`': {
                     'score': '1',
                     '[#FAV_GAMETYPE]': {
                         '`I love` #GET_FAV_GAME `too !` #GET_REASON_FAV_GAME': 'transit'
@@ -37,11 +37,11 @@ def doesntKnowLeague():
                     }
                 },
 
-                '#GATE `Why are you interested at league e-Sports`': {
+                '#GATE `Why are you interested in League esports?`': {
                     'state': 'interest',
                     'score': '0.8',
                     '[{friend, friends, social, community}]': {
-                        '`Yeah, a shared interest in game connects friends together. What are you typically do with friends in free time?`': {
+                        '`Yeah, a shared interest in game connects friends together. What do you typically do with friends in your free time?`': {
                             '[#ACTIVITY_WITH_FRIENDS]': {
                                 '`Definitely, I wish I would have chance to` #GET_ACTIVITY_FRIEND ` with my friends too`': 'transit'
                             },
@@ -52,21 +52,20 @@ def doesntKnowLeague():
                     },
 
                     '[{waste, time}]': {
-                        '`Ha, Sounds like you have fallen into the trap of modernism. I guess there would be better '
-                        'ways to use time`': 'transit'
+                        '`Ha, Sounds like you have fallen into the trap of modernism. I guess there are better ways to use your time.`': 'transit'
                     },
 
                     '[$FAV_PLAYER=#ONT(leagues)]': {
-                        '#IF($FAV_PLAYER = jojopyun) `Agree! Jojopyan is my favorite player too`': 'transit',
+                        '#IF($FAV_PLAYER = jojopyun) `Agree! Jojopyun is my favorite player too.`': 'transit',
                         '`I like` $FAV_PLAYER `too`': 'transit',
                         'error': 'loveLeague',
                     },
-                    '[{not,not really, no}]': {
-                        '`Well, so I guess you just want to get some infos in the area.`': 'transit'
+                    '[{not, not really, no}]': {
+                        '`Oh ok, so I guess you just want to get some info on the subject.`': 'transit'
                     },
                     '[{bye,exit}]': {
                         'state': 'quit',
-                        '`Adieu,hope to see you again`': 'end'
+                        '`Adieu, hope to see you again.`': 'end'
                     },
                     'error': {
                         'state': 'loveLeague',
@@ -75,8 +74,8 @@ def doesntKnowLeague():
                     },
                 },
 
-                '`Do you want to know more about the league of legends. I can give you a brief introduction over the '
-                'game goal, champion selection and some advice for improving in-game skills`': {
+                '`Do you want to know more about the League of Legends? I can give you a brief introduction of the '
+                'game goal, champion selection, and some advice for improving in-game skills`': {
                     'state': 'IntroduceLeague',
                     'score': '0.5',
 
@@ -85,15 +84,16 @@ def doesntKnowLeague():
                     '[{champion}]': 'champInfo',
                     '[{role,lane}]': 'roleInfo',
                     '[{map}]': 'mapInfo',
+                    '[{item}]': 'items',
                     'error': {
-                        '`Sorry, I don\'t understand you, could you say it again?`': 'IntroduceLeague'
+                        '`Sorry, I didn\'t catch that, could you say it again?`': 'IntroduceLeague'
                     }
                 },
 
             },
 
             'error': {
-                '`Sorry, I don\'t understand you, could you say it again?`': 'transit'
+                '`Sorry, I didn\'t catch that, could you say it again?`': 'transit'
             },
 
         },
@@ -102,7 +102,21 @@ def doesntKnowLeague():
 
     items = {
         'state': 'items',
-        '`Items are intimidating at first glance, but they\'re actually pretty simple.`': 'end'
+        '`Items are intimidating at first glance, but they\'re actually pretty simple. Items are purchased from the '
+        'store in your base, and they provide positive effects to you. Most items provide stat bonuses, but some grant '
+        'a passive ability, and some are consumables that have some effect when used. Do you want me to explain any '
+        'of that in more depth?`': {
+            '[{how}, {buy}, {money, gold}]': {
+                '`Items are bought with gold, which you passively acquire throughout the game. You can also get more '
+                'gold by defeating minions, enemy champs, or jungle monsters, or by destroying enemy structures. Any '
+                'other item questions?`': {
+                    '[{-think, no, nope}]': {
+                        '`Great, any other general League questions?`': 'IntroduceLeague'
+                    },
+                    'error': 'items'
+                }
+            }
+        }
         # TODO: add info about items
     }
 
