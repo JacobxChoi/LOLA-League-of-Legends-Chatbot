@@ -95,8 +95,11 @@ class UserInfo(Macro):
 class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         userResponse = ngrams.text()
-
-
+        MacroGPTJSON(
+            "Does the user have a favorite region to watch?",
+            {"interest":"yes"},
+            {"interest":"N/A"}
+        )
 
         # opens json
         f = open('resources/tourneys.json', )
@@ -108,6 +111,7 @@ class favRegion(Macro):
         # different ways a user can reference the regions
         regions = {'na': 'NORTH AMERICA',
                    'north america': 'NORTH AMERICA',
+                   'north american': 'NORTH AMERICA',
                    'north': 'NORTH AMERICA',
                    'america': 'NORTH AMERICA',
                    'north american': 'NORTH AMERICA',
@@ -142,6 +146,7 @@ class favRegion(Macro):
         team1 = 'T_TEAM1'
         team2 = 'T_TEAM2'
         winner = 'T_WINNER'
+        t_loser = 'T_LOSER'
         t_month = 'T_MONTH'
         t_day = 'T_DAY'
 
@@ -152,6 +157,7 @@ class favRegion(Macro):
         vars[winner] = ''
         vars[t_day] = ''
         vars[t_month] = ''
+        vars[t_loser] = ''
 
         # region local variable
         region = ''
@@ -181,6 +187,11 @@ class favRegion(Macro):
         vars[team1] = game['teams'][0]
         vars[team2] = game['teams'][1]
         vars[winner] = game['winner']
+        if game['winner'] == game['teams'][0]:
+            vars[t_loser] = game['teams'][1]
+        else:
+            vars[t_loser] = game['teams'][0]
+
         date = game['time'][0:10]
         month = date[5:7]
         day = date[-2:]
@@ -290,6 +301,7 @@ class MacroGPTJSON(Macro):
         examples = f'{self.full_ex} or {self.empty_ex} if unavailable' if self.empty_ex else self.full_ex
         prompt = f'{self.request} Respond in the JSON schema such as {examples}: {ngrams.raw_text().strip()}'
         output = gpt_completion(prompt)
+        print(output)
         if not output: return False
 
         try:
@@ -303,7 +315,6 @@ class MacroGPTJSON(Macro):
             self.set_variables(vars, d)
         else:
             vars.update(d)
-
         return True
 
 

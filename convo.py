@@ -58,7 +58,7 @@ def load(df: DialogueFlow, varfile: str):
 transitions = {
     'state': 'start',
     ##Welcoming section TODO: Intro can be modified
-    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue, may I have your name`': {
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. May I have your name?`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: for the same user
