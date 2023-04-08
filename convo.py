@@ -58,7 +58,7 @@ def load(df: DialogueFlow, varfile: str):
 # This is the welcoming transition
 transitions = {
     'state': 'start',
-    ##Welcoming section TODO: Intro can be modified
+    ##Welcoming section TODO: change #GET_NAME FROM REGEX TO CHATGPT
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. May I have your name?`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',

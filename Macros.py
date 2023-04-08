@@ -94,12 +94,6 @@ class UserInfo(Macro):
 
 class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        userResponse = ngrams.text()
-        MacroGPTJSON(
-            "Does the user have a favorite region to watch?",
-            {"interest":"yes"},
-            {"interest":"N/A"}
-        )
 
         # opens json
         f = open('resources/tourneys.json', )
