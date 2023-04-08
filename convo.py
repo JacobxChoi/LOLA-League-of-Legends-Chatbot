@@ -47,6 +47,7 @@ def load(df: DialogueFlow, varfile: str):
         d = pickle.load(open(varfile, 'rb'))
         df.vars().update(d)
         df.run()
+        # df.run(debugging=True)
         save(df, varfile)
     # first time conversing
     else:
