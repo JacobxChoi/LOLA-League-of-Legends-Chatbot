@@ -114,7 +114,7 @@ macros = {
     'NEGATIVE_AGREEMENT': MacroNLG(NegativeAgreement),
 
     'AgreementChecker': MacroGPTJSON(
-        'How does the speaker response to the yes or no question, give yes for postive agreement, and no for negative agreement ',
+        'How does the speaker response to the yes or no question, give yes if user answers "yes", or affirmative answers for the question , and no if user anseers with "no" or doubting ',
         {'Agreement': 'yes'},
         {'Agreement': 'no'}
     )
