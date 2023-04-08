@@ -29,6 +29,7 @@ def doesntKnowLeague():
                 # Casual questions to collect related infos
                 '#GATE `What\'s your favorite game?`': {
                     'score': '1',
+                    # TODO: catch circumstance if the user do not have favorite game
                     '[#FAV_GAMETYPE]': {
                         '`I love` #GET_FAV_GAME `too !` #GET_REASON_FAV_GAME': 'transit'
                     },
@@ -48,7 +49,11 @@ def doesntKnowLeague():
                         }
                     },
                     '[{fun,challenging,exciting}]': {
-                        '`For sure! After all, the adrenaline rush after watching an exciting matches is true `': 'transit'
+                        '`For sure! After all, the adrenaline rush after watching an exciting matches is true. Do you enjoy the watching other sports events as well?`': {
+                            '[#SportEvents]': {
+
+                            }
+                        }
                     },
 
                     '[{waste, time}]': {
@@ -60,7 +65,7 @@ def doesntKnowLeague():
                         '`I like` $FAV_PLAYER `too`': 'transit',
                         'error': 'loveLeague',
                     },
-                    '[{not, not really, no}]': {
+                    '[{not, not really, no, dont}]': {
                         '`Oh ok, so I guess you just want to get some info on the subject.`': 'transit'
                     },
                     '[{bye,exit}]': {
@@ -79,12 +84,28 @@ def doesntKnowLeague():
                     'state': 'IntroduceLeague',
                     'score': '0.5',
 
+                    '[{sure, yes}]': {
+                        '`Great! Do you know how players win a game ?`': {
+                            'state': 'Directed_Questions',
+                            '[#AgreementChecker]': {
+                                '#IF(#POSITIVE_AGREEMENT) `Wow! Could you explain it to me. I guess different people understand it in different ways`': 'IntroduceLeague',
+                                '#IF(#NEGATIVE_AGREEMENT)': 'GameGoal',
+                                'error': {
+                                    '`Forgive me for my inability to understand you, but do you know the goal of league of legends?`': 'Directed_Questions'
+                                }
+
+                            },
+
+                        }
+                    },
+
                     '[{goal, win}]': 'GameGoal',
                     '[{#LEM(improve), enhance}]': 'howToImprove',
                     '[{champion}]': 'champInfo',
                     '[{role,lane}]': 'roleInfo',
                     '[{map}]': 'mapInfo',
                     '[{item}]': 'items',
+
                     'error': {
                         '`Sorry, I didn\'t catch that, could you say it again?`': 'IntroduceLeague'
                     }

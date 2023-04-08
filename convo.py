@@ -17,7 +17,8 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 
 #macros
 from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
-    MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends
+    MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
+    PositiveAgreement,NegativeAgreement
 
 #convo.py imports
 import pickle
@@ -102,6 +103,22 @@ macros = {
     'GET_FAV_GAME': MacroNLG(getFavGame),
     'GET_REASON_FAV_GAME': MacroNLG(getReason),
     'GET_ACTIVITY_FRIEND': MacroNLG(getActivityWithFriends),
+    'SportEvents': MacroGPTJSON(
+            'What is the sports event user mentioned, if the user doesn\'t like any sports event, return no "',
+            {'GameType': 'Adventure game'},
+            {'GameType': 'N/A'}
+        ),
+
+    'POSITIVE_AGREEMENT': MacroNLG(PositiveAgreement),
+    'NEGATIVE_AGREEMENT': MacroNLG(NegativeAgreement),
+
+    'AgreementChecker': MacroGPTJSON(
+        'How does the speaker response to the yes or no question, give yes for postive agreement, and no for negative agreement ',
+        {'Agreement': 'yes'},
+        {'Agreement': 'no'}
+    )
+
+
 
 
 }
