@@ -78,21 +78,6 @@ class MacroEsportsOrLeague(Macro):
                 hasLeague = True
         return hasLeague
 
-
-# class lolasFavChamp(Macro):
-#     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-#         # json.load('resources/teams.json')
-#         f = open('resources/teams.json')
-#         data = json.load(f)
-#
-#         for player in ngrams:
-#             for _, teams in data['ontology'].items():
-#                 for pro in teams:
-#                     if player == pro:
-#                         vars['FAV_PLAYER'] = pro
-#                         return True
-#         return False
-
 class UserInfo(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         # variables used in conversation so far.
@@ -109,6 +94,10 @@ class UserInfo(Macro):
 
 class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        userResponse = ngrams.text()
+
+
+
         # opens json
         f = open('resources/tourneys.json', )
         data = json.load(f)

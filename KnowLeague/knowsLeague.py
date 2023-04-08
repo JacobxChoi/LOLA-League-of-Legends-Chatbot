@@ -2,7 +2,7 @@
 def knowsLeague():
     favoriteTeam = {
         'state': 'favPlayer',
-        '`Who\'s your favorite professional player?`': {
+        '`Do you have a favorite professional player?`': {
             'state': 'playerCondition',
             '[jojopyun]':{
                 '`I agree! I love jojopyun too!`':'end'
@@ -31,7 +31,7 @@ def knowsLeague():
     }
     favoriteRegion = { #
         'state':'favRegion',
-        '`What\'s your favorite region to watch?`':{
+        '`How about a favorite region to watch?`':{
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
                 '`Did you watch the`$T_TOURNEY $T_MATCH `between` $T_TEAM1 `and` $T_TEAM2 `where` $T_WINNER `won?`': {
                     '[{yes, did, watched}]':'advanced', #shows that user actively watches current esports games.
