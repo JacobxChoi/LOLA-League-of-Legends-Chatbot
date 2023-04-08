@@ -338,3 +338,15 @@ def getReason(vars: Dict[str, Any]):
     return vars['WhyInterest']
 def getActivityWithFriends(vars: Dict[str, Any]):
     return vars['WithFriendActivities']
+
+def PositiveAgreement(vars: Dict[str, Any]):
+    if vars['Agreement'] == 'yes':
+        return True
+    else:
+        return False
+
+def NegativeAgreement(vars: Dict[str, Any]):
+    if vars['Agreement'] == 'no':
+        return True
+    else:
+        return False
