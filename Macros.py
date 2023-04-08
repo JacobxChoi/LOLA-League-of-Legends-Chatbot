@@ -78,7 +78,6 @@ class MacroEsportsOrLeague(Macro):
                 hasLeague = True
         return hasLeague
 
-
 class UserInfo(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         # variables used in conversation so far.
@@ -96,6 +95,8 @@ class UserInfo(Macro):
 class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         userResponse = ngrams.text()
+
+
 
         # opens json
         f = open('resources/tourneys.json', )
@@ -327,8 +328,7 @@ def gpt_completion(input: str, regex: Pattern = None) -> str:
 
     return output
 
-
-# Section: casual communication: What's your favorite game?
+#Section: casual communication: What's your favorite game?
 
 def getFavGame(vars: Dict[str, Any]):
     return vars['GameType']
@@ -336,21 +336,5 @@ def getFavGame(vars: Dict[str, Any]):
 
 def getReason(vars: Dict[str, Any]):
     return vars['WhyInterest']
-
-
 def getActivityWithFriends(vars: Dict[str, Any]):
     return vars['WithFriendActivities']
-
-
-# Section: some fundamental macros to get attitude/sentiment... from users
-def PositiveAgreement(vars: Dict[str, Any]):
-    if vars['Agreement'] == 'yes':
-        return True
-    else:
-        return False
-
-def NegativeAgreement(vars: Dict[str, Any]):
-    if vars['Agreement'] == 'no':
-        return True
-    else:
-        return False

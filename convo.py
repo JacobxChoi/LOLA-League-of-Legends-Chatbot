@@ -48,6 +48,7 @@ def load(df: DialogueFlow, varfile: str):
         d = pickle.load(open(varfile, 'rb'))
         df.vars().update(d)
         df.run()
+        # df.run(debugging=True)
         save(df, varfile)
     # first time conversing
     else:
@@ -58,8 +59,8 @@ def load(df: DialogueFlow, varfile: str):
 # This is the welcoming transition
 transitions = {
     'state': 'start',
-    ##Welcoming section TODO: Intro can be modified
-    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue, may I have your name`': {
+    ##Welcoming section TODO: change #GET_NAME FROM REGEX TO CHATGPT
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. May I have your name?`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: for the same user
