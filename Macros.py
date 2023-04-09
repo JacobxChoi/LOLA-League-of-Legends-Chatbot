@@ -15,7 +15,7 @@ CHATGPT_MODEL = 'gpt-3.5-turbo'
 
 class MacroGetName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-
+        #TODO: CHANGE THIS TO CHATGPT BASED
         r = re.compile(
             r"(?:(?:hi)?(?:\,)?(?:\s)*my(?:\s)*(?:name|nickname)(?:\s)*(?:is)?(?:\s)*|(?:hi)?(?:\,)?(?:\s)*i(?:\s)*am(?:\s)*|(?:please|you(?:\s)*can|everyone)?(?:\s)*(?:call|calls)(?:\s)*me(?:\s)*?|(?:hi)?(?:\,)?(?:\s)*i(?:\')?(?:m)?(?:ts)?(?:t\'s)?(?:\s)*(?:go by)?)?(?:\s)*(mr|mrs|ms|dr|dr\.)?(?:^|\s)*([a-z']+)(?:\s([a-z']+))?(?:(?:\,)?(?:\s)*.*)?")
 
@@ -40,20 +40,22 @@ class MacroGetName(Macro):
 
         vn_firstname = firstname.capitalize()
 
+        #add dictionary to gather info about user
         if vn_PI not in vars:
             vars[vn_PI] = {}
             vars[vn_PI][vn_firstname] = {}
         else:
             vars[vn_PI][vn_firstname] = {}
 
+        #if 'FIRSTNAME' var isn't in vars
         if vn_FN not in vars:
             vars[vn_FN] = firstname
             vars[vn_firstname] = False
 
+        #if vn_firstname (their actual name) isn't in vars['FIRSTNAME']
         if vn_firstname not in vars['FIRSTNAME']:
             vars['FIRSTNAME'] = vn_firstname
             vars[vn_firstname] = False
-
         else:
             vars[vn_firstname] = True
         return True
@@ -104,8 +106,6 @@ class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         userResponse = ngrams.text()
 
-
-
         # opens json
         f = open('resources/tourneys.json', )
         data = json.load(f)
@@ -150,6 +150,7 @@ class favRegion(Macro):
         team1 = 'T_TEAM1'
         team2 = 'T_TEAM2'
         winner = 'T_WINNER'
+        loser = 'T_LOSER'
         t_month = 'T_MONTH'
         t_day = 'T_DAY'
 
@@ -172,6 +173,11 @@ class favRegion(Macro):
         # no region found. Return false
         if region == '':
             return False
+        else: #ADDS FAVORITE REGION TO PLAYERINFO
+            vn_PI = 'PLAYERINFO'
+            vn_FN = 'FIRSTNAME'
+            vn_FR = 'FAV_REGION'
+            vars[vn_PI][vars[vn_FN]][vn_FR] = region
 
         # some regions don't have any games from this year so far. If this is the case, return false
         if (len(data['ontology'][region]) >= 1):
@@ -192,6 +198,11 @@ class favRegion(Macro):
         date = game['time'][0:10]
         month = date[5:7]
         day = date[-2:]
+
+        if vars[winner] == game['teams'][1]:
+            vars[loser] = game['teams'][0]
+        else:
+            vars[loser] = game['teams'][1]
 
         # playoffs
         if typeOfMatch[0:8] == 'Playoffs':

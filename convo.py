@@ -64,7 +64,7 @@ transitions = {
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. May I have your name?`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
-            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: for the same user
+            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
         }
     },
 }

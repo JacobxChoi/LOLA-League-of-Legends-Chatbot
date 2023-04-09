@@ -91,7 +91,7 @@ def casual():
                 '`no worries!`':'casual'
             },
             'error':'end'
-        }, #TODO: move gate to different part of conversation
+        }, #TODO: handle gate
         '`End of gate`':{
             'score':0.1,
             'state':'end'
@@ -119,7 +119,7 @@ def favTeam():
     }
     return favTeam
 
-def favPlayer():
+def favPlayer(): #TODO: WE ALREADY HAVE FAVPLAYER VAR
     favPlayer = {
         'state': 'favPlayer'
     }
