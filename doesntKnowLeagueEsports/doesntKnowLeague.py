@@ -16,7 +16,7 @@ def doesntKnowLeague():
                 '`Do you have a favorite champion?`': {
                     '#UserChamp': {
                         # ontology for favorite champion. Does not unfortunately handle cases where user has no favorite champion
-                        '$FAV_CHAMP `is fun to play!` $PLAYER_RECOMMEND`plays them as well, and they\'re really fun to watch. I suggest watching them`': 'end'
+                        '$FAV_CHAMP `is fun to play!` $PLAYER_RECOMMEND`plays them as well.`': 'end'
                     },
                     '[{no, not really, not}]': {
                         '`All good. My favorite champion is Irelia. I like playing aggressively and getting kills, so I find playing Irelia pretty fun.`': 'end'

@@ -240,7 +240,7 @@ class UserInputChampion(Macro):
                 # for each token in user's sentence
                 for token in doc:
                     # champions are labeled as nouns by spacy
-                    if token.pos_ == 'NOUN':
+                    if token.pos_ == 'NOUN' or token.pos_ == 'PROPN':
                         # if champion in ontology and player suggested champion is same as champion in iteration
                         if token.text in data['ontology'] and champion == token.text:
                             # keeps track of first player in ont who plays that champion in lcs

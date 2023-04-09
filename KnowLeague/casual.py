@@ -99,7 +99,6 @@ def casual():
     }
     return casual
 
-
 #TODO connect these to convo.py
 
 def EdwardGaming():
