@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement,NegativeAgreement
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy
 
 #convo.py imports
 import pickle
@@ -117,7 +117,9 @@ macros = {
         'How does the speaker response to the yes or no question, give yes if user answers "yes", or affirmative answers for the question , and no if user anseers with "no" or doubting ',
         {'Agreement': 'yes'},
         {'Agreement': 'no'}
-    )
+    ),
+
+    'GameGoalAnalogy': MacroGoalAnalogy(),
 
 
 

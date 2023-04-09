@@ -350,3 +350,39 @@ def NegativeAgreement(vars: Dict[str, Any]):
         return True
     else:
         return False
+
+
+# This macro use analogy to explain the game goal according to the favorite game user select
+class MacroGoalAnalogy(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        vn = 'GameType'
+        GameTypeResponseDic = {
+            'RPG': {
+                'GameGoalSim': 'You can conceive it as a 30 min mini role play game with real person friends and foes, where each hero has different sets of power to achieve the ultimate goal: destroy the enemy nexus with your teammates. Along the process, side missions are seizing the available resources, ambushing the enemy champions, and getting buffs from neutral monsters, upgrading the weapons and defense... '
+            },
+
+            'shooter': {
+                'GameGoalSim': 'It\'s really similar to the shooter games like CS or Overwatch, as teammates shall cooperate in a competitive environment to achieve the ultimate goal. In here, it\'s destroying the turrets and finally the enemy nexus  '
+            },
+
+            'towerDefense': {
+                'GameGoalSim': 'You can regard it as the tower defense game where you shall protect your turrets and bases from enemy attack. (ゝ∀･).'
+            },
+
+            'other': {
+                'GameGoalSim': 'You can conceive turrets are defensive organs like skin, bones, meninges that protect your brain, the nexus in bases, from being attacked (*´▽`*) And with evil or hypocritical ends, you must destroy the "brain" of the other team'
+            }
+        }
+
+        # TODO: include a category based on the gpt output
+
+        if vars[vn] == 'First-person shooter ':
+            return GameTypeResponseDic['shooter']['GameGoalSim']
+
+        if vars[vn] == 'Tower defense':
+            return GameTypeResponseDic['towerDefense']['GameGoalSim']
+
+        if vars[vn] == 'Role play Game':
+            return GameTypeResponseDic['towerDefense']['GameGoalSim']
+        else:
+            return GameTypeResponseDic['other']['GameGoalSim']
