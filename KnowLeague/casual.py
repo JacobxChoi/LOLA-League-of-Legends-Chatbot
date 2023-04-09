@@ -19,11 +19,44 @@ def casual():
                                     '[{aggressive, fastpaced, fun, skilled, flashy, technical, informational, fast paced}]': {
                                         '`If you like that then you should also check out T1! They\'re really calculated in their plays.`': {
                                             '{[already, watch],[watch, already]}': {
-                                                '`Nice! Do you want any more aggressive suggestions?`': {
+                                                '`Nice! Do you want any more similar suggestions?`': {
+                                                    '{yes, ok, yeah, sure, fun, alright, [sounds, {fun, good}]}': {
+                                                        '`Check out FNC\'s game against GAM during the 2017 World\'s '
+                                                        'group stage. It had one of the craziest starts to a game I have ever seen.`': {
+                                                            '{why, how, what}': {
+                                                                '`By the time one jungler was level six, the enemy top '
+                                                                'laner was only level two. I won\'t spoil the rest of '
+                                                                'the game so you should give it a watch. '
+                                                                'Is there anything else you wanted to talk about?`': {
 
+                                                                }
+                                                            },
+                                                            '{yes, ok, yeah, sure, fun, alright, cool, [sounds, {fun, good}]}': {
+                                                                #TODO: Store the match
+                                                                '`Alrighty! Let me know what you think of it later!`': 'end'
+                                                            },
+                                                            '{no, not, nah, pass, [im, {good, fine}]}': {
+                                                                '`Oh, ok... Do you want another game or team to watch?`': {
+                                                                    #TODO: macro that pulls information and sends a game that they played
+                                                                }
+                                                            },
+                                                            'error': {
+                                                                '`Okay I gotcha.`': 'end'
+                                                            }
+                                                        }
+                                                    },
+                                                    '{no, not, nah, pass, [im, {good, fine}]}': {
+                                                        '`Alrighty! I\'ll see you later!`': 'end'
+                                                    }
                                                 },
+                                                '{no, not, nah, pass, [im, {good, fine}]}': {
+                                                        '`Then do you want to talk about something else? I mainly can '
+                                                        'talk about teams, recent games, and information about the game`': {
+
+                                                        }
+                                                    }
                                             },
-                                            '{yes, ok, yeah, sure, []}': {
+                                            '{yes, ok, yeah, sure, fun, alright, [sounds, {fun, good}]}': {
 
                                             }
                                         },
