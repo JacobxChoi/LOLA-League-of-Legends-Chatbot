@@ -52,7 +52,9 @@ def casual():
                                                 '{no, not, nah, pass, [im, {good, fine}]}': {
                                                         '`Then do you want to talk about something else? I mainly can '
                                                         'talk about teams, recent games, and information about the game`': {
+                                                            '{team, teams}': {
 
+                                                            }
                                                         }
                                                     }
                                             },
