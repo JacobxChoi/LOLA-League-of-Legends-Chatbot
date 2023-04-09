@@ -3,6 +3,7 @@ def casual():
         'state': 'casual', #at this point, they don't have a favorite professional player. They have a favorite region, but are not watching any games currently
         '#GATE`I\'ll share some of my personal favorites. Keria is my favorite player, but my favorite team is Edward Gaming. They\'re fun to watch`': { #user will ask questions
             # 'score': 0.9,
+            'state':'share',
             '{[like, {EDG, them, team}, too]}':{#USER: I like them too!
                 '`Awesome! What do you like about Edward Gaming?`':'EDG'
             },
@@ -45,14 +46,16 @@ def casual():
             '{[favorite, player]}':{ #USER: my favorite player, though, is _____
                 '`What do you like about them?`':'favPlayer'
             },
-            'error':'end'
+            'error':'share'
         },
         # USER didn't watch Lola suggested games, but perhaps they still watched a game from this year
         '#GATE`Are there any games or tournaments that you watched this year?`':{
             # 'score': 0.9,
             '[{yes, yeah, watched, watch}]':{ #USER: yeah! this year, I watched a game between team1 and team2
                 '`That\'s cool! Who was the highlight of the game?`' :{
+                    '[$HIGHLIGHT_PLAYER = #ONT(teams)]':{
 
+                    }
                 },
                 '`Nice! Who won the game? Was it close?`':{
                     '[{yes, yeah, close}]':{ #USER: yeah, it was a really close game!

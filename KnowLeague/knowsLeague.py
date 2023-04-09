@@ -38,6 +38,7 @@ def knowsLeague():
                     '[{yes, did, watched}]':'advanced', #shows that user actively watches current esports games.
                     '[{no, [did not], dont, didnt}]':{ #next favorite region?
                         '`No Worries. How about this other match?`':{
+                            '[{yes, yeah, watch, watched}]':'advanced',
                             '[{no, [did not], didnt, havent, [have not]}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
                                 '`All good!`':'casual'
                             },
