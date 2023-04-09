@@ -100,7 +100,7 @@ def doesntKnowLeague():
                                                 'score': '1.0',
                                                 'state': 'Minions',
                                                 '`If the champions users control are heroes that can dominate the victory or defeat of the game, minions are the front-line fighters that can rush against the defense of the foe and take the damage from the turret on behalf of the player. Otherwise, players cannot enter the base of the other team `': {
-
+                                                    'state': 'minion',
                                                     '[{minion, minions, they}, {essential, key, important}]': {
                                                         'state': 'MinionImportant',
                                                         '`Yeah, the waves of minions that can bear the boat of the victory is the same that swallows it. So, it\'s important to have a sophisticated control of the minions in order to win the game`': {
@@ -131,6 +131,10 @@ def doesntKnowLeague():
 
                                                     },
 
+                                                    '[{understand, get}]': {
+                                                        '`ξ( ✿＞◡❛)`': 'MinionImportant'
+                                                    },
+
                                                     # TODO: add more options here
 
                                                     'error': {
@@ -141,9 +145,9 @@ def doesntKnowLeague():
 
                                             },
 
-                                            '[turret, turrets]': {
+                                            '[turret, turrets, tower]': {
                                                 'state': 'turrets',
-                                                '`Turrets can give high damage if you hastily intrude into its range when your minions are absent. It\'s one of the main obstacle on your way to destroy the nexus`': {
+                                                '`Turrets and towers can give high damage if you hastily intrude into its range when your minions are absent. It\'s one of the main obstacle on your way to destroy the nexus`': {
                                                     '[{protect}, {own}]': {
                                                         '`You really have the talents! Turrets are \'strategic weapons\' that we should protect to protect our base from being attacking`': {
 
@@ -205,13 +209,15 @@ def doesntKnowLeague():
                                                                             },
                                                                             '[#AgreementChecker]': {
                                                                                 'score': '0.5',
-                                                                                '#IF(#POSITIVE_AGREEMENT) `It\'s my great pleasure to guide you around in the investigative trip of the monsters. `': {
+                                                                                '#IF(#POSITIVE_AGREEMENT) `It\'s my great pleasure to guide you around in the investigative trip of the monsters. Our first destination is the blue sentinels which guard the power of crests of Insight `': {
                                                                                     'state': 'MonsterFirstGlance',
+
+
 
                                                                                 },
                                                                                 '#IF(#NEGATIVE_AGREEMENT)': 'GameGoal',
                                                                                 'error': {
-                                                                                    '`Σ(°Д°;The monster is just in front of us. Do you see the large,blue, golem-like creature with a blue crystalline body. That\'s blue sentinel. We call it blue buffs as it can grants champion who defeat it the buff with energy regeneration and cooldown reduction  `': 'MonsterFirstGlance'
+                                                                                    '`Σ(°Д°;A monster is just in front of us. Do you see the large,blue, golem-like creature with a blue crystalline body. That\'s blue sentinel. Together with its 2 minions, they are fearful treasures for those greedy, novice hunters `': 'MonsterFirstGlance'
                                                                                 }
 
                                                                             },
@@ -320,28 +326,20 @@ def doesntKnowLeague():
                                                                 '`(´・ω・`) , Do you have other questions related to league of legends ?`': 'IntroduceLeague'
                                                             }
                                                         }
-
                                                     },
                                                     'error': {
                                                         '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'compareWithVG'
                                                     }
                                                 }
-
                                             },
-
                                             '[{played, play, playing}]': {
                                                 'score': '0.5',
-
-                                                # TODO: add this later
-
+                                                '`Great! MOBA games shared the similar core design, you will definitely master lol fast! Do you have other questions?`': 'IntroduceLeague'
                                             },
-
                                             'error': {
                                                 '`(ゝ∀･) That\'s great! Do you have other questions ?`': 'IntroduceLeague'
                                             }
-
                                         }
-
                                     },
                                     '[{what},{MOBA}]': {
                                         '`MOBA is the synonym of Multi-player Online Battle Arena, in league of legends, 5 players on each team are working together in the battle fields with the shared goal to destroy the nexus of the other team. `': {
@@ -362,16 +360,24 @@ def doesntKnowLeague():
 
                                     '[{how},{destroy}]': {
 
-                                        # TODO: add this later
+                                        '`There are no way for you destroyed the base unless you destroy all turrets in a lane and two guardian towers in front of the nexus to destroy the base with helps from your minions. `': {
+                                            '[{tower,turrets}]': 'turrets',
+                                            '[{minions}]': 'Minions',
+                                            '[{lot, many}]': {
+                                                '`I know it\'s sound a hard mission but when you grab the potentials on the battlefields, enemy turrets will be demolished like the sand tower in winds`'
+                                            },
+                                            '[{lane}]': 'laneInfo',
+                                            'error': {
+                                                '`(´・ω・`) , Do you have other questions related to league of legends ?`': 'IntroduceLeague'
+                                            }
+                                        }
 
                                     },
 
                                     'error': {
                                         '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'Base',
                                     }
-
                                 }
-
                             },
                             '[#AgreementChecker]': {
                                 'score': '0.5',
@@ -380,18 +386,15 @@ def doesntKnowLeague():
                                 'error': {
                                     '`Forgive me for my inability to understand you, but do you know the goal of league of legends?`': 'Directed_Questions'
                                 }
-
                             },
 
                             'error': {
                                 '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'Directed_Questions',
                             }
-
                         }
                     },
 
                     '[{goal, win}]': 'DestroyNexus',
-                    '[{#LEM(improve), enhance}]': 'howToImprove',
                     '[{champion}]': 'champInfo',
                     '[{role,lane}]': 'laneInfo',
                     '[{map}]': 'mapInfo',
