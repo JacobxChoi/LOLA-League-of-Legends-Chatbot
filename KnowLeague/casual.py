@@ -1,15 +1,34 @@
 def casual():
     casual = {
         'state': 'casual', #at this point, they don't have a favorite professional player. They have a favorite region, but are not watching any games currently
-        '#GATE`I\'ll share some of my favorite teams. Jojopyun is my favorite player, but my favorite team is Edward Gaming. They\'re fun to watch`': { #user will ask questions
+        '#GATE`I\'ll share some of my personal favorites. Keria is my favorite player, but my favorite team is Edward Gaming. They\'re fun to watch`': { #user will ask questions
             # 'score': 0.9,
-            '{[like, too]}':{#USER: I like them too!
+            '{[like, {EDG, them, team}, too]}':{#USER: I like them too!
                 '`Awesome! What do you like about Edward Gaming?`':'EDG'
             },
-            '[{like}]':{ #USER: What do you like about them?
-                '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What do you think?`':{
-                    '[{like}]':{ #I like Edward Gaming too!
-                        '`nice!`':'end' #TODO
+            '{[like, {keria, him}, {too, also}]}': {  # USER: I like them too!
+                '`Awesome! What do you like about Keria?`': 'keria'
+            },
+            '{[you, like]}':{ #USER: What do you like about them?
+                '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What about you?`':{
+                    '{[like,{too, also}], [also, like]}':{ #I like Edward Gaming too!
+                        '`Nice! Do you like them for their personality or gameplay?`': {
+                            '[{playstyle, play, style, skills, abilities,gameplay}]': {
+                                '`What do you like about it specifically?`': {
+                                    'error': {
+                                        '`Awesome! Are there any other players you enjoy watching?`': 'favPlayer'
+                                    }
+                                }
+                            },
+                            '[{personalities, personality, character, charisma}]': {
+                                '`In what way?`': {
+
+                                }
+                            }
+                        }
+                    },
+                    '[{agree}]': {
+                        '`Awesome! Happy to hear you think that way.`'
                     },
                     '[{think}]':{ #I think they're good too, but I prefer ...
                         '`That\'s fair.`':'end' #TODO
@@ -65,6 +84,12 @@ def EdwardGaming():
     }
     return EDG
 
+def Keria():
+    Keria = {
+        'state': 'keria'
+
+    }
+    return Keria
 def favTeam():
     favTeam = {
         'state': 'favTeam'
