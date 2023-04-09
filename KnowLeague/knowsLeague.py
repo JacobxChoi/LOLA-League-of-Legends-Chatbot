@@ -13,7 +13,8 @@ def knowsLeague():
                         '`That\'s valid. I would say that keria is probably doing the best right now though.`':{
                             '[{agree, right, yeah}]':'end',
                             '[{nah, dont, no, disagree}]':'end',
-                            '[{why}]':'end'
+                            '[{why}]':'end',
+                            'error':'end'
                         },
                        'error':'end'
                     },

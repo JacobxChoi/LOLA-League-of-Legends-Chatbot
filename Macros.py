@@ -242,7 +242,7 @@ class UserInputChampion(Macro):
                     # champions are labeled as nouns by spacy
                     if token.pos_ == 'NOUN' or token.pos_ == 'PROPN':
                         # if champion in ontology and player suggested champion is same as champion in iteration
-                        if token.text in data['ontology'] and champion == token.text:
+                        if token.text.lower() in data['ontology'] and champion == token.text.lower():
                             # keeps track of first player in ont who plays that champion in lcs
                             # TODO keep track of recommended players
                             # TODO handle cases where user does not have favorite champ
