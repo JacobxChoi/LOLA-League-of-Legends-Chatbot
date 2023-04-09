@@ -11,6 +11,7 @@ def doesntKnowLeague():
     doesntKnowLeague = {
         'state': 'doesntKnowLeagueEsports',
         '`That\'s fine. Have you ever played League of Legends?.`': {
+            'state': 'playedLOL',
             '[{yes, yeah}]': {
                 'state': 'familiarity',
                 '`Do you have a favorite champion?`': {
@@ -24,7 +25,7 @@ def doesntKnowLeague():
                     'error': 'end'
                 }
             },
-            '[{no, not, dont, never}]': {
+            '[{no, not, dont, never, barely}]': {
                 'state': 'transit',
                 # Casual questions to collect related infos
                 '#GATE `What\'s your favorite game?`': {
@@ -88,22 +89,24 @@ def doesntKnowLeague():
                         '#GATE `Great! Do you know how to win a league of legends game?`': {
                             'state': 'Directed_Questions',
 
-                            '[{nexus, base, tower}]': {
+                            '[{nexus, base, turrets}]': {
                                 'state': 'DestroyNexus',
                                 'score': '1.0',
                                 '`Exactly! League of legends or LOL is a 5 players vs. 5 players MOBA game, where teammates cooperate together to destroy other team\'s base and of course, there are many hindrance on the way toward final goal `': {
-                                    '[{what},{base}]': {
-                                        '`Base is like the \'headquaters\' of a team where waves of minions enter the battlefields. The game ends if you destroy the nexus on the base of the other team.`': {
-                                            '[{minion， minions}]': {
+                                    'state': 'Base',
+                                    '[{what},{base,nexus}]': {
+                                        '`Base is like the \'headquaters\' of a team where waves of minions enter the battlefields. The game ends if you destroy the nexus on the base of the other team but you cannot do this without relying on your minions.`': {
+                                            '[{minion, minions}]': {
                                                 'score': '1.0',
+                                                'state': 'Minions',
                                                 '`Hmm, If the champions users control are heroes that can dominate the victory or defeat of the game, minions are the front-line fighters that can rush against the defense of the foe and take the damage from the turret on behalf of the player. Otherwise, players cannot enter the base of the other team `': {
 
-                                                    '[{minion}, {essential, key, important}]': {
-                                                        'state': 'minion',
-                                                        'Yeah, the waves of minions that can bear the boat of the victory is the same that swallows it. So, it\'s important to have a sophisticated control of the minions in order to win the game': {
+                                                    '[{minion, minions, they}, {essential, key, important}]': {
+                                                        'state': 'MinionImportant',
+                                                        '`Yeah, the waves of minions that can bear the boat of the victory is the same that swallows it. So, it\'s important to have a sophisticated control of the minions in order to win the game`': {
                                                             '[{explain,know, more},{control}]': {
                                                                 'state': 'toMinionWaveControl',
-                                                                'The skill is really learned and honed with thinking in actual practice, but for sure I can give you some hint if you want to know ': {
+                                                                '`The skill is really learned and honed with thinking in actual practice, but for sure I can give you some hint if you want to know `': {
                                                                     '[#AgreementChecker]': {
                                                                         '#IF(#POSITIVE_AGREEMENT) `Wow, it\'s great you have interest in it. I can give you the experience I summarized from playing the game. More is for you to explore`': 'MinionwaveControl', # TODO complete the branch of the dialogue
                                                                         '#IF(#NEGATIVE_AGREEMENT) `That\'s alright. I guess to find the interest for a game is more important for a beginner rather than get overwhelmed by those concerns. What else do you want to know`': 'IntroduceLeague',
@@ -121,10 +124,16 @@ def doesntKnowLeague():
                                                             '[{interesting, challenging}]': 'toMinionWaveControl',
 
                                                             'error': {
-                                                                ' (́◉◞౪◟◉‵) Pardon my absent-mindedness just then. Could you explain it ?': 'minion'
+                                                                ' (́◉◞౪◟◉‵) Pardon my absent-mindedness just then. Could you explain it ?': 'MinionImportant'
                                                             }
                                                         }
 
+                                                    },
+
+                                                    # TODO: add more options here
+
+                                                    'error': {
+                                                        ' (́◉◞౪◟◉‵) Pardon my absent-mindedness just then. Could you explain it ?': 'minion'
                                                     }
 
                                                 }
@@ -167,7 +176,7 @@ def doesntKnowLeague():
                                                     },
 
                                                     'error': {
-                                                        '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'DestroyNexus'
+                                                        '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'Base'
                                                     }
 
                                                 }
@@ -193,9 +202,9 @@ def doesntKnowLeague():
                                             }
                                         }
                                     },
-                                    '[{played},{MOBA}]': {
+                                    '[{played},{moba}]': {
                                         '`Wow, which one did you play? Have you played DOTA 2 or Vain Glory ?`': {
-                                            '[DOTA]': { # TODO: Expand later
+                                            '[dota]': { # TODO: Expand later
                                                 'score': '1.0',
                                                 '`Then, I guess you\'ll master league of legends quicker as DOTA 2 shares the similar core structure with LoL despite a way more complex systems `': {
                                                     'state': 'compareWithDOTA',
@@ -214,7 +223,7 @@ def doesntKnowLeague():
                                                     }
                                                 }
                                             },
-                                            '[Vain Glory]': { # TODO: Expand later
+                                            '[vain glory]': { # TODO: Expand later
                                                 'score': '1.0',
                                                 '`Then, I guess you\'ll enter league of legends more smoothly as the core structure is similar`': {
                                                     'state': 'compareWithVG',
@@ -279,7 +288,7 @@ def doesntKnowLeague():
                                     },
 
                                     'error': {
-                                        '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'Directed_Questions',
+                                        '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'Base',
                                     }
 
                                 }
@@ -295,13 +304,17 @@ def doesntKnowLeague():
 
                             },
 
+                            'error': {
+                                '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'Directed_Questions',
+                            }
+
                         }
                     },
 
                     '[{goal, win}]': 'DestroyNexus',
                     '[{#LEM(improve), enhance}]': 'howToImprove',
                     '[{champion}]': 'champInfo',
-                    '[{role,lane}]': 'roleInfo',
+                    '[{role,lane}]': 'laneInfo',
                     '[{map}]': 'mapInfo',
                     '[{item}]': 'items',
 
@@ -313,7 +326,7 @@ def doesntKnowLeague():
             },
 
             'error': {
-                '`Sorry, I didn\'t catch that, could you say it again?`': 'transit'
+                '`Sorry, I didn\'t catch that, could you say it again? ξ( ✿＞◡❛)`': 'playedLOL'
             },
 
         },
