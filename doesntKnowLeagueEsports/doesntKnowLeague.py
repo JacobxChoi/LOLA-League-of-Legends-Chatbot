@@ -99,7 +99,7 @@ def doesntKnowLeague():
                                             '[{minion, minions}]': {
                                                 'score': '1.0',
                                                 'state': 'Minions',
-                                                '`Hmm, If the champions users control are heroes that can dominate the victory or defeat of the game, minions are the front-line fighters that can rush against the defense of the foe and take the damage from the turret on behalf of the player. Otherwise, players cannot enter the base of the other team `': {
+                                                '`If the champions users control are heroes that can dominate the victory or defeat of the game, minions are the front-line fighters that can rush against the defense of the foe and take the damage from the turret on behalf of the player. Otherwise, players cannot enter the base of the other team `': {
 
                                                     '[{minion, minions, they}, {essential, key, important}]': {
                                                         'state': 'MinionImportant',
@@ -108,7 +108,8 @@ def doesntKnowLeague():
                                                                 'state': 'toMinionWaveControl',
                                                                 '`The skill is really learned and honed with thinking in actual practice, but for sure I can give you some hint if you want to know `': {
                                                                     '[#AgreementChecker]': {
-                                                                        '#IF(#POSITIVE_AGREEMENT) `Wow, it\'s great you have interest in it. I can give you the experience I summarized from playing the game. More is for you to explore`': 'MinionwaveControl', # TODO complete the branch of the dialogue
+                                                                        '#IF(#POSITIVE_AGREEMENT) `Wow, it\'s great you have interest in it. I can give you the experience I summarized from playing the game. More is for you to explore`': 'MinionwaveControl',
+                                                                        # TODO complete the branch of the dialogue
                                                                         '#IF(#NEGATIVE_AGREEMENT) `That\'s alright. I guess to find the interest for a game is more important for a beginner rather than get overwhelmed by those concerns. What else do you want to know`': 'IntroduceLeague',
                                                                         'error': {
                                                                             '`Forgive me for my inability to understand you, but do you know the goal of league of legends?`': 'Directed_Questions'
@@ -152,8 +153,8 @@ def doesntKnowLeague():
                                                     '[{not, dont},{understand, sure, get}]': {
                                                         'score': '0.7',
                                                         '`You can think those turrets as guardians that protect your base form enemy attacks. So you really want to try hard to protect your own turrets while destoying the enemy turrents with your minions`': {
-                                                            '[{how},{protect}]':{
-                                                                '`Good question! Turrets will only receive a little damage when the enemy minions are not in its range. In this case, you really want to try hard to keep enemy minions away from your turrets`':{
+                                                            '[{how},{protect}]': {
+                                                                '`Good question! Turrets will only receive a little damage when the enemy minions are not in its range. In this case, you really want to try hard to keep enemy minions away from your turrets`': {
 
                                                                 }
                                                             },
@@ -183,10 +184,93 @@ def doesntKnowLeague():
 
                                             },
 
-
                                             '[{not, dont},{understand, sure, get}]': {
                                                 'score': '0.7',
-                                                # TODO: COMMONITY with the game user select
+                                                '`#GameGoalAnalogy`': {
+                                                    '[{resources, resource}]': {
+                                                        '`Enemy champions, neutral monsters, minions, turrets, you gain experiences and golds that allow you to buy builds including weapons and armors`': {
+                                                            '[{build, weapon, armor}]': 'buildInfo',
+                                                            '[{minions, minion}]': 'Minions',
+                                                            '[{turrets}]': 'turrets',
+                                                            '[{monsters}]': {
+                                                                'state': 'neutralMonsters',
+                                                                '`There are many different types of neutral monsters distributed symmetrically across the map, you can gain golds, experiences, and buffs after defeating them, `': {
+                                                                    'state': 'MonstersInfo',
+                                                                    '[{type, different}]': {
+                                                                        '`Great, I can guide you across the summoner\'s rift to see the ecology of the monsters. You can always stop me for further information and feel free to take off the safari vehicles. We will leave you around the monsters (=^-ω-^=). Do you prepare yourself to set on the journey? `': {
+                                                                            'state': 'MonsterTrip',
+                                                                            '[{ecology}]': {
+                                                                                'score': '1.0',
+                                                                                '`I\'m just kidding. So do you prepare to set on the zoo trip`': 'MonsterTrip'
+                                                                            },
+                                                                            '[#AgreementChecker]': {
+                                                                                'score': '0.5',
+                                                                                '#IF(#POSITIVE_AGREEMENT) `It\'s my great pleasure to guide you around in the investigative trip of the monsters. `': {
+                                                                                    'state': 'MonsterFirstGlance',
+
+                                                                                },
+                                                                                '#IF(#NEGATIVE_AGREEMENT)': 'GameGoal',
+                                                                                'error': {
+                                                                                    '`Σ(°Д°;The monster is just in front of us. Do you see the large,blue, golem-like creature with a blue crystalline body. That\'s blue sentinel. We call it blue buffs as it can grants champion who defeat it the buff with energy regeneration and cooldown reduction  `': 'MonsterFirstGlance'
+                                                                                }
+
+                                                                            },
+
+                                                                            '[{other}]': {
+                                                                                'score': '0.7',
+                                                                                '`Well, what other questions do you have over the league of legends and its e-sports `': 'IntroduceLeague',
+
+                                                                            },
+
+                                                                            'error': {
+                                                                                '`(≧∀≦)ゞ I\'m really sorry for missing you, let me know if you are prepared or you want to switch to other questions  ?`': 'MonsterTypes',
+                                                                            }
+                                                                        }
+
+                                                                    },
+
+                                                                    'error': {
+                                                                        '`(≧∀≦)ゞ I\'m really sorry for missing you, could you explain more for your request ?`': 'neutralMonsters',
+                                                                    }
+
+                                                                }
+                                                            },
+                                                            'error': {
+                                                                '`༼ つ◕_◕ ༽つ Do you have other questions related to league `': 'IntroduceLeague',
+                                                            }
+                                                        }
+
+                                                    },
+
+                                                    '[{what},{weapon, defense}]': {
+                                                        'state': 'buildInfo',
+                                                        '`Appropriate builds including weapons, clothes... ,that you can purchase on your bases,can greatly enhance your power to gain edges in combating. For beginner, you can just follow the recommended build in game `': {
+                                                            '[{purchase, buy}]': {
+
+                                                            },
+
+                                                            'error': {
+                                                                '`(≧∀≦)ゞ My apologies, but could you explain more for your request? `': 'IntroduceLeague',
+
+                                                            }
+                                                        }
+
+                                                    },
+
+                                                    '[{competitive}]': {
+
+                                                    },
+
+                                                    '[{why}, {brain}]': {
+                                                        '`A game is like a dream, where players are stuck into a sets of absurd rules, and they are happy with it. But that\'s off-topic. Do you have other questions related to the game goal`': 'Directed_Questions',
+                                                    },
+
+                                                    '[{understand, get}]': 'understandLeague',
+                                                    'error': {
+                                                        '`(*´ω`)人(´ω`*) Cool! do you have other questions related to the game`': 'IntroduceLeague'
+                                                    }
+
+                                                }
 
                                             },
 
@@ -204,7 +288,7 @@ def doesntKnowLeague():
                                     },
                                     '[{played},{moba}]': {
                                         '`Wow, which one did you play? Have you played DOTA 2 or Vain Glory ?`': {
-                                            '[dota]': { # TODO: Expand later
+                                            '[dota]': {  # TODO: Expand later
                                                 'score': '1.0',
                                                 '`Then, I guess you\'ll master league of legends quicker as DOTA 2 shares the similar core structure with LoL despite a way more complex systems `': {
                                                     'state': 'compareWithDOTA',
@@ -223,7 +307,7 @@ def doesntKnowLeague():
                                                     }
                                                 }
                                             },
-                                            '[vain glory]': { # TODO: Expand later
+                                            '[vain glory]': {  # TODO: Expand later
                                                 'score': '1.0',
                                                 '`Then, I guess you\'ll enter league of legends more smoothly as the core structure is similar`': {
                                                     'state': 'compareWithVG',
@@ -250,13 +334,11 @@ def doesntKnowLeague():
 
                                                 # TODO: add this later
 
-
                                             },
 
                                             'error': {
                                                 '`(ゝ∀･) That\'s great! Do you have other questions ?`': 'IntroduceLeague'
                                             }
-
 
                                         }
 
@@ -264,8 +346,7 @@ def doesntKnowLeague():
                                     '[{what},{MOBA}]': {
                                         '`MOBA is the synonym of Multi-player Online Battle Arena, in league of legends, 5 players on each team are working together in the battle fields with the shared goal to destroy the nexus of the other team. `': {
 
-                                            '[{arena, battlefield}]': 'mapInfo', #TODO connect to mapInfos
-
+                                            '[{arena, battlefield}]': 'mapInfo',  # TODO connect to mapInfos
 
                                             '[{understand, get}]': {
                                                 '`ξ( ✿＞◡❛) , Do you have other questions related to league of legends ?`': 'IntroduceLeague'
@@ -273,7 +354,6 @@ def doesntKnowLeague():
                                             'error': {
                                                 '`(´・ω・`) , Do you have other questions related to league of legends ?`': 'IntroduceLeague'
                                             }
-
 
                                         }
 
@@ -283,7 +363,6 @@ def doesntKnowLeague():
                                     '[{how},{destroy}]': {
 
                                         # TODO: add this later
-
 
                                     },
 
