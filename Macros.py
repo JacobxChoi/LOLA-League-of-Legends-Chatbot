@@ -36,7 +36,15 @@ class MacroGetName(Macro):
         vars['LASTNAME'] = lastname
         vn_FN = 'FIRSTNAME'
 
+        vn_PI = 'PLAYERINFO'
+
         vn_firstname = firstname.capitalize()
+
+        if vn_PI not in vars:
+            vars[vn_PI] = {}
+            vars[vn_PI][vn_firstname] = {}
+        else:
+            vars[vn_PI][vn_firstname] = {}
 
         if vn_FN not in vars:
             vars[vn_FN] = firstname
