@@ -54,12 +54,21 @@ def casual():
             '[{yes, yeah, watched, watch}]':{ #USER: yeah! this year, I watched a game between team1 and team2
                 '`That\'s cool! Who was the highlight of the game?`' :{
                     '[$HIGHLIGHT_PLAYER = #ONT(teams)]':{
-
-                    }
+                        '`I agree!` $HIGHLIGHT_PLAYER `has been doing well lately. Do you think they\'ll continue to do well?`':{
+                            '[{yes, well}]':{
+                                '`I agree! Their stats are above average this season, and I think they will help their team go far!`':'end' #TODO: CONTRADICTION, BECAUSE NO API
+                            },
+                            '[{no, wont, disagree, [definitely, not], [absolutely, not]}]':{
+                                '`I see. Their stats are below average this season, so maybe they won\'t do too well.`':'end'
+                            },
+                            'error':'end' #TODO: HANDLE ERROR
+                        }
+                    },
+                    'error': 'end'
                 },
                 '`Nice! Who won the game? Was it close?`':{
                     '[{yes, yeah, close}]':{ #USER: yeah, it was a really close game!
-                        '`awesome!`':'end' #TODO
+                        '`awesome!`':'end' #TODO: HANDLE ERROR
                     },
                     '[{no, not}]':{ #USER: no, the game wasnt really close
                         '`Dang. I\'m not a fan of one-sided games either.`':'end'
