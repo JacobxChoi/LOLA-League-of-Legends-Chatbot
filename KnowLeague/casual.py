@@ -14,8 +14,20 @@ def casual():
                 '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What about you?`':{
                     '{[like,{too, also}], [also, like]}':{ #I like Edward Gaming too!
                         '`Nice! Do you like them for their personality or gameplay?`': {
-                            '[{playstyle, play, style, skills, abilities,gameplay}]': {
+                            '[{playstyle, play, style, skills, abilities, gameplay}]': {
                                 '`What do you like about it specifically?`': {
+                                    '[{aggressive, fastpaced, fun, skilled, flashy, technical, informational, fast paced}]': {
+                                        '`If you like that then you should also check out T1! They\'re really calculated in their plays.`': {
+                                            '{[already, watch],[watch, already]}': {
+                                                '`Nice! Do you want any more aggressive suggestions?`': {
+
+                                                },
+                                            },
+                                            '{yes, ok, yeah, sure, []}': {
+
+                                            }
+                                        },
+                                    },
                                     'error': {
                                         '`Awesome! Are there any other players you enjoy watching?`': 'favPlayer'
                                     }

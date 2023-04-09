@@ -6,7 +6,7 @@ def advanced():
                 '#CLOSE `Who do you think performed the best?`': {
                     # Should reply with if the game was close or not
                     'state': 'perform',
-                    '$BEST_PLAYER = #ONT(teams)': {
+                    '[$BEST_PLAYER = #ONT(teams)]': {
                         '#IF(#BESTPLAYER = $BEST_PLAYER)': {
                             '`I agree! I think that` $BEST_PLAYER `was the most efficient player this game. What do you think made his performance so strong?`': {
                                 'state': 'choose_skills',
@@ -36,7 +36,7 @@ def advanced():
                         },
                         '{agree, yes, yeah, sure}': {
                             '`Is there another player that you thought performed well this game?`': {
-                                '#ONT(teams)': {
+                                '[$GOOD_PLAYER=#ONT(teams)]': {
                                     '`What made him particularly stand out?`': {
                                         '{laning, fighting, objective control, vision control, roaming, itemization, wave management}': 'skills',
                                         'error': {
@@ -52,7 +52,7 @@ def advanced():
             },
             '{boring, bad, #LEM(stomp), [not close]}': {
                 '#CLOSE2` Who do you think was the winning factor for the game? I personally think it was` #BESTPLAYER': { #Should reply with if the game was close or not
-                    '$BEST_PLAYER = #ONT(teams)': {
+                    '[$BEST_PLAYER=#ONT(teams)]': {
 
                     }
                 }
@@ -63,18 +63,23 @@ def advanced():
             }
 
         },
-        '`Do you think anyone showed a lot of improvement over their last game?`': {
-            '$MOST_IMPROVED = #ONT(teams)': {
+        '#GATE `Do you think anyone showed a lot of improvement over their last game?`': {
+            'score': 0.9,
+            '[$MOST_IMPROVED=#ONT(teams)]': {
                 '`What did they do to improve the most?`': {
 
                 }
+            },
+            '{not, no, [not that i know of]}': {
+                '`Hmm...`'
             }
         },
-        '`Do you think anyone has been performing worse than usual?`': {
-            '$UNDERPERFORMING = #ONT(teams)': {
+        '#GATE `Do you think anyone has been performing worse than usual?`': {
+            'score': 0.8,
+            '[$UNDERPERFORMING=#ONT(teams)]': {
                 '`What have they been struggling with the most lately?`': {
-                    '$WORSE_SKILL = {laning, fighting, objective control, vision control, roaming, itemization, wave management}': {
-                        '`I agree. They have been lacking in that department.`': 'end'
+                    '[$WORSE_SKILL = {laning, fighting, objective control, vision control, roaming, itemization, wave management}]': {
+                        '`I agree.`$UNDERPERFORMING `has been lacking in that department.`': 'end'
                     }
                 }
             }

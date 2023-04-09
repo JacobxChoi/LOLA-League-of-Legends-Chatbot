@@ -4,20 +4,20 @@ def knowsLeague():
         'state': 'favPlayer',
         '`Who\'s your favorite professional player?`': {
             'state': 'playerCondition',
-            '[jojopyun]':{
-                '`I agree! I love jojopyun too!`':'end'
+            '[keria]':{
+                '`I agree! I love keria too!`': 'keria'
             },
             '[$FAV_PLAYER=#ONT(leagues)]':{
                 '`How do you think` $FAV_PLAYER `has been doing lately?`': {
-                   '[{good, well, great, decent, nice, okay, not bad}]': {
-                        '`That\'s valid. I would say that jojopyun is probably doing the best right now though.`':{
+                   '[{good, well, great, decent, nice, okay, not bad, better}]': {
+                        '`That\'s valid. I would say that keria is probably doing the best right now though.`':{
                             '[{agree, right, yeah}]':'end',
                             '[{nah, dont, no, disagree}]':'end',
                             '[{why}]':'end'
                         },
                        'error':'end'
                     },
-                    '[{hasnt, not, bad}]':{
+                    '[{hasnt, not, bad, worse}]':{
                         '`I agree. (fav player) was much better before`': 'end'
                     },
                     'error':{

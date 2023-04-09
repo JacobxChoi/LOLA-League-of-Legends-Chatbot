@@ -68,12 +68,12 @@ transitions = {
     },
 }
 
-# This transition distrubutes the users to different branches of transitions based on their acquistion levels
+# This transition distributes the users to different branches of transitions based on their acquistion levels
 transitionDiverging = {
     'state': 'DIVERGE',
     '`Do you keep up with League of Legends esports?`': {
         '[{yes, yeah, keep, little, kind}]': {
-            '`nice.`': 'favPlayer',
+            '`Nice.`': 'favPlayer',
         },
         '[{no, not, dont}]': 'doesntKnowLeagueEsports',  # change 'no' to something like: no, I don't really play league.
         'error': {
