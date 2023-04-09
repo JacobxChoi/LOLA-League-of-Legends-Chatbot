@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement,NegativeAgreement
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy
 
 #convo.py imports
 import pickle
@@ -47,12 +47,13 @@ def load(df: DialogueFlow, varfile: str):
     if os.path.isfile('resources/visits.pkl'):
         d = pickle.load(open(varfile, 'rb'))
         df.vars().update(d)
-        df.run()
-        # df.run(debugging=True)
+        # df.run()
+        df.run(debugging=True)
         save(df, varfile)
     # first time conversing
     else:
-        df.run()
+        # df.run()
+        df.run(debugging=True)
         save(df, varfile)
 
 
@@ -63,7 +64,7 @@ transitions = {
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. May I have your name?`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
-            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: for the same user
+            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
         }
     },
 }
@@ -117,7 +118,9 @@ macros = {
         'How does the speaker response to the yes or no question, give yes if user answers "yes", or affirmative answers for the question , and no if user anseers with "no" or doubting ',
         {'Agreement': 'yes'},
         {'Agreement': 'no'}
-    )
+    ),
+
+    'GameGoalAnalogy': MacroGoalAnalogy(),
 
 
 

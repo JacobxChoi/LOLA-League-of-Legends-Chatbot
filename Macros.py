@@ -15,7 +15,7 @@ CHATGPT_MODEL = 'gpt-3.5-turbo'
 
 class MacroGetName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-
+        #TODO: CHANGE THIS TO CHATGPT BASED
         r = re.compile(
             r"(?:(?:hi)?(?:\,)?(?:\s)*my(?:\s)*(?:name|nickname)(?:\s)*(?:is)?(?:\s)*|(?:hi)?(?:\,)?(?:\s)*i(?:\s)*am(?:\s)*|(?:please|you(?:\s)*can|everyone)?(?:\s)*(?:call|calls)(?:\s)*me(?:\s)*?|(?:hi)?(?:\,)?(?:\s)*i(?:\')?(?:m)?(?:ts)?(?:t\'s)?(?:\s)*(?:go by)?)?(?:\s)*(mr|mrs|ms|dr|dr\.)?(?:^|\s)*([a-z']+)(?:\s([a-z']+))?(?:(?:\,)?(?:\s)*.*)?")
 
@@ -36,16 +36,26 @@ class MacroGetName(Macro):
         vars['LASTNAME'] = lastname
         vn_FN = 'FIRSTNAME'
 
+        vn_PI = 'PLAYERINFO'
+
         vn_firstname = firstname.capitalize()
 
+        #add dictionary to gather info about user
+        if vn_PI not in vars:
+            vars[vn_PI] = {}
+            vars[vn_PI][vn_firstname] = {}
+        else:
+            vars[vn_PI][vn_firstname] = {}
+
+        #if 'FIRSTNAME' var isn't in vars
         if vn_FN not in vars:
             vars[vn_FN] = firstname
             vars[vn_firstname] = False
 
+        #if vn_firstname (their actual name) isn't in vars['FIRSTNAME']
         if vn_firstname not in vars['FIRSTNAME']:
             vars['FIRSTNAME'] = vn_firstname
             vars[vn_firstname] = False
-
         else:
             vars[vn_firstname] = True
         return True
@@ -96,8 +106,6 @@ class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         userResponse = ngrams.text()
 
-
-
         # opens json
         f = open('resources/tourneys.json', )
         data = json.load(f)
@@ -142,6 +150,7 @@ class favRegion(Macro):
         team1 = 'T_TEAM1'
         team2 = 'T_TEAM2'
         winner = 'T_WINNER'
+        loser = 'T_LOSER'
         t_month = 'T_MONTH'
         t_day = 'T_DAY'
 
@@ -164,6 +173,11 @@ class favRegion(Macro):
         # no region found. Return false
         if region == '':
             return False
+        else: #ADDS FAVORITE REGION TO PLAYERINFO
+            vn_PI = 'PLAYERINFO'
+            vn_FN = 'FIRSTNAME'
+            vn_FR = 'FAV_REGION'
+            vars[vn_PI][vars[vn_FN]][vn_FR] = region
 
         # some regions don't have any games from this year so far. If this is the case, return false
         if (len(data['ontology'][region]) >= 1):
@@ -184,6 +198,11 @@ class favRegion(Macro):
         date = game['time'][0:10]
         month = date[5:7]
         day = date[-2:]
+
+        if vars[winner] == game['teams'][1]:
+            vars[loser] = game['teams'][0]
+        else:
+            vars[loser] = game['teams'][1]
 
         # playoffs
         if typeOfMatch[0:8] == 'Playoffs':
@@ -240,9 +259,9 @@ class UserInputChampion(Macro):
                 # for each token in user's sentence
                 for token in doc:
                     # champions are labeled as nouns by spacy
-                    if token.pos_ == 'NOUN':
+                    if token.pos_ == 'NOUN' or token.pos_ == 'PROPN':
                         # if champion in ontology and player suggested champion is same as champion in iteration
-                        if token.text in data['ontology'] and champion == token.text:
+                        if token.text.lower() in data['ontology'] and champion == token.text.lower():
                             # keeps track of first player in ont who plays that champion in lcs
                             # TODO keep track of recommended players
                             # TODO handle cases where user does not have favorite champ
@@ -350,3 +369,39 @@ def NegativeAgreement(vars: Dict[str, Any]):
         return True
     else:
         return False
+
+
+# This macro use analogy to explain the game goal according to the favorite game user select
+class MacroGoalAnalogy(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        vn = 'GameType'
+        GameTypeResponseDic = {
+            'RPG': {
+                'GameGoalSim': 'You can conceive it as a 30 min mini role play game with real person friends and foes, where each hero has different sets of power to achieve the ultimate goal: destroy the enemy nexus with your teammates. Along the process, side missions are seizing the available resources, ambushing the enemy champions, and getting buffs from neutral monsters, upgrading the weapons and defense... '
+            },
+
+            'shooter': {
+                'GameGoalSim': 'It\'s really similar to the shooter games like CS or Overwatch, as teammates shall cooperate in a competitive environment to achieve the ultimate goal. In here, it\'s destroying the turrets and finally the enemy nexus  '
+            },
+
+            'towerDefense': {
+                'GameGoalSim': 'You can regard it as the tower defense game where you shall protect your turrets and bases from enemy attack. (ゝ∀･).'
+            },
+
+            'other': {
+                'GameGoalSim': 'You can conceive turrets are defensive organs like skin, bones, meninges that protect your brain, the nexus in bases, from being attacked (*´▽`*) And with evil or hypocritical ends, you must destroy the "brain" of the other team'
+            }
+        }
+
+        # TODO: include a category based on the gpt output
+
+        if vars[vn] == 'First-person shooter ':
+            return GameTypeResponseDic['shooter']['GameGoalSim']
+
+        if vars[vn] == 'Tower defense':
+            return GameTypeResponseDic['towerDefense']['GameGoalSim']
+
+        if vars[vn] == 'Role play Game':
+            return GameTypeResponseDic['towerDefense']['GameGoalSim']
+        else:
+            return GameTypeResponseDic['other']['GameGoalSim']
