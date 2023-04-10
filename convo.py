@@ -16,7 +16,7 @@ from doesntKnowLeagueEsports.champInfo import championInfo
 from doesntKnowLeagueEsports.laneInfo import laneInfo
 
 #macros
-from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
+from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
     PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame
 
@@ -85,7 +85,6 @@ transitionDiverging = {
 
 macros = {
     'LEAGUE': MacroEsportsOrLeague(),
-    'NUM': MacroRandNum(),
     'UserChamp': UserInputChampion(),
     'NAME': MacroPushName(),
     'GET_NAME': MacroGetName(),
