@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, MacroRandNum, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame
 
 #convo.py imports
 import pickle
@@ -121,9 +121,8 @@ macros = {
     ),
 
     'GameGoalAnalogy': MacroGoalAnalogy(),
-
-
-
+    #for advanced.py
+    'RANDGAME' : getRandomGame()
 
 }
 

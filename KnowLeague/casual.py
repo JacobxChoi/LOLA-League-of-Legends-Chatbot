@@ -37,7 +37,14 @@ def casual():
                                                             },
                                                             '{no, not, nah, pass, [im, {good, fine}]}': {
                                                                 '`Oh, ok... Do you want another game or team to watch?`': {
-                                                                    #TODO PROCESS USER INPUT IN MACRO FOR GETTING RANDOM GAME
+                                                                    '#RANDGAME':{
+                                                                        'state':'suggestGame',
+                                                                        '`Sure, how about the` $T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`':{
+                                                                            '[no, dont]':'suggestGame',
+                                                                            '[yes, yeah]':'end'
+                                                                        }
+                                                                    },
+                                                                    'error':'end' #user doesn't say 'yes' or 'yeah' TODO: use chatgpt to handle user input
                                                                 }
                                                             },
                                                             'error': {
