@@ -37,7 +37,7 @@ def casual():
                                                             },
                                                             '{no, not, nah, pass, [im, {good, fine}]}': {
                                                                 '`Oh, ok... Do you want another game or team to watch?`': {
-                                                                    #TODO: macro that pulls information and sends a game that they played
+                                                                    #TODO PROCESS USER INPUT IN MACRO FOR GETTING RANDOM GAME
                                                                 }
                                                             },
                                                             'error': {
