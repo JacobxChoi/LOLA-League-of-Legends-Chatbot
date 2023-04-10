@@ -417,16 +417,6 @@ class UserInputChampion(Macro):
         return True
 
 
-class MacroRandNum(Macro):
-    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        randomNum = random.randint(0, 1)
-        if randomNum == 1:
-            print('yes')
-            return True
-        else:
-            return False
-
-
 class MacroGPTJSON(Macro):
     def __init__(self, request: str, full_ex: Dict[str, Any], empty_ex: Dict[str, Any] = None,
                  set_variables: Callable[[Dict[str, Any], Dict[str, Any]], None] = None) -> object:
