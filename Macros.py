@@ -72,11 +72,9 @@ class MacroGetNewName(Macro):
         vn = vars['FIRSTNAME']
         return not vars[vn]
 
-
 class MacroPushName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         return vars['FIRSTNAME']
-
 
 class MacroEsportsOrLeague(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
@@ -115,32 +113,45 @@ class favRegion(Macro):
 
         # different ways a user can reference the regions
         regions = {'na': 'NORTH AMERICA',
-                   'north america': 'NORTH AMERICA',
                    'north': 'NORTH AMERICA',
                    'america': 'NORTH AMERICA',
                    'north american': 'NORTH AMERICA',
+                   'lcs': 'NORTH AMERICA',
+                   'nacl': 'NORTH AMERICA',
                    'kr': 'KOREA',
                    'korea': 'KOREA',
+                   'lck': 'KOREA',
                    'emea': 'EMEA',
+                   'lec': 'EMEA',
+                   'tcl': 'EMEA',
                    'latam': 'LATIN AMERICA',
+                   'lla': 'LATIN AMERICA',
                    'hong kong': 'HONG KONG, MACAU, TAIWAN',
                    'macau': 'HONG KONG, MACAU, TAIWAN',
                    'taiwan': 'HONG KONG, MACAU, TAIWAN',
+                   'pcs': 'HONG KONG, MACAU, TAIWAN',
                    'cis': 'COMMONWEALTH OF INDEPENDENT STATES',
+                   'lcl': 'COMMONWEALTH OF INDEPENDENT STATES',
                    'tr': 'TURKEY',
                    'turkey': 'TURKEY',
                    'vt': 'VIETNAM',
+                   'vcs': 'VIETNAM',
                    'vietnam': 'VIETNAM',
                    'oc': 'OCEANIA',
                    'oceania': 'OCEANIA',
+                   'lco': 'OCEANIA',
                    'international': 'INTERNATIONAL',
                    'br': 'BRAZIL',
                    'brazil': 'BRAZIL',
+                   'cblol': 'BRAZIL',
                    'cn': 'CHINA',
                    'china': 'CHINA',
+                   'lpl': 'CHINA',
                    'jp': 'JAPAN',
-                   'japan': 'JAPAN'
-                   }
+                   'japan': 'JAPAN',
+                   'japan': 'JAPAN',
+                   'ljl': 'JAPAN'
+                }
 
         # labeled T because they're temporary variables that are not meant to be stored.
         # TODO make a macro to remove unnecessary variables
