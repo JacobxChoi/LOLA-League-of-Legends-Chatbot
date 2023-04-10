@@ -181,16 +181,46 @@ class favRegion(Macro):
 
         # some regions don't have any games from this year so far. If this is the case, return false
         if (len(data['ontology'][region]) >= 1):
-            # TODO remember regions
-            tourney = data['ontology'][region][0]
+            #picks random tourney from region
+            tourney = data['ontology'][region]
+            tourney = tourney[random.randrange(len(tourney))]
+            hasTourney = True
+            noTourney = 0
+            #if a regional tourney is empty, select another tourney
+            while(hasTourney):
+                noTourney +=1
+                if tourney not in data['ontology']:
+                    tourney = data['ontology'][region]
+                    tourney = tourney[random.randrange(len(tourney))]
+                else:
+                    hasTourney = False
+                #TODO: handle case where there are tourneys, but no games
+                if noTourney >= 17:
+                    print("NO GAMES IN TOURNEY")
+                    return False
+
+            #stores tourney into vars
             vars[t_tourney] = tourney.replace('_', ' ')
+        #TODO: case where region doesn't have any games from this year. Might have to adjust convo like: "I don't think that region played any games this year"
         else:
+            print("REGION HAS NO GAMES")
             return False
 
         # pulling game info from ontology. Last index -1 means most recent game. LOLA should remember which game was suggested
-        # TODO remember which games were suggested
-        game = data['ontology'][tourney][-1]
+        game = data['ontology'][tourney]
+        game = data['ontology'][tourney][random.randrange(len(game))]
 
+        #storing suggested game to personal info
+        vn_GS = 'GAME_SUGGESTED'
+        #if user already has games suggested to them
+        if vn_GS in vars[vn_PI][vars[vn_FN]]:
+            vars[vn_PI][vars[vn_FN]][vn_GS].append(game)
+        #user has not yet had games suggested to them
+        else:
+            vars[vn_PI][vars[vn_FN]][vn_GS] = []
+            vars[vn_PI][vars[vn_FN]][vn_GS].append(game)
+
+        #update variables to get random game
         typeOfMatch = game['week']
         vars[team1] = game['teams'][0]
         vars[team2] = game['teams'][1]
@@ -199,6 +229,7 @@ class favRegion(Macro):
         month = date[5:7]
         day = date[-2:]
 
+        #gets winners and loser
         if vars[winner] == game['teams'][1]:
             vars[loser] = game['teams'][0]
         else:
@@ -231,6 +262,10 @@ class favRegion(Macro):
 
         return True
 
+
+class getRandomGame(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        pass
 
 class UserInputChampion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
