@@ -47,13 +47,13 @@ def load(df: DialogueFlow, varfile: str):
     if os.path.isfile('resources/visits.pkl'):
         d = pickle.load(open(varfile, 'rb'))
         df.vars().update(d)
-        # df.run()
-        df.run(debugging=True)
+        df.run()
+        # df.run(debugging=True)
         save(df, varfile)
     # first time conversing
     else:
-        # df.run()
-        df.run(debugging=True)
+        df.run()
+        # df.run(debugging=True)
         save(df, varfile)
 
 

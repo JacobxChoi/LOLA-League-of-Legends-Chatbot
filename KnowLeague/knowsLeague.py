@@ -38,7 +38,7 @@ def knowsLeague():
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
                     '[{yes, did, watched}]':'advanced', #shows that user actively watches current esports games.
                     '[{no, [did not], dont, didnt}]':{ #next favorite region?
-                        '`No Worries. How about this other match?`':{
+                        '#RANDGAME `No Worries. How about the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
                             '[{yes, yeah, watch, watched}]':'advanced',
                             '[{no, [did not], didnt, havent, [have not]}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
                                 '`All good!`':'casual'

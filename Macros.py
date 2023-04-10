@@ -267,7 +267,9 @@ class getRandomGame(Macro):
     #TODO: USE CHATGPT TO HANDLE USER RESPONSE
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
 
-        if 'yes' in ngrams or 'yeah' in ngrams:
+        print(ngrams)
+
+        if ngrams == None or 'yes' in ngrams or 'yeah' in ngrams:
             f = open('resources/tourneys.json', )
             data = json.load(f)
 

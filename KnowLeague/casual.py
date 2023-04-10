@@ -39,7 +39,7 @@ def casual():
                                                                 '`Oh, ok... Do you want another game or team to watch?`': {
                                                                     '#RANDGAME':{
                                                                         'state':'suggestGame',
-                                                                        '`Sure, how about the` $T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`':{
+                                                                        '`Sure, how about the`$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
                                                                             '[no, dont]':'suggestGame',
                                                                             '[yes, yeah]':'end'
                                                                         }
