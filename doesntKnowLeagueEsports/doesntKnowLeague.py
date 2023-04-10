@@ -10,7 +10,7 @@ laneInfo = laneInfo()
 def doesntKnowLeague():
     doesntKnowLeague = {
         'state': 'doesntKnowLeagueEsports',
-        '`That\'s fine. Have you ever played League of Legends?.`': {
+        '`That\'s fine. Have you ever played League of Legends?`': {
             'state': 'playedLOL',
             '[{yes, yeah, yup}]': {
                 'state': 'familiarity',
@@ -25,7 +25,7 @@ def doesntKnowLeague():
                     'error': 'end'
                 }
             },
-            '[{no, nope, not, dont, never, barely}]': {
+            '[{no, nope, not, dont, never, barely, little bit}]': {
                 'state': 'transit',
                 # Casual questions to collect related infos
                 '#GATE `What\'s your favorite game?`': {
@@ -43,9 +43,9 @@ def doesntKnowLeague():
                     'state': 'interest',
                     'score': '0.8',
                     '[{friend, friends, social, community}]': {
-                        '`Yeah, a shared interest in game connects friends together. What do you typically do with friends in your free time?`': {
+                        '`Yeah, a shared interest in games connects friends together. What do you typically do with friends in your free time?`': {
                             '[#ACTIVITY_WITH_FRIENDS]': {
-                                '`Definitely, I wish I would have chance to` #GET_ACTIVITY_FRIEND ` with my friends too`': 'transit'
+                                '`Definitely, I wish I would have the chance to` #GET_ACTIVITY_FRIEND `with my friends too.`': 'transit'
                             },
                         }
                     },
@@ -92,7 +92,7 @@ def doesntKnowLeague():
                             '[{nexus, base, turrets}]': {
                                 'state': 'DestroyNexus',
                                 'score': '1.0',
-                                '`Exactly! League of legends or LoL is a 5 players vs. 5 players MOBA game, where teammates cooperate together to destroy the other team\'s base and, of course, there are many obstacles on the way to final goal.`': {
+                                '`Exactly! League of legends or LoL is a 5 versus 5 MOBA game, where teammates cooperate together to destroy the other team\'s base and, of course, there are many obstacles on the way to final goal.`': {
                                     'state': 'Base',
                                     '[{what}, {base, nexus}]': {
                                         '`The base is like the \'headquaters\' of a team where waves of minions enter the battlefield from. The game ends if you destroy the nexus on the base of the other team, but you can\'t do this without relying on your minions.`': {
@@ -125,7 +125,7 @@ def doesntKnowLeague():
                                                             '[{interesting, challenging}]': 'toMinionWaveControl',
 
                                                             'error': {
-                                                                ' (́◉◞౪◟◉‵) Pardon my absent-mindedness just then. Could you say that again?': 'MinionImportant'
+                                                                '`(◉◞౪◟◉) Pardon my absent-mindedness just then. Could you say that again?': 'MinionImportant'
                                                             }
                                                         }
 
@@ -138,7 +138,7 @@ def doesntKnowLeague():
                                                     # TODO: add more options here
 
                                                     'error': {
-                                                        ' (́◉◞౪◟◉‵) Pardon my absent-mindedness just then. Could you say that again?': 'minion'
+                                                        '`(◉◞౪◟◉) Pardon my absent-mindedness just then. Could you say that again?': 'minion'
                                                     }
 
                                                 }
@@ -164,12 +164,12 @@ def doesntKnowLeague():
                                                             },
                                                             '[{understand, get}]': {
                                                                 'score': '0.5',
-                                                                '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                                '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
 
                                                             },
 
                                                             'error': {
-                                                                '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                                '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                                             }
                                                         }
 
@@ -177,7 +177,7 @@ def doesntKnowLeague():
 
                                                     '[{understand, get}]': {
                                                         'score': '0.5',
-                                                        '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                        '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                                     },
 
                                                     'error': {
@@ -217,7 +217,7 @@ def doesntKnowLeague():
                                                                                 },
                                                                                 '#IF(#NEGATIVE_AGREEMENT)': 'GameGoal',
                                                                                 'error': {
-                                                                                    '`Σ(°Д°;A monster is just in front of us. Do you see the large, blue, golem-like creature with a blue crystalline body? That\'s a blue sentinel. Together with its 2 minions, they are fearsome monsters, but tempting treasures for greedy, novice hunters.`': 'MonsterFirstGlance'
+                                                                                    '`Σ(°Д°) A monster is right in front of us. Do you see the large, blue, golem-like creature with a blue crystalline body? That\'s a blue sentinel. Together with its 2 minions, they are fearsome monsters, but tempting treasures for greedy, novice hunters.`': 'MonsterFirstGlance'
                                                                                 }
 
                                                                             },
@@ -273,7 +273,7 @@ def doesntKnowLeague():
 
                                                     '[{understand, get}]': 'understandLeague',
                                                     'error': {
-                                                        '`(*´ω`)人(´ω`*) Cool! do you have other questions about the game?`': 'IntroduceLeague'
+                                                        '`(*\'ω\')人(\'ω\'*) Cool! do you have other questions about the game?`': 'IntroduceLeague'
                                                     }
 
                                                 }
@@ -283,7 +283,7 @@ def doesntKnowLeague():
                                             '[{understand, get}]': {
                                                 'state': 'understandLeague',
                                                 'score': '0.5',
-                                                '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
 
                                             },
 
@@ -301,10 +301,10 @@ def doesntKnowLeague():
                                                     '[different, difference]': {
                                                         '`Well, in League of Legends, you can\'t kill your own minions and there aren\'t any courier units. Also, each game takes less time, making it possibly more catered to a fast-paced life.`': {
                                                             '[{understand, get, see}]': {
-                                                                '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                                '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                                             },
                                                             'error': {
-                                                                '`(´・ω・`) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                                '`(・ω・) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                                             }
                                                         }
                                                     },
@@ -320,10 +320,10 @@ def doesntKnowLeague():
                                                     '[different, difference]': {
                                                         '`The key difference is that Vainglory is designed more for iOS and Android, and it supports touchscreen control. LoL is mainly on PC, so the controls and menus are geared around mouse and keyboard input. Also, there are 3 lanes on the map in LoL instead of just 1.`': {
                                                             '[{understand, get, see}]': {
-                                                                '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                                '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                                             },
                                                             'error': {
-                                                                '`(´・ω・`) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                                '`(・ω・) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                                             }
                                                         }
                                                     },
@@ -341,16 +341,16 @@ def doesntKnowLeague():
                                             }
                                         }
                                     },
-                                    '[{what},{MOBA}]': {
+                                    '[{what},{moba}]': {
                                         '`MOBA is an acronym for Multiplayer Online Battle Arena. In League of Legends, for example, 5 players on each team are working together in the battlefield of Summoner\'s Rift with the shared goal to destroy the other team\'s Nexus.`': {
 
                                             '[{arena, battlefield}]': 'mapInfo',  # TODO connect to mapInfos
 
                                             '[{understand, get}]': {
-                                                '`ξ( ✿＞◡❛) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                             },
                                             'error': {
-                                                '`(´・ω・`) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                '`(・ω・) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                             }
 
                                         }
@@ -368,7 +368,7 @@ def doesntKnowLeague():
                                             },
                                             '[{lane}]': 'laneInfo',
                                             'error': {
-                                                '`(´・ω・`) , Do you have other questions about League of Legends?`': 'IntroduceLeague'
+                                                '`(・ω・) Do you have other questions about League of Legends?`': 'IntroduceLeague'
                                             }
                                         }
 
