@@ -389,46 +389,115 @@ class UserInputChampion(Macro):
         # variables
         playerRec = 'PLAYER_RECOMMEND'
         fav_champ = 'FAV_CHAMP'
+        vn_PI = 'PLAYERINFO'
+        vn_FN = 'FIRSTNAME'
 
         # opening jason
         f = open('resources/champs.json', )
         data = json.load(f)
-        # takes user input as string
         mystr = ngrams.text()
+        # takes user input as string
+        champs = {
+            'k\'sante':'ksante',
+            'cho gath':'chogath',
+            'cho\'gath':'chogath',
+            'lee sin': 'leesin',
+            'jarvan':'jarvaniv',
+            'jarvan iv':'jarvaniv',
+            'dr mundo':'drmundo',
+            'dr. mundo': 'drmundo',
+            'tahm kench':'tahmkench',
+            'xin zhao':'xinzhao',
+            'bel\'veth':'belveth',
+            'bel veth':'belveth',
+            'kha zix':'khazix',
+            'kha\'zix': 'khazix',
+            'master yi':'masteryi',
+            'rek\'sai':'reksai',
+            'rek sai': 'reksai',
+            'le\'blanc':'leblanc',
+            'le blanc': 'leblanc',
+            'aurelion sol':'aurelionsol',
+            'vel\'koz':'velkoz',
+            'vel koz': 'velkoz',
+            'twisted fate':'twistedfate',
+            'kog maw':'kogmaw',
+            'kog\'maw': 'kogmaw',
+            'miss fortune':'missfortune'
+        }
 
-        # loads spacy model to tokenize string
-        nlp = spacy.load("en_core_web_md")
-        doc = nlp(mystr)
-
-        # turns user input into a list of strings
-        sentenceSplit = mystr.split()
-
-        # top, mid, jungle, bot, support
-        for role in data['ontology']['lane']:
-            # iterates through each champion
-            for champion in data['ontology'][role]:
-                # for each token in user's sentence
-                for token in doc:
-                    # champions are labeled as nouns by spacy
-                    if token.pos_ == 'NOUN' or token.pos_ == 'PROPN':
-                        # if champion in ontology and player suggested champion is same as champion in iteration
-                        if token.text.lower() in data['ontology'] and champion == token.text.lower():
-                            # keeps track of first player in ont who plays that champion in lcs
-                            # TODO keep track of recommended players
-                            # TODO handle cases where user does not have favorite champ
-                            # TODO handle cases where user misspells champion
-                            # TODO handle cases where user has multiple favorite champions
-                            vars[fav_champ] = champion
-                            vars[playerRec] = data['ontology'][token.text][0]
-                            break
+        for key in champs:
+            if key in mystr.lower():
+                #user's favorite champion stored as temp variable
+                vars[fav_champ] = champs[key].capitalize()
+                #if user already has said their favorite champion
+                if fav_champ in vars[vn_PI][vars[vn_FN]]:
+                    pass
+                #user has not yet said their favorite champion
                 else:
-                    continue  # only executed if the inner loop did NOT break
-                break
-            else:
-                continue  # only executed if the inner loop did NOT break
-            break
-        return True
+                    vars[vn_PI][vars[vn_FN]][fav_champ] = champs[key].capitalize()
+                # grabs player that plays this champion
+                player = data['ontology'][champs[key]][random.randrange(len(data['ontology'][champs[key]]))]
 
+                #playerRec has alreayd been made
+                if playerRec in vars[vn_PI][vars[vn_FN]]:
+                    # if player has already been suggested previously
+                    if player in vars[vn_PI][vars[vn_FN]][playerRec]:
+                        diffPlayer = data['ontology'][champs[key]][random.randrange(len(data['ontology'][champs[key]]))]
+                        vars[vn_PI][vars[vn_FN]][playerRec].append(diffPlayer)
+                        vars[playerRec] = diffPlayer
+                        return True
+                    #player has not yet been suggested
+                    else:
+                        vars[vn_PI][vars[vn_FN]][playerRec].append(player)
+                        vars[playerRec] = player
+                        return True
+                #player has not yet been suggested
+                else:
+                    vars[vn_PI][vars[vn_FN]][playerRec] = []
+                    newPlayer = data['ontology'][champs[key]][random.randrange(len(data['ontology'][champs[key]]))]
+                    vars[vn_PI][vars[vn_FN]][playerRec].append(newPlayer)
+                    vars[playerRec] = newPlayer
+                    return True
+
+        mystr = ngrams.text().split()
+        #iterates through player text
+        for word in mystr:
+            #if champion in ontology
+            if word.lower() in data['ontology']:
+                # user's favorite champion stored as temp variable
+                vars[fav_champ] = word.capitalize()
+                # if user already has said their favorite champion
+                if fav_champ in vars[vn_PI][vars[vn_FN]]:
+                    pass
+                # user has not yet said their favorite champion
+                else:
+                    vars[vn_PI][vars[vn_FN]][fav_champ] = word.capitalize()
+                # grabs player that plays this champion
+                player = data['ontology'][word.lower()][random.randrange(len(data['ontology'][word.lower()]))]
+
+                # playerRec has alreayd been made
+                if playerRec in vars[vn_PI][vars[vn_FN]]:
+                    # if player has already been suggested previously
+                    if player in vars[vn_PI][vars[vn_FN]][playerRec]:
+                        diffPlayer = data['ontology'][word.lower()][random.randrange(len(data['ontology'][word.lower()]))]
+                        vars[vn_PI][vars[vn_FN]][playerRec].append(diffPlayer)
+                        vars[playerRec] = diffPlayer
+                        return True
+                    # player has not yet been suggested
+                    else:
+                        vars[vn_PI][vars[vn_FN]][playerRec].append(player)
+                        vars[playerRec] = player
+                        return True
+                # player has not yet been suggested
+                else:
+                    vars[vn_PI][vars[vn_FN]][playerRec] = []
+                    newPlayer = data['ontology'][word.lower()][random.randrange(len(data['ontology'][word.lower()]))]
+                    vars[vn_PI][vars[vn_FN]][playerRec].append(newPlayer)
+                    vars[playerRec] = newPlayer
+                    return True
+
+        return False
 
 class MacroGPTJSON(Macro):
     def __init__(self, request: str, full_ex: Dict[str, Any], empty_ex: Dict[str, Any] = None,

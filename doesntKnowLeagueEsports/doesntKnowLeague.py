@@ -399,7 +399,7 @@ def doesntKnowLeague():
                     '[{role,lane}]': 'laneInfo',
                     '[{map}]': 'mapInfo',
                     '[{item}]': 'items',
-
+                    #TODO: HANDLE CASE WHERE USER SAYS NO
                     'error': {
                         '`Sorry, I didn\'t catch that, could you say it again?`': 'IntroduceLeague'
                     }
