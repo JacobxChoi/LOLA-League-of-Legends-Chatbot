@@ -52,6 +52,34 @@ def doesntKnowLeague():
                     '[{fun, challenging, exciting}]': {
                         '`For sure! After all, the adrenaline rush after watching an exciting matches is true. Do you enjoy the watching other sports events as well?`': {
                             '[#SportEvents]': {
+                                # TODO to add different attitude toward different games
+                                '`(^ρ^)/, Wow,I love` #GET_SportsEvent `too. My emotion get quickly driven by the players, and I love that feeling !`': {
+                                    '[{too, [as well]}, yeah, sure, true]': {
+                                        'score': '0.5',
+                                        '`Hmm, I don\'t know where the excitement exactly come from, but I did feel connected when I watched the sport event, even it\'s online. In your mind, where do you think the interest in sports event comes from`': {
+                                            '[{dont},{know}]': {
+                                                'score': '0.5',
+                                                '`Yeah, I guess sometimes it\'s hard to introspect our feelings. They may not be able to be captured by our reason. In this case what do you think about the esports event of virtual games ?`': 'esportAttitude'
+                                            },
+                                            '[{yeah,well,true}]':{
+
+                                            },
+                                            'error': {
+                                                '`Cool, in this case what do you think about the esports event of virtual games?`': 'esportAttitude',
+                                            }
+
+                                        }
+                                    }
+                                },
+
+                                'error': {
+                                    '`Cool, in this case what do you think about the esports event of virtual games?`': {
+                                        'state': 'esportAttitude',
+                                    }
+                                }
+
+
+
 
                             }
                         }
@@ -103,8 +131,8 @@ def doesntKnowLeague():
                                                     'state': 'minion',
                                                     '[{minion, minions, they}, {essential, key, important}]': {
                                                         'state': 'MinionImportant',
-                                                        '`Yeah, the waves of minions that can bear the boat of the victory is the same that swallows it. So, it\'s important to have sophisticated control of the minions in order to win the game.`': {
-                                                            '[{explain, know, more},{control}]': {
+                                                        '`Yeah, the waves of minions that can bear the boat of the victory is the same that swallows it. So, it\'s important to have a sophisticated control of the minions in order to win the game`': {
+                                                            '[{explain,know, more},{control}]': {
                                                                 'state': 'toMinionWaveControl',
                                                                 '`The skill is really learned and honed with thinking in actual practice, but for sure I can give you some hints if you\'d like to know.`': {
                                                                     '[#AgreementChecker]': {

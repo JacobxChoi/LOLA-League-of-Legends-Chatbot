@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent
 
 #convo.py imports
 import pickle
@@ -106,9 +106,10 @@ macros = {
     'GET_ACTIVITY_FRIEND': MacroNLG(getActivityWithFriends),
     'SportEvents': MacroGPTJSON(
             'What is the sports event user mentioned, if the user doesn\'t like any sports event, return no "',
-            {'GameType': 'Adventure game'},
-            {'GameType': 'N/A'}
+            {'SportEvent': 'NBA'},
+            {'SportEvent': 'N/A'}
         ),
+    'GET_SportsEvent': MacroNLG(getSportsEvent),
 
     'POSITIVE_AGREEMENT': MacroNLG(PositiveAgreement),
     'NEGATIVE_AGREEMENT': MacroNLG(NegativeAgreement),

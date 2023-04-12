@@ -568,6 +568,9 @@ def getReason(vars: Dict[str, Any]):
 def getActivityWithFriends(vars: Dict[str, Any]):
     return vars['WithFriendActivities']
 
+def getSportsEvent(vars: Dict[str, Any]):
+    return vars['SportEvent']
+
 def PositiveAgreement(vars: Dict[str, Any]):
     if vars['Agreement'] == 'yes':
         return True
