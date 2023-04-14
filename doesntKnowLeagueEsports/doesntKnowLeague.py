@@ -10,7 +10,7 @@ laneInfo = laneInfo()
 def doesntKnowLeague():
     doesntKnowLeague = {
         'state': 'doesntKnowLeagueEsports',
-        '`That\'s fine. Have you ever played League of Legends?`': {
+        '`Have you ever played League of Legends?`': {
             'state': 'playedLOL',
             '[{yes, yeah, yup}]': {
                 'state': 'familiarity',
@@ -421,10 +421,9 @@ def doesntKnowLeague():
                             }
                         }
                     },
-
                     '[{goal, win}]': 'DestroyNexus',
-                    '[{champion}]': 'champInfo',
-                    '[{role,lane}]': 'laneInfo',
+                    '[{champ, champion}]': 'champInfo',
+                    '[{role, lane}]': 'laneInfo',
                     '[{map}]': 'mapInfo',
                     '[{item}]': 'items',
                     #TODO: HANDLE CASE WHERE USER SAYS NO

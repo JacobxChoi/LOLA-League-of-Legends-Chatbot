@@ -522,10 +522,8 @@ class MacroGPTJSON(Macro):
         if not output: return False
 
         try:
-            print(output)
             d = json.loads(output)
         except JSONDecodeError:
-            print(f'Invalid: {output}')
             return False
 
         if self.set_variables:

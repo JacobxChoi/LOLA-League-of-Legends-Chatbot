@@ -73,10 +73,10 @@ transitions = {
 transitionDiverging = {
     'state': 'DIVERGE',
     '`Do you keep up with League of Legends esports?`': {
-        '[{yes, yeah, keep, little, kind}]': {
-            '`Nice.`': 'favPlayer',
+        '[#AgreementChecker]': {
+            '#IF(#POSITIVE_AGREEMENT) `Nice.`': 'favPlayer',
+            '#IF(#NEGATIVE_AGREEMENT) `That\'s fine.`': 'doesntKnowLeagueEsports'
         },
-        '[{no, not, dont}]': 'doesntKnowLeagueEsports',  # change 'no' to something like: no, I don't really play league.
         'error': {
             '`Sorry, I didn\'t understand you.`': 'start'
         }
@@ -98,7 +98,7 @@ macros = {
         ),
     'ACTIVITY_WITH_FRIENDS':MacroGPTJSON(
             'What does the activity the speaker typically do with friends, the activity stored should start with an verb',
-            {'WithFriendActivities': 'Go hiking'},
+            {'WithFriendActivities': 'go hiking'},
             {'WithFriendActivities': 'N/A'}
         ),
     'GET_FAV_GAME': MacroNLG(getFavGame),
