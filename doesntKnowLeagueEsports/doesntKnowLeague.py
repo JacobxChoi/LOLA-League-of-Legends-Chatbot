@@ -128,13 +128,26 @@ def doesntKnowLeague():
         },
 
     }
-    
+
     IntroduceGame = {
         'state': 'IntroduceGame',
-        '`There are three main roles in the game: damage dealers (called AD Carry or APC), tanks, and supports. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. Would you like to know about the different types of champions or the in-game objectives?`': {
+        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. What would you like to know more about: the different types of champions, in-game objectives, or the roles in the game?`': {
             '[{champions, types}]': 'IntroduceChampions',
             '[{objectives, in-game}]': 'IntroduceObjectives',
-            'error': 'IntroduceChampions'
+            '[{roles, positions, lanes}]': 'IntroduceRoles',
+            '[{map, layout}]': 'IntroduceMap',
+            '[{no, nothing, fine}]': 'EndIntroduceGame',
+            'error': {
+                'state': 'IntroduceGameRepeat',
+                '`I\'m sorry, I didn\'t quite understand your question. Would you like to know more about the different types of champions, in-game objectives, roles in the game, or the map layout?`': {
+                    '[{champions, types}]': 'IntroduceChampions',
+                    '[{objectives, in-game}]': 'IntroduceObjectives',
+                    '[{roles, positions, lanes}]': 'IntroduceRoles',
+                    '[{map, layout}]': 'IntroduceMap',
+                    '[{no, nothing, fine}]': 'EndIntroduceGame',
+                    'error': 'IntroduceChampions'
+                }
+            }
         }
     }
 
@@ -151,7 +164,10 @@ def doesntKnowLeague():
         'state': 'SpecificChampions',
         '`Some popular champions for beginners include Garen (a tanky fighter), Ashe (a marksman), and Lux (a mage). These champions have relatively simple mechanics, making it easier for new players to learn the game. If you\'re interested, I can recommend more champions for each role.Would you like that?`': {
             '[{yes, sure, recommend}]': 'RecommendChampions',
-            '[{no, not now, later}]': 'EndSpecificChampions',
+            '[{no, not now, later}]': {
+                'state': 'EndSpecificChampions',
+                '`Alright, if you have any more questions about champions or anything else related to League of Legends, feel free to ask anytime. Have fun exploring the game!`': 'end'
+            },
             'error': 'RecommendChampions'
         }
     }
@@ -169,7 +185,11 @@ def doesntKnowLeague():
         'state': 'ChampionRoles',
         '`In a team, champions play specific roles based on their strengths and abilities. The roles are: Top, Jungle, Mid, ADC, and Support. Top laners are usually tanks or fighters, junglers roam the map and secure objectives, mid laners are mages or assassins, ADCs deal consistent damage from range, and supports protect their team and provide utility. Each role contributes to the overall success of the team. Are you interested in learning about the in-game objectives?`': {
             '[{yes, objectives, sure}]': 'IntroduceObjectives',
-            '[{no, not now, later}]': 'EndObjectives',
+            '[{no, not now, later}]': {
+                'state': 'EndObjectives',
+                # TODO not to end
+                '`No problem! If you have more questions about in-game objectives or anything else related to League of Legends, don\'t hesitate to ask.Enjoy your time in the game!`': 'end'
+            },
             'error': 'IntroduceObjectives'
         }
     }
@@ -189,7 +209,10 @@ def doesntKnowLeague():
         '`League of Legends esports is a highly competitive scene with regional and international tournaments. The most prestigious event is the League of Legends World Championship, where the best teams from around the world compete for the title of world champion. Regional leagues, like the LCS (North America), LEC (Europe), LPL (China), and LCK (Korea), have regular seasons and playoffs that lead to international events. Top players can earn fame, fortune, and the adoration of fans. Would you like to learn more about specific teams or players?`': {
             '[{teams, specific}]': 'SpecificTeams',
             '[{players, specific}]': 'SpecificPlayers',
-            '[{no, not now, later}]': 'EndEsports',
+            '[{no, not now, later}]': {
+                'state': 'EndEsports',
+                '`That\'s totally fine! If you ever want to learn more about the esports scene or anything else related to League of Legends, feel free to ask.Have a great time playing the game!`': 'end'
+            },
             'error': 'SpecificTeams'
         }
     }
@@ -198,7 +221,10 @@ def doesntKnowLeague():
         'state': 'SpecificTeams',
         '`Some of the most famous and successful teams in League of Legends history include T1 (formerly SK Telecom T1) from Korea, Fnatic and G2 Esports from Europe, and Team SoloMid and Cloud9 from North America. These teams have consistently performed well in their regional leagues and at international events. Are you interested in learning about specific players?`': {
             '[{yes, players, specific}]': 'SpecificPlayers',
-            '[{no, not now, later}]': 'EndPlayers',
+            '[{no, not now, later}]': {
+                'state': 'EndPlayers',
+                '`Okay! If you ever want to know more about specific players or anything else related to League of Legends, just let me know. Enjoy your journey into the world of League of Legends!`': 'end'
+            },
             'error': 'SpecificPlayers'
         }
     }
@@ -206,40 +232,17 @@ def doesntKnowLeague():
     SpecificPlayers = {
         'state': 'SpecificPlayers',
         '`Some legendary players in the history of League of Legends esports are Faker (mid laner for T1), Uzi (former ADC for Royal Never Give Up), Caps (mid laner for G2 Esports), and Doublelift (former ADC for Team SoloMid and Team Liquid). These players have had successful careers and have made a significant impact on the esports scene. I hope this information has been helpful. Are you ready to try the game now?`': {
-            '[{yes, try, game}]': 'ReadyToTry',
-            '[{no, not now, later}]': 'EndReadyToTry',
+            '[{yes, try, game}]': {
+                'state': 'ReadyToTry',
+                # TODO not lead to end
+                '`Great! You can download League of Legends for free from the official website. It\'s available on Windows and macOS.I hope you have fun exploring the game and finding your favorite champions.If you have any more questions, don\'t hesitate to ask!`': 'end'
+            },
+            '[{no, not now, later}]': {
+                'state': 'EndReadyToTry',
+                '`No worries! If you ever decide to give League of Legends a try, or if you have any more questions, feel free to ask. Have a great day!`': 'end'
+            },
             'error': 'ReadyToTry'
         }
-    }
-
-    ReadyToTry = {
-        'state': 'ReadyToTry',
-        '`Great! You can download League of Legends for free from the official website. It\'s available on Windows and macOS.I hope you have fun exploring the game and finding your favorite champions.If you have any more questions, don\'t hesitate to ask!`': 'end'
-    }
-
-    EndSpecificChampions = {
-        'state': 'EndSpecificChampions',
-        '`Alright, if you have any more questions about champions or anything else related to League of Legends, feel free to ask anytime. Have fun exploring the game!`': 'end'
-    }
-
-    EndObjectives = {
-        'state': 'EndObjectives',
-        '`No problem! If you have more questions about in-game objectives or anything else related to League of Legends, don\'t hesitate to ask.Enjoy your time in the game!`': 'end'
-    }
-
-    EndEsports = {
-        'state': 'EndEsports',
-        '`That\'s totally fine! If you ever want to learn more about the esports scene or anything else related to League of Legends, feel free to ask.Have a great time playing the game!`': 'end'
-    }
-
-    EndPlayers = {
-        'state': 'EndPlayers',
-        '`Okay! If you ever want to know more about specific players or anything else related to League of Legends, just let me know. Enjoy your journey into the world of League of Legends!`': 'end'
-    }
-
-    EndReadyToTry = {
-        'state': 'EndReadyToTry',
-        '`No worries! If you ever decide to give League of Legends a try, or if you have any more questions, feel free to ask. Have a great day!`': 'end'
     }
 
     items = {
@@ -270,4 +273,4 @@ def doesntKnowLeague():
         'opponents nexus, they win the game.`': 'end'
     }
 
-    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, ReadyToTry, EndReadyToTry, EndPlayers, EndEsports, EndObjectives, EndSpecificChampions
+    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions,
