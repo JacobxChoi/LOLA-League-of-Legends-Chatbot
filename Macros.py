@@ -99,6 +99,9 @@ class UserInfo(Macro):
         vars[playerRec] = ''
         vars[visits] = 1
 
+class favPlayer(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        json.load('resources/teams.json')
 
 class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
