@@ -12,7 +12,7 @@ from KnowLeague.casual import casual
 
 #doesnKnowLeague
 from doesntKnowLeagueEsports.doesntKnowLeague import doesntKnowLeague
-from doesntKnowLeagueEsports.champInfo import championInfo
+from doesntKnowLeagueEsports.IntroduceLeague import IntroduceLeague
 from doesntKnowLeagueEsports.laneInfo import laneInfo
 
 #macros
@@ -30,7 +30,7 @@ advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -135,7 +135,7 @@ df.knowledge_base().load_json_file('resources/gameType.json')
 df.load_transitions(doesntKnowLeague)
 df.load_transitions(transitionDiverging)
 df.load_transitions(transitions)
-df.load_transitions(championInfo())
+df.load_transitions(IntroduceLeague)
 df.load_transitions(laneInfo)
 # df.load_transitions(buildInfo)
 
