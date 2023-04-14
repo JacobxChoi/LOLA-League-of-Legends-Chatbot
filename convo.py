@@ -30,7 +30,7 @@ advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo, IntroduceLeague = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, ReadyToTry, EndReadyToTry, EndPlayers, EndEsports, EndObjectives, EndSpecificChampions = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -131,13 +131,34 @@ df = DialogueFlow('start', end_state='end')
 df.knowledge_base().load_json_file('resources/teams.json')
 df.knowledge_base().load_json_file('resources/gameType.json')
 
+
 #doesntKnowLeague transitions
 df.load_transitions(doesntKnowLeague)
 df.load_transitions(transitionDiverging)
 df.load_transitions(transitions)
 df.load_transitions(IntroduceLeague)
 df.load_transitions(laneInfo)
+
 # df.load_transitions(buildInfo)
+df.load_transitions(IntroduceGame)
+df.load_transitions(IntroduceChampions)
+df.load_transitions(IntroduceEsports)
+df.load_transitions(IntroduceObjectives)
+df.load_transitions(ChampionRoles)
+df.load_transitions(SpecificTeams)
+df.load_transitions(SpecificChampions)
+df.load_transitions(SpecificPlayers)
+df.load_transitions(RecommendChampions)
+df.load_transitions(ReadyToTry)
+df.load_transitions(EndReadyToTry)
+df.load_transitions(EndPlayers)
+df.load_transitions(EndEsports)
+df.load_transitions(EndObjectives)
+df.load_transitions(EndSpecificChampions)
+
+
+
+
 
 #knowsLeague transitions
 df.load_transitions(favoriteTeam)
