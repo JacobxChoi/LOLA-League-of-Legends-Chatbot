@@ -4,7 +4,6 @@ from .laneInfo import laneInfo
 IntroduceLeague = IntroduceLeague()
 laneInfo = laneInfo()
 
-
 def doesntKnowLeague():
     doesntKnowLeague = {
         'state': 'doesntKnowLeagueEsports',
@@ -17,7 +16,7 @@ def doesntKnowLeague():
                         # ontology for favorite champion. Does not unfortunately handle cases where user has no favorite champion
                         '$FAV_CHAMP `is fun to play!` $PLAYER_RECOMMEND`plays them as well.`': 'end'
                     },
-                    '[{dont, no}]': {
+                    '[{dont, no, not}]': {
                         '`All good. My favorite champion is Irelia. I like playing aggressively and getting kills, so I find playing Irelia pretty fun.`': 'end'
                     },
                     'error': 'end'

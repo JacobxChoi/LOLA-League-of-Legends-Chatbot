@@ -56,12 +56,11 @@ def load(df: DialogueFlow, varfile: str):
         # df.run(debugging=True)
         save(df, varfile)
 
-
 # This is the welcoming transition
 transitions = {
     'state': 'start',
     ##Welcoming section TODO: change #GET_NAME FROM REGEX TO CHATGPT
-    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. May I have your name?`': {
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you introduce yourself?`': {
         '[#GET_NAME]': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
@@ -72,7 +71,7 @@ transitions = {
 # This transition distributes the users to different branches of transitions based on their acquistion levels
 transitionDiverging = {
     'state': 'DIVERGE',
-    '`Do you keep up with League of Legends esports?`': {
+    '`Do you keep up with league of legends esports? What do you think about it? `': {
         '[#AgreementChecker]': {
             '#IF(#POSITIVE_AGREEMENT) `Nice.`': 'favPlayer',
             '#IF(#NEGATIVE_AGREEMENT) `That\'s fine.`': 'doesntKnowLeagueEsports'

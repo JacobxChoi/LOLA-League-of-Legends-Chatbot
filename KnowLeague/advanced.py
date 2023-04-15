@@ -2,7 +2,7 @@ def advanced():
     advanced = { #user has just mentioned that they actively watch the game mentioned in casual.
         'state': 'advanced',
         '`What did you think about the game?`': { #TODO: HANDLE CASES LIKE "I LIKED IT"
-            '{good, competitive, close, fun}': {
+            '{good, competitive, close, fun, well}': {
                 '#CLOSE `Who do you think performed the best?`': {
                     # Should reply with if the game was close or not
                     'state': 'perform',
