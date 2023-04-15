@@ -296,7 +296,7 @@ def casual():
             },
             '[{fans, fanbase, community}]': {
                 '`They naturally will have a strong community because they\'re such a good team. Their fanbase is the '
-                'best, probably because I\'m a part of it. What do you like about it?`' : {
+                'best, probably because I\'m a part of it. What do you like about it?`': {
                     '[{good, agree, dont disagree, fantastic, nice, home, fun, welcoming, energetic, best, like}]': {
                         '`Yeah, I think that we\'re the best. I\'ll see you later! Bye!`': 'end'
                     },
