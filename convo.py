@@ -30,7 +30,7 @@ advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -131,7 +131,6 @@ df = DialogueFlow('start', end_state='end')
 df.knowledge_base().load_json_file('resources/teams.json')
 df.knowledge_base().load_json_file('resources/gameType.json')
 
-
 #doesntKnowLeague transitions
 df.load_transitions(doesntKnowLeague)
 df.load_transitions(transitionDiverging)
@@ -147,7 +146,11 @@ df.load_transitions(SpecificTeams)
 df.load_transitions(SpecificChampions)
 df.load_transitions(SpecificPlayers)
 df.load_transitions(RecommendChampions)
-
+df.load_transitions(PopularChampions)
+df.load_transitions(ChampionRoles)
+df.load_transitions(ChampionTypes)
+df.load_transitions(StartPlaying)
+df.load_transitions(StartWatching)
 
 #knowsLeague transitions
 df.load_transitions(favoriteTeam)
