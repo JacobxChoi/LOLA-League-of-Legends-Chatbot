@@ -307,8 +307,8 @@ def casual():
                 }
             },
             '[{ale, jia le, jiale, top}]': {
-                '`That\'s a strong choice. I think he\'s a really talented top laner. EDG Meiko '
-                'is still my favorite player on this team though. I think you should focus on him too.`': 'end'  # TODO
+                '`That\'s a strong choice. I think he\'s a really talented top laner. EDG Meiko'
+                ' is still my favorite player on this team though. I think you should focus on him too.`': 'end'  # TODO
             },
             '[{jiejie, li jie, lijie, jungle, jungler}]': {
                 '`Awesome!. I think Jiejie\'s a really talented jungler. His ganks '
