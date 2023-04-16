@@ -45,10 +45,6 @@ def doesntKnowLeague():
                     }
                 },
 
-                '#GATE` League of legends is actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving e-sports scene. Do you want to know more about the game or its e-sports scene?`': {
-
-                },
-
                 '#GATE `May I know why are you interested in knowing more about League esports?`': {
                     'score': '1.0',
                     'state': 'interest',
@@ -59,7 +55,7 @@ def doesntKnowLeague():
                             },
                         }
                     },
-                    '[{fun, challenging, exciting}]': {
+                    '[{fun,challenging, exciting}]': {
                         '`For sure! After all, the adrenaline rush after watching an exciting matches is true. Do you enjoy the watching other sports events as well?`': {
                             '[#SportEvents]': {
                                 # TODO to add different attitude toward different games
