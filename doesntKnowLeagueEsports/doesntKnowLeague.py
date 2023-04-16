@@ -167,7 +167,7 @@ def doesntKnowLeague():
             '[{types, categories}]': 'ChampionTypes',
             '[{popular, favorite}]': 'PopularChampions',
             'error': {
-                '`I\'m sorry, I didn\'t catch that. If you have any questions about champions, feel free to ask!`'
+                '`I\'m sorry, I didn\'t catch that. If you have any questions about champions, feel free to ask!`': 'InnerIntroduceChampions'
             }
         }
     }
