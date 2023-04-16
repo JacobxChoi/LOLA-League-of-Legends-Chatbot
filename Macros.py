@@ -16,59 +16,67 @@ CHATGPT_MODEL = 'gpt-3.5-turbo'
 class MacroGetName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         #TODO: CHANGE THIS TO CHATGPT BASED
-        r = re.compile(
-            r"(?:(?:hi)?(?:\,)?(?:\s)*my(?:\s)*(?:name|nickname)(?:\s)*(?:is)?(?:\s)*|(?:hi)?(?:\,)?(?:\s)*i(?:\s)*am(?:\s)*|(?:please|you(?:\s)*can|everyone)?(?:\s)*(?:call|calls)(?:\s)*me(?:\s)*?|(?:hi)?(?:\,)?(?:\s)*i(?:\')?(?:m)?(?:ts)?(?:t\'s)?(?:\s)*(?:go by)?)?(?:\s)*(mr|mrs|ms|dr|dr\.)?(?:^|\s)*([a-z']+)(?:\s([a-z']+))?(?:(?:\,)?(?:\s)*.*)?")
-
-        title, firstname, lastname = None, None, None
-
-        for m in re.finditer(r, ngrams.text()):
-            if m.group(1) is not None:
-                title = m.group(1)
-            if m.group(2) is not None:
-                firstname = m.group(2)
-            if m.group(3) is not None:
-                lastname = m.group(3)
-
-        if title is None and firstname is None and lastname is None:
-            return False
-
-        vars['TITLE'] = title
-        vars['LASTNAME'] = lastname
+        # r = re.compile(
+        #     r"(?:(?:hi)?(?:\,)?(?:\s)*my(?:\s)*(?:name|nickname)(?:\s)*(?:is)?(?:\s)*|(?:hi)?(?:\,)?(?:\s)*i(?:\s)*am(?:\s)*|(?:please|you(?:\s)*can|everyone)?(?:\s)*(?:call|calls)(?:\s)*me(?:\s)*?|(?:hi)?(?:\,)?(?:\s)*i(?:\')?(?:m)?(?:ts)?(?:t\'s)?(?:\s)*(?:go by)?)?(?:\s)*(mr|mrs|ms|dr|dr\.)?(?:^|\s)*([a-z']+)(?:\s([a-z']+))?(?:(?:\,)?(?:\s)*.*)?")
+        #
+        # title, firstname, lastname = None, None, None
+        #
+        # for m in re.finditer(r, ngrams.text()):
+        #     if m.group(1) is not None:
+        #         title = m.group(1)
+        #     if m.group(2) is not None:
+        #         firstname = m.group(2)
+        #     if m.group(3) is not None:
+        #         lastname = m.group(3)
+        #
+        # if title is None and firstname is None and lastname is None:
+        #     return False
+        #
+        # vars['TITLE'] = title
+        # vars['LASTNAME'] = lastname
         vn_FN = 'FIRSTNAME'
-
         vn_PI = 'PLAYERINFO'
 
+        firstname = vars[vn_FN]
         vn_firstname = firstname.capitalize()
 
-        #add dictionary to gather info about user
+        #if 'FIRSTNAME' var isn't in vars
+        # if vn_FN not in vars:
+        #     vars[vn_FN] = firstname
+        #     vars[vn_firstname] = False
+
         if vn_PI not in vars:
             vars[vn_PI] = {}
             vars[vn_PI][vn_firstname] = {}
-        else:
-            vars[vn_PI][vn_firstname] = {}
-
-        #if 'FIRSTNAME' var isn't in vars
-        if vn_FN not in vars:
-            vars[vn_FN] = firstname
             vars[vn_firstname] = False
+            return True
 
         #if vn_firstname (their actual name) isn't in vars['FIRSTNAME']
-        if vn_firstname not in vars['FIRSTNAME']:
+        # if vn_firstname not in vars['FIRSTNAME']:
+        if vn_firstname not in vars[vn_PI]:
             vars['FIRSTNAME'] = vn_firstname
+            vars[vn_PI][vn_firstname] = {}
             vars[vn_firstname] = False
         else:
             vars[vn_firstname] = True
-        return True
 
+        # add dictionary to gather info about user
+
+        return True
 
 class MacroGetOldName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        print('1')
+        # MacroGetName().run(ngrams, vars, args)
         vn = vars['FIRSTNAME']
         return vars[vn]
 
 
 class MacroGetNewName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        print('2')
+        # MacroGetName().run(ngrams, vars, args)
+        print(vars)
         vn = vars['FIRSTNAME']
         return not vars[vn]
 
@@ -534,7 +542,6 @@ class MacroGPTJSON(Macro):
             self.set_variables(vars, d)
         else:
             vars.update(d)
-
         return True
 
 

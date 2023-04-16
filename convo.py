@@ -30,7 +30,7 @@ advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching, LeagueInfoTransit = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -61,7 +61,7 @@ transitions = {
     'state': 'start',
     ##Welcoming section TODO: change #GET_NAME FROM REGEX TO CHATGPT
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you introduce yourself?`': {
-        '[#GET_NAME]': {
+        '#GET_NAME_GPT #GET_NAME': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
         }
@@ -118,6 +118,12 @@ macros = {
         {'Agreement': 'yes'},
         {'Agreement': 'no'}
     ),
+    'GET_NAME_GPT': MacroGPTJSON(
+        'What is the user\'s name?',
+        {'FIRSTNAME': 'Jacob'},
+        {'FIRSTNAME': 'NA'}
+    ),
+    # 'SET_NAME_GPT':
 
     'ESportAttitudeChecker': MacroGPTJSON(
         'What is the speakers\'s attitude toward esport events. Attitude options are LookingForward, Excitement, Indifference, Unwilling, Open-mindednness',
@@ -157,7 +163,7 @@ df.load_transitions(ChampionRoles)
 df.load_transitions(ChampionTypes)
 df.load_transitions(StartPlaying)
 df.load_transitions(StartWatching)
-df.load_transitions(LeagueInfoTransit)
+# df.load_transitions(LeagueInfoTransit)
 
 #knowsLeague transitions
 df.load_transitions(favoriteTeam)

@@ -7,23 +7,17 @@ def knowsLeague():
             '[keria]':{
                 '`I agree! I love keria too!`': 'keria'
             },
-            '[$FAV_PLAYER=#ONT(leagues)]':{
-                '`How do you think` $FAV_PLAYER `has been doing lately?`': {
-                   '[{good, well, great, decent, nice, okay, not bad, better}]': {
-                        '`That\'s valid. I would say that keria is probably doing the best right now though.`':{
-                            '[{agree, right, yeah}]':'end',
-                            '[{nah, dont, no, disagree}]':'end',
-                            '[{why}]':'end',
-                            'error':'end'
-                        },
-                       'error':'end'
-                    },
-                    '[{hasnt, not, bad, worse}]':{
-                        '`I agree. (fav player) was much better before`': 'end'
-                    },
-                    'error':{
-                        '`I\'m sorry, I didn\'t quite get that.`':'playerCondition' #error condition not handled
-                    }
+            '[$FAV_PLAYER=#ONT(leagues), {bad, terrible, [not good], [not doing well], [not doing good], [not been doing well], [not been doing well lately], [not been doing too well], [not been doing good], [not been doing too good]}]':{
+                '`Why do you think` $FAV_PLAYER `has been doing poorly?`': { #TODO: CONTINUE WORKING ON THIS CONVERSATION
+                   '[{stats}]':{ #his stats have not been too good #TODO ANOTHER CHANCE TO SHOWCASE STATS HERE
+                        '`that\'s fair`':'end'
+                   },
+                    'error':'end'
+                }
+            },
+            '[$FAV_PLAYER=#ONT(leagues), {good}]': {
+                '`Why do you think` $FAV_PLAYER `has been doing good lately? `':{
+                    'error':'end'
                 }
             },
             '[{no, dont have, do not, dont}]':'favRegion',
