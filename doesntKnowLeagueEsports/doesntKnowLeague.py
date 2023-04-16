@@ -142,6 +142,7 @@ def doesntKnowLeague():
             '[{objectives, in-game}]': 'IntroduceObjectives',
             '[{roles, positions}]': 'IntroduceRoles',
             '[{lane, lanes}]': 'laneInfo',
+            '[{items, item}]': 'items',
             '[{map, layout}]': 'IntroduceMap',
             '[{no, nothing, fine}]': 'EndIntroduceGame',
             'error': {
@@ -475,7 +476,7 @@ def doesntKnowLeague():
             '[{yes, try, game}]': {
                 'state': 'ReadyToTry',
                 # TODO not lead to end
-                '`Great! You can download League of Legends for free from the official website. It\'s available on Windows and macOS.I hope you have fun exploring the game and finding your favorite champions.If you have any more questions, don\'t hesitate to ask!`': 'end'
+                '`Great! You can download League of Legends for free from the official website. It\'s available on Windows and macOS.I hope you have fun exploring the game and finding your favorite champions. If you have any more questions, don\'t hesitate to ask!`': 'end'
             },
             '[{no, not now, later}]': {
                 'state': 'EndReadyToTry',
@@ -512,18 +513,59 @@ def doesntKnowLeague():
         'store in your base, and they provide positive effects to you. Most items provide stat bonuses, but some grant '
         'a passive ability, and some are consumables that have some effect when used. Do you want me to explain any '
         'of that in more depth?`': {
-            '[{how}, {buy}, {money, gold}]': {
-                '`Items are bought with gold, which you passively acquire throughout the game. You can also get more '
+            'state': 'itemQuestions',
+            '[{how}, {buy, purchase}, {money, gold}]': {
+                '`You buy items with gold, which you earn passively throughout the game. You can also get more '
                 'gold by defeating minions, enemy champs, or jungle monsters, or by destroying enemy structures. Any '
                 'other item questions?`': {
                     '[{-think, no, nope}]': {
-                        '`Great, any other general League questions?`': 'IntroduceLeague'
+                        '`Great, any other general League questions?`': 'IntroduceGame'
                     },
-                    'error': 'items'
+                    'error': {
+                        '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
+                    }
                 }
+            },
+            '[{stat, bonus}]': {
+                '`Some examples of stat boosting items are the Mercury Treads, which increase your magic resistance and movements speed, and the Bramble Vest, which increases your defense and harms enemies that hit you. Any other item questions?`': {
+                    '[{-think, no, nope}]': {
+                        '`Great, any other general League questions?`': 'IntroduceGame'
+                    },
+                    'error': {
+                        '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
+                    }
+                }
+            },
+            '[{consumable}]': {
+                '`Some consumables restore health and mana, like the Corrupting potion, and some grant temporary stat boosts, like the Elixir of Iron and the Elixir of Sorcery. Another consumable item is the Control Ward, which you can place on the map to gain vision around where the ward is placed. Any other item questions?`': {
+                    '[{-think, no, nope}]': {
+                        '`Great, any other general League questions?`': 'IntroduceGame'
+                    },
+                    'error': {
+                        '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
+                    }
+                }
+            },
+            '[{passive, ability}]': {
+                '`One example is the Spirit Visage, which increases all healing and shielding received from items or abilities by 25%. Another example is the Staff of Flowing Water, which boosts a teammate\'s magic power and reduces their cooldowns if you shield them. Any other item questions?`': {
+                    '[{-think, no, nope}]': {
+                        '`Great, any other general League questions?`': 'IntroduceGame'
+                    },
+                    'error': {
+                        '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
+                    }
+                }
+            },
+            '[{yeah, yes, yup, yep, sure, ok}]': {
+                '`Sure, what would you like to hear about?`': 'itemQuestions'
+            },
+            '[{-think, no, nah, not really, nope}]': {
+                '`Great, any other general League questions?`': 'IntroduceGame'
+            },
+            'error': {
+                '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
             }
         }
-        # TODO: add info about items
     }
 
     base = {
