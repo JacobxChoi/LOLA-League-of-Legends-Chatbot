@@ -91,9 +91,9 @@ macros = {
     'GET_OLDNAME': MacroGetOldName(),
     'FAV_REGION': favRegion(),
     'FAV_GAMETYPE':MacroGPTJSON(
-            'What is the type of the game user mentioned, and give one sentence answer why people love the game type starting with "they offer"',
-            {'GameType': 'Adventure game', 'WhyInterest': 'They offer a unique and immersive gameplay experience that allows players to express their creativity, engage in friendly competition, and form lasting social connections.'},
-            {'GameType': 'N/A', 'WhyInterest': 'N/A'}
+            'What is the game user mentioned, what is the type of the game. Give an example of the other game in the category and give one sentence answer why people love the game speaker mentioned starting with "it offers"',
+            {'GameName': 'Legend of Zelda', 'GameType': 'Adventure game', 'OtherGame': 'Xenoblade Chronicles', 'WhyInterest': 'They offer a unique and immersive gameplay experience that allows players to express their creativity, engage in friendly competition, and form lasting social connections.'},
+            {'GameName': 'N/A', 'GameType': 'N/A', 'OtherGame': 'N/A', 'WhyInterest': 'N/A'}
         ),
     'ACTIVITY_WITH_FRIENDS':MacroGPTJSON(
             'What does the activity the speaker typically do with friends, the activity stored should start with an verb',
