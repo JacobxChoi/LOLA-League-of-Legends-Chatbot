@@ -620,3 +620,49 @@ class MacroGoalAnalogy(Macro):
             return GameTypeResponseDic['towerDefense']['GameGoalSim']
         else:
             return GameTypeResponseDic['other']['GameGoalSim']
+class MacroEsportAttitudeResponse(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        vn = 'EsportAttitude'
+
+        EsportAttitudeResponseDic = {
+            'LookingForward': {
+                'EsportAttitudeSim': 'It\'s definitely worth a try if you want to meet more friends with same interest !'
+            },
+
+            'Excitement': {
+                'EsportAttitudeSim': 'ヽ(゜▽゜ )－C<(/;◇;)/~,'
+            },
+
+            'Unwilling': {
+                'EsportAttitudeSim': '(｡í _ ì｡), '
+            },
+
+            'Open-mindedness': {
+                'EsportAttitudeSim': 'I agree with you. Embracing new things is definitely a joy in the life ! '
+            },
+
+            'Indifference':{
+                'EsportAttitudeSim': 'That\'s fine. After all, one fun thing to be a person is each of us has different interest. '
+            },
+
+
+            'other': {
+                'EsportAttitudeSim': '(´～`),'
+            }
+
+        }
+
+        if vars[vn] == 'LookingForward':
+            return EsportAttitudeResponseDic['LookingForward']['EsportAttitudeSim']
+
+        if vars[vn] == 'Excitement':
+            return EsportAttitudeResponseDic['Excitement']['EsportAttitudeSim']
+
+        if vars[vn] == 'Unwilling':
+            return EsportAttitudeResponseDic['Unwilling']['EsportAttitudeSim']
+
+        if vars[vn] == 'Open-mindedness':
+            return EsportAttitudeResponseDic['Open-mindedness']['EsportAttitudeSim']
+
+        else:
+            return EsportAttitudeResponseDic['other']['EsportAttitudeSim']

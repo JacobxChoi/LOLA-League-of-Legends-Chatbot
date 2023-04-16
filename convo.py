@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse
 
 #convo.py imports
 import pickle
@@ -30,7 +30,7 @@ advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching, LeagueInfoTransit = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -119,6 +119,13 @@ macros = {
         {'Agreement': 'no'}
     ),
 
+    'ESportAttitudeChecker': MacroGPTJSON(
+        'What is the speakers\'s attitude toward esport events. Attitude options are LookingForward, Excitement, Indifference, Unwilling, Open-mindednness',
+        {'EsportAttitude': 'LookingForward'},
+    ),
+
+    'ESportAttitudeResponse': MacroEsportAttitudeResponse(),
+
     'GameGoalAnalogy': MacroGoalAnalogy(),
     #for advanced.py
     'RANDGAME' : getRandomGame()
@@ -150,6 +157,7 @@ df.load_transitions(ChampionRoles)
 df.load_transitions(ChampionTypes)
 df.load_transitions(StartPlaying)
 df.load_transitions(StartWatching)
+df.load_transitions(LeagueInfoTransit)
 
 #knowsLeague transitions
 df.load_transitions(favoriteTeam)

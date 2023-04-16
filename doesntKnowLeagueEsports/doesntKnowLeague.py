@@ -34,7 +34,7 @@ def doesntKnowLeague():
                 'state': 'transit',
                 # Casual questions to collect related infos
                 # TODO: rewrite the casual converstaion part to add depth and smooth transitions
-                '#GATE `What\'s your favorite game?`': {
+                '#GATE `By the way, what\'s your favorite game?`': {
                     'score': '0.8',
                     # TODO: catch circumstance if the user do not have favorite game
                     '[#FAV_GAMETYPE]': {
@@ -45,10 +45,10 @@ def doesntKnowLeague():
                     }
                 },
 
-                '#GATE `May I know why are you interested in knowing more about League esports?`': {
+                '#GATE `May I know why you are interested in knowing more about League esports?`': {
                     'score': '1.0',
                     'state': 'interest',
-                    '[{friend, friends, social, community}]': {
+                    '[{friend, friends, social, community, peers, group}]': {
                         '`Yeah, a shared interest in games connects friends together. What do you typically do with friends in your free time?`': {
                             '[#ACTIVITY_WITH_FRIENDS]': {
                                 '`Definitely, I wish I would have the chance to` #GET_ACTIVITY_FRIEND `with my friends too.`': 'transit'
@@ -60,18 +60,16 @@ def doesntKnowLeague():
                             '[#SportEvents]': {
                                 # TODO to add different attitude toward different games
                                 '`(^ρ^)/, Wow,I love` #GET_SportsEvent `too. My emotion get quickly driven by the players, and I love that feeling !`': {
-                                    '[{too, [as well]}, yeah, sure, true]': {
+                                    'state': 'SportEvents',
+                                    '[{too, [as well], yeah, sure, true, definitely}]': {
                                         'score': '0.5',
-                                        '`Hmm, I don\'t know where the excitement exactly come from, but I did feel connected when I watched the sport event, even it\'s online. `': {
+                                        '`Yeah, the feeling of being is definitely fun, even it\'s online. `': {
 
-                                            '[{yeah,well,true,too}]': {
+                                            '[{yeah,well,true,too,similar}]': {
+                                                'state': 'esportAttitude',
                                                 '`What do you think of esport event then`': {
                                                     '[{#ESportAttitudeChecker}]': {
-                                                        '`#ESportAttitudeResponse`': {
-                                                            # TODO: complete the branch
-
-                                                        }
-
+                                                        '#ESportAttitudeResponse': 'transit'
                                                     },
 
                                                 }
@@ -82,13 +80,14 @@ def doesntKnowLeague():
                                             }
 
                                         }
+                                    },
+                                    'error': {
+                                        '`Cool, in this case what do you think about the esport event of virtual games?`': 'esportAttitude',
                                     }
                                 },
 
                                 'error': {
-                                    '`Cool, in this case what do you think about the esports event of virtual games?`': {
-                                        'state': 'esportAttitude',
-                                    }
+                                    '`Cool, in this case what do you think about the esports event of virtual games?`': 'esportAttitude'
                                 }
 
                             }
@@ -120,6 +119,20 @@ def doesntKnowLeague():
 
                 '`Let me give you a brief introduction to League of Legends. It\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving e-sports scene. Do you want to know more about the game or its e-sports scene?`': {
                     'score': '0.5',
+                    '[{sure, yes, definitely, ok, okey}]': {
+                        '`So do you want to know more about the game mechanics?`': {
+                            '[#AgreementChecker]': {
+                                'score': '0.5',
+                                '#IF(#POSITIVE_AGREEMENT) `For sure,`': 'IntroduceGame',
+                                '#IF(#NEGATIVE_AGREEMENT)': {
+                                    '`How about the esport scene, I can give you a brief introduction to how league esports work and where to find the exiciting scens!`': 'LeagueInfoTransit',
+                                },
+                                'error': {
+                                    '`Forgive me for my inability to understand you, but do you know the goal of a game of League of Legends?`': 'Directed_Questions'
+                                }
+                            },
+                        }
+                    },
                     '[{game, learn}]': 'IntroduceGame',
                     '[{esports, scene}]': 'IntroduceEsports',
                     'error': 'IntroduceGame'
@@ -128,16 +141,41 @@ def doesntKnowLeague():
             },
 
             'error': {
-                '`Sorry, I didn\'t catch that, could you say it again? ξ( ✿＞◡❛)`': 'playedLOL'
+                '` (￣ε(#￣)☆, Sorry, I didn\'t catch that, could you say it again? ξ( ✿＞◡❛)`': 'playedLOL'
             },
 
         },
 
     }
 
+    LeagueInfoTransit = {
+        'state': 'LeagueInfoTransit',
+
+        '[{game, learn}]': 'IntroduceGame',
+        '[{esports, scene}]': 'IntroduceEsports',
+        '[{champions, types}]': 'IntroduceChampions',
+        '[{objectives, in-game}]': 'IntroduceObjectives',
+        '[{roles, positions, lanes}]': 'IntroduceRoles',
+        '[{map, layout}]': 'IntroduceMap',
+        '[{specific, champions}]': 'SpecificChampions',
+        '[{roles, team}]': 'ChampionRoles',
+        '[{types, categories}]': 'ChampionTypes',
+        '[{popular, favorite}]': 'PopularChampions',
+        '[{turrets}]': 'TurretsInfo',
+        '[{explain, what}{dragons}]': 'DragonsInfo',
+        '[{explain, what}{Baron, Nashor}]': 'BaronInfo',
+        '[{try}]': 'ReadyToTry',
+        '[{qualify, events}]': 'QualifyCompetitions',
+        '[{living}]': 'EsportsLiving',
+        '[destroy,{nexus, base, turrets}]': 'DestroyNexus',
+        '[{minion, minions}]': 'Minions',
+        '[{watching, streaming}]': 'StreamingPlatforms',
+
+    }
+
     IntroduceGame = {
         'state': 'IntroduceGame',
-        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. What would you like to know more about: the different types of champions, in-game objectives, or the roles in the game?`': {
+        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents.`': {
             '[{champions, types}]': 'IntroduceChampions',
             '[{objectives, in-game}]': 'IntroduceObjectives',
             '[{roles, positions}]': 'IntroduceRoles',
@@ -145,6 +183,12 @@ def doesntKnowLeague():
             '[{items, item}]': 'items',
             '[{map, layout}]': 'IntroduceMap',
             '[{no, nothing, fine}]': 'EndIntroduceGame',
+            '[{complicated}]': {
+                '`It can be at first, but once you get the hang of it, it\'s really fun. You choose a champion to play as, and each one has unique abilities and playstyles.`': 'LeagueInfoTransit'
+            },
+            '[{require,need},{coordination}]': {
+                '`Absolutely, but that\'s what makes it so much fun! You get to work with your friends to take down the enemy team and claim victory.`': 'LeagueInfoTransit'
+            },
             'error': {
                 'state': 'IntroduceGameRepeat',
                 '`I\'m sorry, I didn\'t quite understand your question. Would you like to know more about the different types of champions, in-game objectives, roles in the game, or the map layout?`': {
@@ -152,7 +196,11 @@ def doesntKnowLeague():
                     '[{objectives, in-game}]': 'IntroduceObjectives',
                     '[{roles, positions, lanes}]': 'IntroduceRoles',
                     '[{map, layout}]': 'IntroduceMap',
-                    '[{no, nothing, fine}]': 'EndIntroduceGame',
+                    '[{no, nothing, fine}]': {
+                        'state': 'EndIntroduceGame',
+                        '`Feel free to ask me, if you have another questions!ヽ( ° ▽°)ノ`': 'LeagueInfoTransit'
+                    },
+
                     'error': 'IntroduceChampions'
                 }
             }
@@ -382,10 +430,17 @@ def doesntKnowLeague():
 
     IntroduceObjectives = {
         'state': 'IntroduceObjectives',
-        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base. Ultimately, the goal is to destroy the enemy Nexus. Would you like to know more about the esports scene or are you ready to try the game?`': {
-            '[{turrets}]': 'TurretsInfo',
-            '[{dragons}]': 'DragonsInfo',
-            '[{Baron, Nashor}]': 'BaronInfo',
+        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base.Ultimately, the goal is to destroy the enemy Nexus.Would you like to know more about the esports scene or are you ready to try the game?`': {
+            'state': 'InnerObjectives',
+            '[{turrets}]': 'turrets',
+            '[{dragons}]': {
+                'state': 'dragons',
+                '`Dragons are powerful neutral monsters that grant buffs to the team that slays them. There are four elemental dragons: Infernal, Cloud, Mountain, and Ocean, each providing different bonuses. There\'s also the Elder Dragon, which enhances the elemental buffs and deals true damage. Want to learn about other objectives?`': 'InnerObjectives'
+            },
+            '[{Baron, Nashor}]': {
+                'state': 'NashorBaron',
+                '`Baron Nashor is a powerful neutral monster that grants a significant buff called Hand of Baron to the team that defeats it. This buff empowers minions, making them stronger and harder to kill. Taking Baron can turn the tide of a game. Are you curious about other objectives?`': 'InnerObjectives'
+            },
             '[{esports, scene}]': 'IntroduceEsports',
             '[{try, game}]': 'ReadyToTry',
             'error': 'IntroduceEsports'
@@ -395,10 +450,11 @@ def doesntKnowLeague():
 
     IntroduceEsports = {
         'state': 'IntroduceEsports',
-        '`League of Legends esports is a highly competitive scene with regional and international tournaments. The most prestigious event is the League of Legends World Championship, where the best teams from around the world compete for the title of world champion. Regional leagues, like the LCS (North America), LEC (Europe), LPL (China), and LCK (Korea), have regular seasons and playoffs that lead to international events. Top players can earn fame, fortune, and the adoration of fans. Would you like to learn more about specific teams or players?`': {
+        '`Oh man, the esports scene is huge. The two biggest international events are the Mid-Season Invitational and the League of Legends World Championship.`': {
             '[{teams, specific}]': 'SpecificTeams',
             '[{players, specific}]': 'SpecificPlayers',
             '[{game, works}]': 'IntroduceChampions',
+            '[{qualify}]': 'QualifyCompetitions',
             '[{professional, teams}]': {
                 'state': 'ProTeamsInfo',
                 '`In the LoL e-sports scene, teams usually have coaches, analysts, and support staff to help them prepare for matches. They practice together, work on strategies, and scout their opponents to find weaknesses they can exploit. Most regions have their own professional leagues, like the LEC in Europe, LCS in North America, and LCK in Korea. Are you interested in major international competitions or how teams qualify for them?`': {
@@ -407,8 +463,8 @@ def doesntKnowLeague():
                         'state': 'InternationalCompetitions',
                         '`The two biggest international events are the Mid-Season Invitational (MSI) and the League of Legends World Championship, or just Worlds. MSI happens around the middle of the year, while Worlds takes place in the fall. Would you like to learn more about how teams qualify for these events or how players make a living from e-sports?`': {
                             'state': 'InnerInternationalCompetitions',
-                            '[{qualify, events}]': 'QualifyCompetitions',
-                            '[{living, esports}]': 'EsportsLiving',
+                            '[{qualify, earn, award}]': 'QualifyCompetitions',
+                            '[{living}]': 'EsportsLiving',
                             'error': {
                                 '`I\'m sorry, I didn\'t catch that. If you want to know more about how teams qualify for events or how players make a living from e-sports, just let me know!`': 'InnerInternationalCompetitions',
                             }
@@ -420,7 +476,7 @@ def doesntKnowLeague():
                             'state': 'InnerQualification',
                             '[{financial, aspect}]': {
                                 'state': 'EsportsLiving',
-                                '`Many pro LoL players make a good living from salaries, sponsorships, and prize money. Some of the top players are even considered celebrities in their home countries. The e-sports industry is growing rapidly, and there are more opportunities than ever for talented players. Are you interested in watching e-sports games on streaming platforms or how to get into playing the game?`': {
+                                '`Many pro LoL players make a good living from salaries, sponsorships, and prize money. Some of the top players are even considered celebrities in their home countries. The e-sports industry is growing rapidly, and there are more opportunities than ever for talented players.`': {
                                     'state': 'InnerEsportLiving',
                                     '[{watching, streaming}]': {
                                         'state': 'StreamingPlatforms',
@@ -434,6 +490,9 @@ def doesntKnowLeague():
                                         }
                                     },
                                     '[{playing, game}]': 'StartPlaying',
+                                    '[{lot, large, huge}]': {
+                                        '`Yeah, it\'s worth it. The pro players make a good living from salaries, sponsorships, and prize money, and some of the top players are even considered celebrities in their home countries.`': 'LeagueInfoTransit'
+                                    },
                                     'error': {
                                         '`I\'m sorry, I didn\'t catch that. If you want to know more about watching e-sports on streaming platforms or how to get into playing the game, just let me know!`': 'InnerEsportLiving'
                                     }
@@ -490,6 +549,9 @@ def doesntKnowLeague():
         'state': 'StartWatching',
         '`I\'d recommend starting with the regional leagues, like the LEC, LCS, or LCK. This will give you a good introduction to the teams and players, as well as the overall competitive landscape. From there, you can move on to international events like MSI and Worlds. If you\'re interested in playing the game, it\'s free and there are plenty of resources available to help you learn!`': {
             'state': 'InnerStartWatching',
+            '[you, {watch, enjoy}]': {
+                '`Absolutely! It\'s a big part of the experience. Fans can watch live matches, replays, and highlights, as well as follow their favorite players and teams. Some pro players even stream their own gameplay and interact with fans during their downtime.`': 'LeagueInfoTransit'
+            },
             '[{playing, game}]': 'StartPlaying',
             'error': {
                 '`I\'m sorry, I didn\'t catch that. If you want to know more about playing the game, just let me know!`': 'InnerStartWatching',
@@ -566,6 +628,7 @@ def doesntKnowLeague():
                 '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
             }
         }
+        # TODO: add info about items
     }
 
     base = {
@@ -576,4 +639,4 @@ def doesntKnowLeague():
         'opponents nexus, they win the game.`': 'end'
     }
 
-    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching
+    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching, LeagueInfoTransit
