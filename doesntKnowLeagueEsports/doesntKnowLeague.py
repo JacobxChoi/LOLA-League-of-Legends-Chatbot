@@ -144,7 +144,8 @@ def doesntKnowLeague():
         '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. What would you like to know more about: the different types of champions, in-game objectives, or the roles in the game?`': {
             '[{champions, types}]': 'IntroduceChampions',
             '[{objectives, in-game}]': 'IntroduceObjectives',
-            '[{roles, positions, lanes}]': 'IntroduceRoles',
+            '[{roles, positions}]': 'IntroduceRoles',
+            '[{lane, lanes}]': 'laneInfo',
             '[{map, layout}]': 'IntroduceMap',
             '[{no, nothing, fine}]': 'EndIntroduceGame',
             'error': {
@@ -384,7 +385,7 @@ def doesntKnowLeague():
 
     IntroduceObjectives = {
         'state': 'IntroduceObjectives',
-        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base.Ultimately, the goal is to destroy the enemy Nexus.Would you like to know more about the esports scene or are you ready to try the game?`': {
+        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base. Ultimately, the goal is to destroy the enemy Nexus. Would you like to know more about the esports scene or are you ready to try the game?`': {
             '[{turrets}]': 'TurretsInfo',
             '[{dragons}]': 'DragonsInfo',
             '[{Baron, Nashor}]': 'BaronInfo',
