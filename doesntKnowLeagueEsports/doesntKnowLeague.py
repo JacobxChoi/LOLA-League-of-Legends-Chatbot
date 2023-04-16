@@ -38,7 +38,7 @@ def doesntKnowLeague():
                     'score': '0.8',
                     # TODO: catch circumstance if the user do not have favorite game
                     '[#FAV_GAMETYPE]': {
-                        '`I love` #GET_FAV_GAME `too !` #GET_REASON_FAV_GAME `. `': 'transit'
+                        '`I love` #GET_FAV_GAME `too!` #GET_REASON_FAV_GAME': 'transit'
                     },
                     'error': {
                         '`Cool`': 'transit'
@@ -118,7 +118,7 @@ def doesntKnowLeague():
                     },
                 },
 
-                '`Let me give you a brief introduction to League of Legends. is actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving e-sports scene. Do you want to know more about the game or its e-sports scene?`': {
+                '`Let me give you a brief introduction to League of Legends. It\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving e-sports scene. Do you want to know more about the game or its e-sports scene?`': {
                     'score': '0.5',
                     '[{game, learn}]': 'IntroduceGame',
                     '[{esports, scene}]': 'IntroduceEsports',
