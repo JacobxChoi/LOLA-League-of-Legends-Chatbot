@@ -30,7 +30,7 @@ advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching,LeagueInfoTransit = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -163,7 +163,7 @@ df.load_transitions(ChampionRoles)
 df.load_transitions(ChampionTypes)
 df.load_transitions(StartPlaying)
 df.load_transitions(StartWatching)
-# df.load_transitions(LeagueInfoTransit)
+df.load_transitions(LeagueInfoTransit)
 
 #knowsLeague transitions
 df.load_transitions(favoriteTeam)
