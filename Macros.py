@@ -12,7 +12,6 @@ import regexutils
 OPENAI_API_KEY_PATH = 'resources/openai_api.txt'
 CHATGPT_MODEL = 'gpt-3.5-turbo'
 
-
 class MacroGetName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         #TODO: CHANGE THIS TO CHATGPT BASED
@@ -66,17 +65,12 @@ class MacroGetName(Macro):
 
 class MacroGetOldName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        print('1')
-        # MacroGetName().run(ngrams, vars, args)
         vn = vars['FIRSTNAME']
         return vars[vn]
 
 
 class MacroGetNewName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        print('2')
-        # MacroGetName().run(ngrams, vars, args)
-        print(vars)
         vn = vars['FIRSTNAME']
         return not vars[vn]
 
@@ -530,7 +524,7 @@ class MacroGPTJSON(Macro):
         examples = f'{self.full_ex} or {self.empty_ex} if unavailable' if self.empty_ex else self.full_ex
         prompt = f'{self.request} Respond in the JSON schema such as {examples}: {ngrams.raw_text().strip()}'
         output = gpt_completion(prompt)
-        print(output)
+        # print(output)
         if not output: return False
 
         try:

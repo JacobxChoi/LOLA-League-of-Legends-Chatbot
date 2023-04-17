@@ -110,7 +110,7 @@ def doesntKnowLeague():
                     },
 
                     '[$FAV_PLAYER=#ONT(leagues)]': {
-                        '#IF($FAV_PLAYER = jojopyun) `Agree! Jojopyun is my favorite player too.`': 'transit',
+                        '#IF($FAV_PLAYER = keria) `Agree! Keria is my favorite player too.`': 'transit',
                         '`I like` $FAV_PLAYER `too`': 'transit',
                         'error': 'loveLeague',
                     },
@@ -542,11 +542,11 @@ def doesntKnowLeague():
 
     SpecificPlayers = {
         'state': 'SpecificPlayers',
-        '`Some legendary players in the history of League of Legends esports are Faker (mid laner for T1), Uzi (former ADC for Royal Never Give Up), Caps (mid laner for G2 Esports), and Doublelift (former ADC for Team SoloMid and Team Liquid). These players have had successful careers and have made a significant impact on the esports scene. I hope this information has been helpful. Are you ready to try the game now?`': {
-            '[{yes, try, game}]': {
+        '`Some legendary players in the history of League of Legends esports are Faker (mid laner for T1), Uzi (former ADC for Royal Never Give Up), Caps (mid laner for G2 Esports), and Doublelift (former ADC for Team SoloMid and Team Liquid). These players have had successful careers and have made a significant impact on the esports scene. I can also share some of my favorite players and teams if you\'re interested.`': {
+            '[{yes, know}]': { #yes, I'd like to know about your favorite teams/players as well
                 'state': 'ReadyToTry',
-                # TODO not lead to end
-                '`Great! You can download League of Legends for free from the official website. It\'s available on Windows and macOS.I hope you have fun exploring the game and finding your favorite champions. If you have any more questions, don\'t hesitate to ask!`': 'end'
+                # TODO: fix transition between doesntKnowLeague and knowsLeague
+                '`Great!`': 'casual'
             },
             '[{no, not now, later}]': {
                 'state': 'EndReadyToTry',
@@ -572,8 +572,11 @@ def doesntKnowLeague():
 
     StartPlaying = {
         'state': 'StartPlaying',
-        '`While there is a learning curve, the game is free to play, and there are plenty of resources available to help you learn. You can find guides, tutorials, and community forums online to help you improve your skills. Plus, playing with friends can make the experience more enjoyable. If you ever have any questions or want to play together, just let me know!`': {
-            'state': 'InnerStartPlaying',
+        '`While there is a learning curve, the game is free to play, and there are plenty of resources available to help you learn. You can find guides, tutorials, and community forums online to help you improve your skills. Plus, playing with friends can make the experience more enjoyable. If you ever have any questions or want to play together, just let me know! Lastly, would you happen to be interested in learning a bit about the esports scene as well? I can introduce my favorite players and teams too!`': {
+            'state': 'InnerStartPlaying', #TODO improve transition between doesntKnowLeague and knowsLeague
+            '[{yes, ready}]':{
+                '`Cool!`':'casual'
+            },
             'error': {
                 '`I\'m sorry, I didn\'t catch that. If you want to know more about playing the game or anything else related to League of Legends, just let me know!`': 'InnerStartPlaying'
             }
