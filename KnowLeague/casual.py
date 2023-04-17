@@ -1,14 +1,11 @@
 def casual():
     casual = {
         'state': 'casual', #at this point, they don't have a favorite professional player. They have a favorite region, but are not watching any games currently
-        '#GATE`I\'ll share some of my personal favorites. Keria is my favorite player, but my favorite team is Edward Gaming. They\'re fun to watch`': { #user will ask questions
+        '#GATE`I\'ll share some of my personal favorites. Keria is my favorite player, but my favorite team is Edward Gaming. They\'re very fun to watch`': { #user will ask questions
             # 'score': 0.9,
             'state':'share',
-            '{[like, {EDG, them, team}, too]}':{#USER: I like them too!
-                '`Awesome! What do you like about Edward Gaming?`':'EDG'
-            },
-            '{[like, {keria, him}, {too, also}]}': {  # USER: I like them too!
-                '`Awesome! What do you like about Keria?`': 'keria'
+            '{[like, {edg, them, team, edward}]}': 'EDG', #USER: I like them too!
+            '{[like, {keria, him}]}': {  # USER: I like them too!
             },
             '{[you, like]}':{ #USER: What do you like about them?
                 '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What about you?`':{
@@ -59,8 +56,24 @@ def casual():
                                                 '{no, not, nah, pass, [im, {good, fine}]}': {
                                                         '`Then do you want to talk about something else? I mainly can '
                                                         'talk about teams, recent games, and information about the game`': {
+                                                            'state': 'somethingElse',
                                                             '{team, teams}': {
-
+                                                                '`What team do you wanna talk about then?`': 'describeTeam' #TODO
+                                                            },
+                                                            '{[{recent, recently, past}, {match, game}]}': {
+                                                                '`Which match?`': 'describeMatch' #TODO
+                                                            },
+                                                            '{information, info, game, match, league, lol}': {
+                                                                '`What part of league do you want to talk about?`': 'describeLeague' #TODO
+                                                            },
+                                                            '{no, not, nah, pass, [im, {good, fine}]}': {
+                                                                '`I\'ll see you later then! Bye!`': 'end'
+                                                            },
+                                                            '{yes, ok, yeah, sure, fun, alright, cool, [sounds, {fun, good}]}': {
+                                                                '`What do you wanna talk about then?`': 'somethingElse'
+                                                            },
+                                                            '#UNX': {
+                                                                '`I\'ll see you later then! Bye!`': 'end'
                                                             }
                                                         }
                                                     }
@@ -124,13 +137,13 @@ def casual():
                     '[{yes, yeah, close}]':{ #USER: yeah, ___ won, and it was a really close game!
                         '`Wow! I\'m sure TEAM put up a really good fight.`':'end' #TODO: HANDLE ERROR
                     },
-                    '[{no, not}]':{ #USER: no, the game wasnt really close
+                    '[{no, not, wasnt}]':{ #USER: no, the game wasnt really close
                         '`Dang. I\'m not a fan of one-sided games either.`':'end'
                     }
                 }
             },
             '[{no, did not, didnt}]':{
-                '`no worries!`':'casual'
+                '`No worries!`':'casual'
             },
             'error':'end'
         }, #TODO: handle gate
@@ -139,30 +152,198 @@ def casual():
             'state':'end'
         }
     }
-    return casual
+
+    edg = {
+        'state': 'EDG',
+        '`Awesome! What do you like about Edward Gaming?`': {
+            'state': 'EDG2',
+            '[{skill, macro, macroplay, strategy, skillful, skilled, dynamic}]': {
+                '`I also think that they\'re really skillful and smart at strategizing. I mean, they have to be in order to win '
+                'Worlds. I think that they win because of their ability to adapt to new scenarios.`': {
+                    '[{agree, also, too, true}]': {
+                        '`I\'m glad to hear you think the same way! Is there another reason why you like them?`': {
+                            '[{yes, yeah, sure, of course, do}]': {
+                                '`What is it?`': 'EDG2'
+                            },
+                            '[{no, not, nah, dont}]': {
+                                '`That\'s valid. It was nice talking to you! See ya soon!`' 'end' #we should make a state that prompts the user whether or not they want to talk about a region or team or player
+                            },
+                            '[{fun, entertaining, fast, fast paced, action, engaging}]': {
+                                '`Yeah. Since they\'re accustomed to action-packed games, they\'re able to overwhelm the'
+                                ' enemy team by playing proactively. On the other hand, what do you think about their '
+                                'fanbase community?`': {
+                                    '[{good, fantastic, nice, home, fun, welcoming, energetic, best, like}]': {
+                                        '`They naturally will have a strong community because they\'re such a good team. Their '
+                                        'fan base is the best, probably because I\'m a part of it. I\'m glad that we'
+                                        ' both have similar taste in pro teams. I\'ll see you later! Bye!`': 'end'
+                                    },
+                                    '[{bad, worst, not good, poor, toxic, boring, dead, dislike, hate}]': {
+                                        '`That makes me sad to hear because I\'m a part of it and I love it :(. Try it out again and'
+                                        ' see if you change your mind. It was still nice talking to you. Bye!`': 'end'
+                                    },
+                                    'error': {
+                                        '`That\'s alright. Hopefully you\'ll join me and the others after watching some'
+                                        ' more games. I\'ll catch you later!`': 'end'
+                                    }
+
+                                }
+                            },
+                            '[{fans, fanbase, community}]': {
+                                '`For sure!. They naturally will have a strong community because they\'re such a good team. Their '
+                                'fan base is the best, probably because I\'m a part of it. On the other hand, what do'
+                                ' you think about the way they play?`': {
+                                    '[{strong, good, best, strongest, fun, entertaining, fast, fast paced, action, engaging}]': {
+                                        '`I agree. They probably have a strong fan base because of how good they are. It'
+                                        ' was nice talking to you,'
+                                        ' and I\'m glad we share similar interests!`': 'end'
+                                    },
+                                    '[{bad, worst, not good, poor, boring, dislike, weak}]' : {
+                                        '`Really? I really like the way that they play. You should go check out some of '
+                                        'their games in the LPL. That might change your mind. I\'ll see you later!`': 'end'
+                                    },
+                                    'error': {
+                                        '`I hope you continue to watch EDG\'s games and cheer them on as a fan! See ya!`': 'end'
+                                    }
+
+                                }
+                            },
+                            'error': {
+                                '`That\'s valid. It was nice talking to you! See ya soon!`': 'end'
+                            }
+                        }
+                    }
+                }
+            },
+            '[{fun, entertaining, fast, fastpaced, action, engaging}]': {
+                '`Yeah. Since they\'re accustomed to action-packed games, they\'re able to overwhelm the enemy team with their proactive play.`': {
+                    '[{agree, also, too, true}]': {
+                        '`I\'m glad to hear you think the same way! Is there another reason why you like them?`': {
+                            '[{yes, yeah, sure, of course, do}]': {
+                                '`What is it?`': 'EDG2'
+                            },
+                            '[{no, not, nah, dont}]': {
+                                '`That\'s valid. It was nice talking to you! See ya soon!`' 'end'
+                                # we should make a state that prompts the user whether or not they want to talk about a region or team or player
+                            },
+                            '[{skill, macro, macroplay, strategy, skillful, skilled}]': {
+                                '`Of course! They\'re a super solid team that is really good at making plays together as a team. '
+                                'On the other hand, what do you think about their fanbase community?`': {
+                                    '[{good, fantastic, nice, home, fun, welcoming, energetic, best, like}]': {
+                                        '`They naturally will have a strong community because they\'re such a good team. Their '
+                                        'fan base is the best, probably because I\'m a part of it. I\'m glad that we'
+                                        ' both have similar taste in pro teams. I\'ll see you later! Bye!`': 'end'
+                                    },
+                                    '[{bad, worst, not good, poor, toxic, boring, dead, dislike, hate}]': {
+                                        '`That makes me sad to hear because I\'m a part of it and I love it :(. Try it out again and'
+                                        ' see if you change your mind. It was still nice talking to you. Bye!`': 'end'
+                                    },
+                                    'error': {
+                                        '`That\'s alright. Hopefully you\'ll join me and the others after watching some'
+                                        ' more games. I\'ll catch you later!`': 'end'
+                                    }
+
+                                }
+                            },
+                            '[{fans, fanbase, community}]': {
+                                '`They naturally will have a strong community because they\'re such a good team. Their '
+                                'fan base is the best, probably because I\'m a part of it. On the other hand, who\'s your'
+                                ' favorite player on EDG?`': { #TODO
+                                    'state': 'playerEDG',
+                                    '[{ale, jia le, jiale, top}]': {
+                                        '`That\'s a strong choice. I think he\'s a really talented top laner. EDG Fofo '
+                                        'is still my favorite player on this team though. I think you should check him out too.`': 'end' #TODO
+                                    },
+                                    '[{jiejie, li jie, lijie, jungle, jungler}]': {
+                                        '`That\'s a strong choice. I think he\'s a really talented jungler. His ganks '
+                                        'always seems to work. EDG Fofo is still my favorite player on this team '
+                                        'though. I think you should focus on him too.`': 'end' # TODO
+                                    },
+                                    '[{fofo, chun lan, chunlan, mid, middle, midlaner}]': {
+                                        '`That\'s a strong choice. I think he\'s one of the best midlaners in the world. His roam '
+                                        'timings, laning, and mechanics are super strong. That\'s why he is my favorite player on this team '
+                                        'I\'m glad we have similar interests.`': 'end' # TODO
+                                    },
+                                    '[{leave, hong chao, hongchao, bot, adc, bottom, botlaner}]': {
+                                        '`That\'s an interesting choice. I think he\'s a really good adc. His team-fighting '
+                                        'and laning is really strong. However, Meiko makes Leave seem a lot stronger in lane.`': 'end'  # TODO
+                                    },
+                                    '[{meiko, tian ye, ye, sup, support}]': {
+                                        '`Wow! He\'s also my favorite player on EDG! What makes you think he\'s so good?'
+                                        ' I like him cause of his laning phase.`': 'end'  # TODO
+                                    },
+                                    '[{monki, meng qi, mengqi, jungle, jungler}]': {
+                                        '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
+                                        'substitute player! You must really watch EDG.`': 'end'  # TODO
+                                    },
+                                    '[{fisher, jeong tae, jeongtae, mid, middle, midlane, midlaner}]': {
+                                        '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
+                                        'substitute player! You must really watch EDG.`': 'end'  # TODO
+                                    },
+                                    'error': {
+                                        '`I don\'t think that person currently plays for EDG. Try another player.`': 'playerEDG'
+                                    }
+                                }
+                            },
+                            'error': {
+                                '`That\'s valid. It was nice talking to you! See ya soon!`': 'end'
+                            }
+                        }
+                    }
+                }
+            },
+            '[{fans, fanbase, community}]': {
+                '`They naturally will have a strong community because they\'re such a good team. Their fanbase is the '
+                'best, probably because I\'m a part of it. What do you like about it?`' : {
+                    '[{good, agree, dont disagree, fantastic, nice, home, fun, welcoming, energetic, best, like}]': {
+                        '`Yeah, I think that we\'re the best. I\'ll see you later! Bye!`': 'end'
+                    },
+                    '[{bad, disagree, dont agree, worst, not good, poor, toxic, boring, dead, dislike, hate}]': {
+                        '`That makes me sad to hear because I\'m a part of it and I love it :(. Try it out again and'
+                        ' see if you change your mind. It was still nice talking to you. Bye!`': 'end'
+                    },
+                }
+            },
+            '[{ale, jia le, jiale, top}]': {
+                '`That\'s a strong choice. I think he\'s a really talented top laner. EDG Fofo '
+                'is still my favorite player on this team though. I think you should focus on him too.`': 'end'  # TODO
+            },
+            '[{jiejie, li jie, lijie, jungle, jungler}]': {
+                '`Awesome!. I think Jiejie\'s a really talented jungler. His ganks '
+                'always seems to work. EDG Fofo is still my favorite player on this team '
+                'though. I think you should focus on him too.`': 'end'  # TODO
+            },
+            '[{fofo, chun lan, chunlan, mid, middle, midlaner}]': {
+                '`I think Fofo is the key to EDG\'s success. Both his roam '
+                'timers and laning is strong. That\'s why he is my favorite player on this team '
+                'I\'m glad we have similar interests.`': 'end'  # TODO
+            },
+            '[{leave, hong chao, hongchao, bot, adc, bottom, botlaner}]': {
+                '`That\'s an interesting choice. I think he\'s a really good adc. His team-fighting '
+                'and laning is really strong. However, Meiko makes Leave seem a lot stronger in lane.`': 'end'  # TODO
+            },
+            '[{meiko, tian ye, ye, sup, support}]': {
+                '`Wow! He\'s one of my favorite players on EDG! What makes you think he\'s so good?'
+                ' I like him cause of his laning phase.`': 'end'  # TODO
+            },
+            '[{monki, meng qi, mengqi, jungle, jungler}]': {
+                '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
+                'substitute player! You must really watch EDG.`': 'end'  # TODO
+            },
+            '[{fisher, jeong tae, jeongtae, mid, middle, midlane, midlaner}]': {
+                '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
+                'substitute player! You must really watch EDG.`': 'end'  # TODO
+            },
+            'error': {
+                '`Are you sure that player currently plays for EDG? I only know players who play for them right now. Try another player.`': 'playerEDG'
+            }
+        }
+    }
+    return casual, edg
 
 #TODO connect these to convo.py
 
-def EdwardGaming():
-    EDG = {
-        'state': 'EDG'
-    }
-    return EDG
-
-def Keria():
-    Keria = {
-        'state': 'keria'
-
-    }
-    return Keria
 def favTeam():
     favTeam = {
         'state': 'favTeam'
     }
     return favTeam
-
-def favPlayer(): #TODO: WE ALREADY HAVE FAVPLAYER VAR
-    favPlayer = {
-        'state': 'favPlayer'
-    }
-    return favPlayer
