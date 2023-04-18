@@ -70,15 +70,15 @@ def doesntKnowLeague():
                         '`For sure! After all, the adrenaline rush after watching an exciting matches is true. Do you enjoy the watching other sports events as well?`': {
                             '[#SportEvents]': {
                                 # TODO to add different attitude toward different games
-                                '`(^ρ^)/, Wow,I love` #GET_SportsEvent `too. My emotion get quickly driven by the players, and I love that feeling !`': {
+                                '`(^ρ^)/, Wow,I love` #GET_SportsEvent `too. My emotions get quickly driven by the players, and I love that feeling !`': {
                                     'state': 'SportEvents',
                                     '[{too, [as well], yeah, sure, true, definitely}]': {
-                                        'score': '0.5',
+                                        'score': '0.5', #TODO - FIX TYPO
                                         '`Yeah, the feeling of being is definitely fun, even it\'s online. `': {
 
                                             '[{yeah,well,true,too,similar}]': {
-                                                'state': 'esportAttitude',
                                                 '`What do you think of esport event then`': {
+                                                    'state': 'esportAttitude',
                                                     '[{#ESportAttitudeChecker}]': {
                                                         '#ESportAttitudeResponse': 'transit'
                                                     },
