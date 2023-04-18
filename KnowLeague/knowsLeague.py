@@ -8,16 +8,23 @@ def knowsLeague():
                 '`I agree! I love keria too!`': 'keria'
             },
             '[$FAV_PLAYER=#ONT(leagues), {bad, terrible, [not good], [not doing well], [not doing good], [not been doing well], [not been doing well lately], [not been doing too well], [not been doing good], [not been doing too good]}]':{
-                '`Why do you think` $FAV_PLAYER `has been doing poorly?`': { #TODO: CONTINUE WORKING ON THIS CONVERSATION
-                   '[{stats}]':{ #his stats have not been too good #TODO ANOTHER CHANCE TO SHOWCASE STATS HERE
-                        '`that\'s fair`':'end'
-                   },
-                    'error':'end'
+                '`Why do you think` $FAV_PLAYER `has been doing poorly?`': {
+                    'error': {
+                        '`That\'s true. I think`$FAV_PLAYER`Could be doing better as well. Do you watch any tournaments?`':'favRegion'
+                    }
                 }
             },
-            '[$FAV_PLAYER=#ONT(leagues), {good}]': {
-                '`Why do you think` $FAV_PLAYER `has been doing good lately? `':{
-                    'error':'end'
+            '[$FAV_PLAYER=#ONT(leagues), {good, well, okay}]': {
+                '`That\'s fair. I think`$FAV_PLAYER`is doing well too. Do you watch any tournaments?`':'favRegion'
+            },
+            '[{like}, $FAV_PLAYER=#ONT(leagues)]': {
+                '`I love $FAV_PLAYER` too. Do you watch any tournaments?': 'favRegion'
+            },
+            '[$FAV_PLAYER=#ONT(leagues)]':{
+                '`What do you think about`$FAV_PLAYER':{
+                    'error':{
+                        '`Nice. Do you follow any tournaments?`': 'favRegion'
+                    }
                 }
             },
             '[{no, dont have, do not, dont}]':'favRegion',
