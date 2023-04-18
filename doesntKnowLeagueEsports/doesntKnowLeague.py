@@ -36,7 +36,7 @@ def doesntKnowLeague():
                         }
                     },
                     '[{dont, no, not}]': {
-                        '`All good. My favorite champion is Irelia. I like playing aggressively and getting kills, so I find playing Irelia pretty fun.`': 'end'
+                        '`All good. My favorite champion is Irelia. I like playing aggressively and getting kills, so I find playing Irelia pretty fun. Just curious`': 'knowsLeague'
                     },
                     'error': 'end'
                 }

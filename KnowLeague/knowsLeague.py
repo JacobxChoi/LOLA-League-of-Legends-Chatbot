@@ -2,7 +2,7 @@
 def knowsLeague():
     favoriteTeam = {
         'state': 'favPlayer',
-        '`Who\'s your favorite professional player, and what do you think about them?`': {
+        '`Do you have a favorite professional player, and what do you think about them?`': {
             'state': 'playerCondition',
             '[keria]':{
                 '`I agree! I love keria too!`': 'keria'
