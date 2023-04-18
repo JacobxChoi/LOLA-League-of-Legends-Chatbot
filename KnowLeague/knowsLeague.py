@@ -30,11 +30,11 @@ def knowsLeague():
             'state':'favRegion2',
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
-                    '[{yes, did, watched}]':'advanced', #shows that user actively watches current esports games.
-                    '[{no, [did not], dont, didnt}]':{ #next favorite region?
+                    '[{yes, did, watched, probably, yea}]':'advanced', #shows that user actively watches current esports games.
+                    '[{no, [did not], dont, didnt, nope}]':{ #next favorite region?
                         '#RANDGAME `No Worries. How about the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
-                            '[{yes, yeah, watch, watched}]':'advanced',
-                            '[{no, [did not], didnt, havent, [have not]}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
+                            '[{yes, yeah, watch, watched, probably, yea}]':'advanced',
+                            '[{no, [did not], didnt, havent, [have not], nope}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
                                 '`All good!`':'casual'
                             },
                             'error':'end'

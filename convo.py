@@ -25,7 +25,7 @@ import pickle
 import os
 
 #knowsLeague
-casual = casual()
+casual, edg = casual()
 advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
@@ -169,6 +169,7 @@ df.load_transitions(LeagueInfoTransit)
 df.load_transitions(favoriteTeam)
 df.load_transitions(favoriteRegion)
 df.load_transitions(casual)
+df.load_transitions(edg)
 df.load_transitions(advanced)
 
 #global transition
