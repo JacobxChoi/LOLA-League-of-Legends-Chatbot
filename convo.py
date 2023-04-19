@@ -70,7 +70,7 @@ transitions = {
     ##Welcoming section
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you introduce yourself?`': {
         '#GET_NAME_GPT #GET_NAME': {
-            '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
+            '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `. I like` $ROLE `too!`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
         }
     },
@@ -127,9 +127,9 @@ macros = {
         {'Agreement': 'no'}
     ),
     'GET_NAME_GPT': MacroGPTJSON(
-        'What is the user\'s name?',
-        {'FIRSTNAME': 'Jacob'},
-        {'FIRSTNAME': 'NA'}
+        'What is the user\'s name? And what do they enjoy doing?',
+        {'FIRSTNAME': 'Jacob', 'ROLE': 'being a student'},
+        {'FIRSTNAME': 'NA', 'ROLE': 'NA'}
     ),
     # 'SET_NAME_GPT':
 

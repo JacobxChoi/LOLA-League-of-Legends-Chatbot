@@ -18,7 +18,7 @@ def knowsLeague():
                 '`That\'s fair. I think`$FAV_PLAYER`is doing well too. Do you watch any tournaments?`':'favRegion'
             },
             '[{like}, $FAV_PLAYER=#ONT(leagues)]': {
-                '`I love $FAV_PLAYER` too. Do you watch any tournaments?': 'favRegion'
+                '`I love $FAV_PLAYER` too. Do you watch any tournaments?`': 'favRegion'
             },
             '[$FAV_PLAYER=#ONT(leagues)]':{
                 '`What do you think about`$FAV_PLAYER':{
@@ -37,17 +37,23 @@ def knowsLeague():
             'state':'favRegion2',
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
+                    'state':'firstSuggestion',
                     '[{yes, did, watched, probably, yea}]':'advanced', #shows that user actively watches current esports games.
                     '[{no, [did not], dont, didnt, nope}]':{ #next favorite region?
                         '#RANDGAME `No Worries. How about the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
+                            'state':'secondSuggestion',
                             '[{yes, yeah, watch, watched, probably, yea}]':'advanced',
-                            '[{no, [did not], didnt, havent, [have not], nope}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
+                            '[{no, [did not], didnt, havent, [have not], nope, dont}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
                                 '`All good!`':'casual'
                             },
-                            'error':'end'
+                            'error':{
+                                'Sorry, could you rephrase what you said?': 'secondSuggestion'
+                            }
                         }
                     }, #TODO user responds with "I didn't watch, but I know the outcome
-                    'error':'end'
+                    'error':{
+                        'Sorry, could you rephrase what you said?':'firstSuggestion'
+                    }
                 }
             },
             'error':{ #TODO: FIX TRANSITION
