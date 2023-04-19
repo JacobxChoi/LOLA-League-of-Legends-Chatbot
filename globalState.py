@@ -23,7 +23,7 @@ def globalState():
         },
         '[babel]':{
             'score':2,
-            '`Sure!`':'babel'
+            '`Sure!`':'babelTransition'
         }
     }
     return global_transitions
