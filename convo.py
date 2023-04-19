@@ -23,15 +23,19 @@ from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroG
 #imports babel conversation
 import babel
 
+from babel import babel
+
+
 #convo.py imports
 import pickle
 import os
 
 #knowsLeague
-babel = babel()
 casual, edg = casual()
 advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
+
+babel = babel()
 
 #doesntKnowLeague
 doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching,LeagueInfoTransit = doesntKnowLeague()
