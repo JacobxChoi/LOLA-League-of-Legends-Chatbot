@@ -18,13 +18,17 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU
+
+#imports babel conversation
+import babel
 
 #convo.py imports
 import pickle
 import os
 
 #knowsLeague
+babel = babel()
 casual, edg = casual()
 advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
@@ -59,7 +63,7 @@ def load(df: DialogueFlow, varfile: str):
 # This is the welcoming transition
 transitions = {
     'state': 'start',
-    ##Welcoming section TODO: change #GET_NAME FROM REGEX TO CHATGPT
+    ##Welcoming section
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you introduce yourself?`': {
         '#GET_NAME_GPT #GET_NAME': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `.`': 'DIVERGE',
@@ -134,8 +138,14 @@ macros = {
 
     'GameGoalAnalogy': MacroGoalAnalogy(),
     #for advanced.py
-    'RANDGAME' : getRandomGame()
+    'RANDGAME' : getRandomGame(),
 
+    #testing global
+    'GET_HAIKU': MacroGPTHAIKU(
+        'Write the user a haiku in the following format:',
+        {'HAIKU':'love between us is - speech and breath. loving you is - a long river running.'},
+        {'HAIKU':'NA'}
+    )
 }
 
 df = DialogueFlow('start', end_state='end')
@@ -174,6 +184,9 @@ df.load_transitions(advanced)
 
 #global transition
 df.load_global_nlu(globalState)
+
+#babel
+df.load_transitions(babel)
 
 #macros
 df.add_macros(macros)

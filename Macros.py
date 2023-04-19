@@ -586,6 +586,39 @@ def NegativeAgreement(vars: Dict[str, Any]):
     else:
         return False
 
+class MacroGPTHAIKU(Macro):
+    def __init__(self, request: str, full_ex: Dict[str, Any], empty_ex: Dict[str, Any] = None,
+                 set_variables: Callable[[Dict[str, Any], Dict[str, Any]], None] = None) -> object:
+        """
+        :rtype: object
+        :param request: the task to be requested regarding the user input (e.g., How does the speaker want to be called?).
+        :param full_ex: the example output where all values are filled (e.g., {"call_names": ["Mike", "Michael"]}).
+        :param empty_ex: the example output where all collections are empty (e.g., {"call_names": []}).
+        :param set_variables: it is a function that takes the STDM variable dictionary and the JSON output dictionary and sets necessary variables.
+        """
+        self.request = request
+        self.full_ex = json.dumps(full_ex)
+        self.empty_ex = '' if empty_ex is None else json.dumps(empty_ex)
+        self.check = re.compile(regexutils.generate(full_ex))
+        self.set_variables = set_variables
+
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        examples = f'{self.full_ex} or {self.empty_ex} if unavailable' if self.empty_ex else self.full_ex
+        prompt = f'{self.request} Respond in the JSON schema such as {examples}'
+        output = gpt_completion(prompt)
+        # print(output)
+        if not output: return False
+
+        try:
+            d = json.loads(output)
+        except JSONDecodeError:
+            return False
+
+        if self.set_variables:
+            self.set_variables(vars, d)
+        else:
+            vars.update(d)
+        return True
 
 # This macro use analogy to explain the game goal according to the favorite game user select
 class MacroGoalAnalogy(Macro):
@@ -621,6 +654,7 @@ class MacroGoalAnalogy(Macro):
             return GameTypeResponseDic['towerDefense']['GameGoalSim']
         else:
             return GameTypeResponseDic['other']['GameGoalSim']
+
 class MacroEsportAttitudeResponse(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         vn = 'EsportAttitude'
