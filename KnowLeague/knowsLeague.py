@@ -61,11 +61,11 @@ def knowsLeague():
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
                     'state':'firstSuggestion',
-                    '[{yes, did, watched, probably, yea}]':'advanced', #shows that user actively watches current esports games.
-                    '[{no, [did not], dont, didnt, nope}]':{ #next favorite region?
+                    '[{yes, yeah, did, watched, probably, yea, maybe}]':'advanced', #shows that user actively watches current esports games.
+                    '[{no, [did not], didnt, havent, [have not], nope, dont}]':{ #next favorite region?
                         '#RANDGAME `No Worries. How about the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
                             'state':'secondSuggestion',
-                            '[{yes, yeah, watch, watched, probably, yea}]':'advanced',
+                            '[{yes, yeah, watch, watched, probably, yea, maybe}]':'advanced',
                             '[{no, [did not], didnt, havent, [have not], nope, dont}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
                                 '`All good!`':'casual'
                             },
@@ -73,14 +73,17 @@ def knowsLeague():
                                 'Sorry, could you rephrase what you said?': 'secondSuggestion'
                             }
                         }
-                    }, #TODO user responds with "I didn't watch, but I know the outcome
+                    },
+                    '[{outcome, wins}]':{ #i didn\'t watch, but I know who wins
+                        '`That\'s awesome. Yeah, it was cool to see` $T_WINNER `win`#RANDGAME `Did you also happe to watch the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`': 'secondSuggestion'
+                    },
                     'error':{
                         'Sorry, could you rephrase what you said?':'firstSuggestion'
                     }
                 }
             },
             'error':{ #TODO: FIX TRANSITION
-                '`Sorry, I\'m not sure if I know that region. Is there another region you might watch?`':'favRegion2'
+                '`Sorry, I don\'t know any games from that region. Is there another region you might watch?`':'favRegion2'
             }
         }
     }
