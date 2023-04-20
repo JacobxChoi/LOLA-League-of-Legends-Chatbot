@@ -68,7 +68,7 @@ def load(df: DialogueFlow, varfile: str):
 transitions = {
     'state': 'start',
     ##Welcoming section
-    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you introduce yourself?`': {
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you tell me a bit about yourself?`': {
         '#GET_NAME_GPT #GET_NAME': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `. I like` $ROLE `too!`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
@@ -122,7 +122,7 @@ macros = {
     'NEGATIVE_AGREEMENT': MacroNLG(NegativeAgreement),
 
     'AgreementChecker': MacroGPTJSON(
-        'How does the speaker response to the yes or no question, give yes if user answers "yes", or affirmative answers for the question , and no if user anseers with "no" or doubting ',
+        'How does the speaker response to the yes or no question, give yes if user answers "yes", or shows interest , and no if user answers with "no" or is not interested ',
         {'Agreement': 'yes'},
         {'Agreement': 'no'}
     ),

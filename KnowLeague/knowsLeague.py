@@ -14,14 +14,37 @@ def knowsLeague():
                     }
                 }
             },
-            '[$FAV_PLAYER=#ONT(leagues), {good, well, okay}]': {
-                '`That\'s fair. I think`$FAV_PLAYER`is doing well too. Do you watch any tournaments?`':'favRegion'
+            '[$FAV_PLAYER=#ONT(leagues), {good, well, okay, great, amazing}]': {
+                '`I agree. I think`$FAV_PLAYER`is doing pretty well too. Do you watch any tournaments?`':'favRegion'
             },
             '[{like}, $FAV_PLAYER=#ONT(leagues)]': {
                 '`I love $FAV_PLAYER` too. Do you watch any tournaments?`': 'favRegion'
             },
             '[$FAV_PLAYER=#ONT(leagues)]':{
                 '`What do you think about`$FAV_PLAYER':{
+                    '[{good, well, plays, capable, knows, [not bad]}]':{
+                        '`I agree,` $FAV_PLAYER `is one of the most skilled players out there. How do you think they\'ll do in the future?':{
+                            'state':'playerFuture',
+                            '[{okay, well, good, decent}]':{
+                                '`I agree. I think they\'ll go pretty far.`': 'casual'
+                            },
+                            '[{retire, retiring}]':{
+                                '` They will be missed. :( Is there anything else about esports that interests you?`': 'favRegion'
+                            },
+                            '[{bad, poor, wont, dont}]':{
+                                '`Maybe not, but it\'s difficult to tell now. I hope they improve, or that they\'ll work something out. Is there anything else about esports that interests you?':'favRegion'
+                            },
+                            '[{[dont know], [not sure], unsure}]':{
+                                '`That\'s fair. Anything could happen in the future. I hope they\'re still enjoying the game. Is there anything else about esports that interests you?`':'favRegion'
+                            },
+                            'error':{
+                                '`I\'m sorry, could you rephrase what you just said?`':'playerFuture'
+                            }
+                        }
+                    },
+                    '[{bad, terrible, [not good], [not doing well], [not doing good], [not been doing well], [not been doing well lately], [not been doing too well], [not been doing good], [not been doing too good]}]':{
+
+                    },
                     'error':{
                         '`Nice. Do you follow any tournaments?`': 'favRegion'
                     }
@@ -33,7 +56,7 @@ def knowsLeague():
     }
     favoriteRegion = { #
         'state': 'favRegion',
-        '`How about a favorite region to watch?`':{
+        '`What about a favorite region to watch?`':{
             'state':'favRegion2',
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
