@@ -24,6 +24,10 @@ def globalState():
         '[babel]':{
             'score':2,
             '`Sure!`':'babelTransition'
+        },
+        '[bean]':{ #DEBUGGING - JUMP TO ANY STATE
+            'score':2,
+            '`okay.`':'casual'
         }
     }
     return global_transitions

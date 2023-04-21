@@ -68,7 +68,6 @@ class MacroGetOldName(Macro):
         vn = vars['FIRSTNAME']
         return vars[vn]
 
-
 class MacroGetNewName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         vn = vars['FIRSTNAME']

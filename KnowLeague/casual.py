@@ -106,11 +106,19 @@ def casual():
             '{[favorite, team]}':{ #USER: my favorite team is ___
                 '`What do you like about your favorite team?`':'favTeam'
             },
-            '{[think]}': {  # USER: I think _____ team is better, though
-                '`What do you like about this team?`': 'favTeam'
-            },
-            '{[favorite, player]}':{ #USER: my favorite player, though, is _____
-                '`What do you like about them?`':'favPlayer'
+            '[$FAV_PLAYER=#ONT(leagues), {better, more}]':{ #USER: my favorite player, though, is _____
+                '`What do you like about them?`': {
+                    '[{skilled, good, talented}]':{
+                        '`I agree. I think`$FAV_PLAYER`is really capable too. How does he compare with other players?`':{
+                            '[{better, capable, skilled}]':{
+                                '`That\'s fair. I still think Keira is the best though. His ability to carry the team is unparalleled.`':'end'
+                            },
+                            '[{worse, unskiled, [as good]}]':{
+                                '``'
+                            }
+                        }
+                    }
+                }
             },
             'error':'share'
         },
@@ -337,6 +345,7 @@ def casual():
             }
         }
     }
+
     return casual, edg
 
 #TODO connect these to convo.py

@@ -157,6 +157,14 @@ df = DialogueFlow('start', end_state='end')
 df.knowledge_base().load_json_file('resources/teams.json')
 df.knowledge_base().load_json_file('resources/gameType.json')
 
+#funny diversions
+funny_diversions = {
+    '[touch grass]': "`You think you\'re sooo funny. You are, though :). Anyways, you were saying?` (3.0)",
+    '[your {mom, mother}]': "`Yeah, I thought we had an earthquake, but she was just hungry. Anyways, you were saying?` (3.0)",
+    '[joke]': "pp"
+}
+df.load_update_rules(funny_diversions)
+
 #doesntKnowLeague transitions
 df.load_transitions(doesntKnowLeague)
 df.load_transitions(transitionDiverging)
