@@ -23,7 +23,7 @@ def knowsLeague():
             '[$FAV_PLAYER=#ONT(leagues)]':{
                 '`What do you think about`$FAV_PLAYER':{
                     '[{good, well, plays, capable, knows, [not bad]}]':{
-                        '`I agree,` $FAV_PLAYER `is one of the most skilled players out there. How do you think they\'ll do in the future?':{
+                        '`I agree,` $FAV_PLAYER `is one of the most skilled players out there. How do you think they\'ll do in the future?`':{
                             'state':'playerFuture',
                             '[{okay, well, good, decent}]':{
                                 '`I agree. I think they\'ll go pretty far.`': 'casual'
@@ -32,7 +32,7 @@ def knowsLeague():
                                 '` They will be missed. :( Is there anything else about esports that interests you?`': 'favRegion'
                             },
                             '[{bad, poor, wont, dont}]':{
-                                '`Maybe not, but it\'s difficult to tell now. I hope they improve, or that they\'ll work something out. Is there anything else about esports that interests you?':'favRegion'
+                                '`Maybe not, but it\'s difficult to tell now. I hope they improve, or that they\'ll work something out. Is there anything else about esports that interests you?`':'favRegion'
                             },
                             '[{[dont know], [not sure], unsure}]':{
                                 '`That\'s fair. Anything could happen in the future. I hope they\'re still enjoying the game. Is there anything else about esports that interests you?`':'favRegion'
