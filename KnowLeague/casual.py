@@ -6,10 +6,12 @@ def casual():
             'state':'share',
             '{[{like,love}, {edg, them, team, edward}]}': 'EDG', #USER: I like them too!
             '[{keria, him, he}]': 'keria',
-            '{[you, like]}':{ #USER: What do you like about them?
+            '{[{what, why}, you, like]}':{ #USER: What do you like about them?
                 '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What about you?`':{
+                    'state':'LolaLikesEDG',
                     '{[like,{too, also}], [also, like]}':{ #I like Edward Gaming too!
-                        '`Nice! Do you like them for their personality or gameplay?`': {
+                        'state':'reciprocateEDG',
+                        '`Do you like them for their personality or gameplay?`': {
                             '[{playstyle, play, style, skills, abilities, gameplay}]': {
                                 '`What do you like about it specifically?`': {
                                     '[{aggressive, fastpaced, fun, skilled, flashy, technical, informational, fast paced}]': {
@@ -94,23 +96,46 @@ def casual():
                         }
                     },
                     '[{agree}]': {
-                        '`Awesome! Happy to hear you think that way.`'
+                        '`Awesome! Happy to hear you think that way.`':'reciprocateEDG'
                     },
-                    '[{think}]':{ #I think they're good too, but I prefer ...
-                        '`That\'s fair.`':'end' #TODO CONTINUE CONVERSATION
+                    '[like, more]':{ #I like ____ more.
+                        '`That\'s fair.`':'favTeamQuestion'
                     },
-                    '[dont]':{ #I don't really watch EDG TODO: FINISH
-                        '`No worries. What are your thoughts on Keria? Do you like him?`':{
-                            '[yes, like, good, skilled]':'keria'
+                    '[prefer]':{ #I prefer _____
+                        '`That\'s fair.`': 'favTeamQuestion'
+                    },
+                    '[dont, disagree, dislike]':{ #I don't really watch EDG
+                        '`That\'s fair. What are your thoughts on Keria then. Do you like him?`':{
+                            'state':'thoughtsOnKeria',
+                            '[yes, like, good, skilled]':'keria',
+                            '[no, dislike, dont, not]':{
+                                '`Do you have a favorite team, then?`':{
+                                    'state':'otherFavTeam',
+                                    '[yes, yeah, [I do], yep, yea]':'favTeamQuestion',
+                                    '[no, nope, [do not], dont]':{
+                                        '`What other player do you think is currently good at the moment then?`':'otherPlayer',
+                                    },
+                                    'error':{
+                                        '`I\'m sorry, would you mind rewording that?`':'otherFavTeam'
+                                    }
+                                }
+                            },
+                            'error':{
+                                '`I\'m sorry, would you mind rewording that?`': 'thoughtsOnKeria'
+                            }
                         }
                     },
-                    'error':'end'
+                    'error':{
+                        '`I\'m sorry, I didn\' catch that. Could you reword that?`':'LolaLikesEDG'
+                    }
                 }
             },
             '{[favorite, team]}':{ #USER: my favorite team is ___
+                'state':'favTeamQuestion',
                 '`What do you like about your favorite team?`':'favTeam'
             },
             '[$FAV_PLAYER=#ONT(leagues), {better, more}]':{ #USER: my favorite player, though, is _____
+                'state':'otherPlayer',
                 '`What do you like about them?`': {
                     '[{skilled, good, talented}]':{
                         '`I agree. I think`$FAV_PLAYER`is really capable too. How does he compare with other players?`':{
