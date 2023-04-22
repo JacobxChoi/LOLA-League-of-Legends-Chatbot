@@ -2,7 +2,7 @@ def IntroduceLeague():
     IntroduceLeague = {
         'state': 'IntroduceLeague',
         'score': '0.5',
-        '`I can give you a brief introduction of the '
+        '`I\'m sorry, I\'m not very sure about what you want, but I can give you a brief introduction of the '
         'game goal, champion selection, and some advice for improving in-game skills.`': {
 
             '[{no, not, dont, nothing}]': {
@@ -315,10 +315,26 @@ def IntroduceLeague():
                     }
                 }
             },
-            '[{goal, win}]': 'DestroyNexus',
-            '[{champ, champion}]': 'champInfo',
+            '[{game, learn}]': 'IntroduceGame',
+            '[{esports, scene}]': 'IntroduceEsports',
+            '[{champions, champs, types, champion}]': 'IntroduceChampions',
+            '[{objectives, goal, win}]': 'IntroduceObjectives',
+            '[{roles, positions, lanes}]': 'IntroduceRoles',
+            '[{map, layout}]': 'IntroduceMap',
+            '[{specific, champions}]': 'SpecificChampions',
+            '[{roles, team}]': 'ChampionRoles',
+            '[{types, categories}]': 'ChampionTypes',
+            '[{popular, favorite}]': 'PopularChampions',
+            '[{turrets}]': 'TurretsInfo',
+            '[{explain, what}{dragons}]': 'DragonsInfo',
+            '[{explain, what}{Baron, Nashor}]': 'BaronInfo',
+            '[{try}]': 'ReadyToTry',
+            '[{qualify, events}]': 'QualifyCompetitions',
+            '[{living}]': 'EsportsLiving',
+            '[destroy,{nexus, base, turrets}]': 'DestroyNexus',
+            '[{minion, minions}]': 'Minions',
+            '[{watching, streaming}]': 'StreamingPlatforms',
             '[{role, lane}]': 'laneInfo',
-            '[{map}]': 'mapInfo',
             '[{item}]': 'items',
             # TODO: HANDLE CASE WHERE USER SAYS NO
             'error': {

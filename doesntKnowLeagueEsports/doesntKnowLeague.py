@@ -61,7 +61,7 @@ def doesntKnowLeague():
                             'error': {
                                 '`Great! I heard that` #GET_REASON_FAV_GAME` That is definitely amazing! Is there some tips you can give to the new beginner`': {
                                     'error': {
-                                        '`Thank you so much, I\'ll definitely follow that! Besides, have you heard about the league of legend, how do you think of it`': {
+                                        '`Thank you so much, I\'ll definitely follow that! Besides, what do you think of league of legends`': {
                                             'error': 'transit'
                                         }
                                     }
@@ -85,7 +85,7 @@ def doesntKnowLeague():
                             },
                         }
                     },
-                    '[{fun,challenging, exciting}]': {
+                    '[{fun, challenging, exciting, interesting}]': {
                         '`For sure! After all, the adrenaline rush after watching an exciting matches is true. Do you enjoy the watching other sports events as well?`': {
                             '[#SportEvents]': {
                                 # TODO to add different attitude toward different games
@@ -155,7 +155,7 @@ def doesntKnowLeague():
                                 'score': '0.5',
                                 '#IF(#POSITIVE_AGREEMENT) `For sure,`': 'IntroduceGame',
                                 '#IF(#NEGATIVE_AGREEMENT)': {
-                                    '`How about the esport scene, I can give you a brief introduction to how league esports work and where to find the exiciting scens!`': 'LeagueInfoTransit',
+                                    '`How about the esport scene, I can give you a brief introduction to how league esports work and where to find the exiciting scens!`': 'IntroduceLeague',
                                 },
                                 'error': {
                                     '`Forgive me for my inability to understand you, but do you know the goal of a game of League of Legends?`': 'Directed_Questions'
@@ -178,62 +178,109 @@ def doesntKnowLeague():
 
     }
 
-    LeagueInfoTransit = {
-        'state': 'LeagueInfoTransit',
-
-        '[{game, learn}]': 'IntroduceGame',
-        '[{esports, scene}]': 'IntroduceEsports',
-        '[{champions, types}]': 'IntroduceChampions',
-        '[{objectives, in-game}]': 'IntroduceObjectives',
-        '[{roles, positions, lanes}]': 'IntroduceRoles',
-        '[{map, layout}]': 'IntroduceMap',
-        '[{specific, champions}]': 'SpecificChampions',
-        '[{roles, team}]': 'ChampionRoles',
-        '[{types, categories}]': 'ChampionTypes',
-        '[{popular, favorite}]': 'PopularChampions',
-        '[{turrets}]': 'TurretsInfo',
-        '[{explain, what}{dragons}]': 'DragonsInfo',
-        '[{explain, what}{Baron, Nashor}]': 'BaronInfo',
-        '[{try}]': 'ReadyToTry',
-        '[{qualify, events}]': 'QualifyCompetitions',
-        '[{living}]': 'EsportsLiving',
-        '[destroy,{nexus, base, turrets}]': 'DestroyNexus',
-        '[{minion, minions}]': 'Minions',
-        '[{watching, streaming}]': 'StreamingPlatforms',
-
-    }
-
     IntroduceGame = {
         'state': 'IntroduceGame',
         '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. What would you like to know more about: the different types of champions, in-game objectives, or the roles in the game?`': {
             '[{champions, types}]': 'IntroduceChampions',
-            '[{objectives, in-game}]': 'IntroduceObjectives',
+            '[{objectives}]': 'IntroduceObjectives',
             '[{roles, positions}]': 'IntroduceRoles',
             '[{lane, lanes}]': 'laneInfo',
             '[{items, item}]': 'items',
             '[{map, layout}]': 'IntroduceMap',
             '[{no, nothing, fine}]': 'EndIntroduceGame',
             '[{complicated}]': {
-                '`It can be at first, but once you get the hang of it, it\'s really fun. You choose a champion to play as, and each one has unique abilities and playstyles.`': 'LeagueInfoTransit'
+                '`It can be at first, but once you get the hang of it, it\'s really fun. You choose a champion to play as, and each one has unique abilities and playstyles.`': 'IntroduceLeague',
             },
             '[{require,need},{coordination}]': {
-                '`Absolutely, but that\'s what makes it so much fun! You get to work with your friends to take down the enemy team and claim victory.`': 'LeagueInfoTransit'
+                '`Absolutely, but that\'s what makes it so much fun! You get to work with your friends to take down the enemy team and claim victory.`': 'IntroduceLeague',
             },
             'error': {
                 'state': 'IntroduceGameRepeat',
                 '`I\'m sorry, I didn\'t quite understand your question. Would you like to know more about the different types of champions, in-game objectives, roles in the game, or the map layout?`': {
                     '[{champions, types}]': 'IntroduceChampions',
-                    '[{objectives, in-game}]': 'IntroduceObjectives',
-                    '[{roles, positions, lanes}]': 'IntroduceRoles',
+                    '[{objective, ingame, goal, win}]': 'IntroduceObjectives',
+                    '[{roles, positions, lanes}]': 'ChampionRoles',
                     '[{map, layout}]': 'IntroduceMap',
                     '[{no, nothing, fine}]': {
                         'state': 'EndIntroduceGame',
-                        '`Feel free to ask me, if you have another questions!ヽ( ° ▽°)ノ`': 'LeagueInfoTransit'
+                        '`Feel free to ask me, if you have another questions!ヽ( ° ▽°)ノ`': 'IntroduceLeague',
                     },
 
-                    'error': 'IntroduceChampions'
+                    'error': 'IntroduceLeague',
                 }
             }
+        }
+    }
+
+    ChampionRoles = {
+        'state': 'ChampionRoles',
+        '`In a team, champions play specific roles based on their strengths and abilities. The roles are Top, Jungle, Mid, ADC, and Support. Each role contributes to the overall success of the team. Which role sounds interesting to you?`': {
+            'state': 'InnerChampionRole',
+            '[{top}]': {
+                'state': 'TopInfo',
+                '`Top lane is usually home to tanky fighters or bruisers. They tend to have high survivability and often engage in duels with their lane opponents. It\'s an exciting role if you enjoy 1v1 combat. What other roles intrigue you?`': {
+                    '[{jungle, mid, adc, support}]': 'InnerChampionRole',
+                    'error': 'InnerChampionRole'
+                }
+            },
+
+            '[{jungle}]': {
+                'state': 'JungleInfo',
+                '`Junglers roam the map, farming neutral monsters and helping teammates by ganking lanes. They play a pivotal role in securing objectives and controlling the map. It\'s a great role if you enjoy being a playmaker. Are you curious about other roles?`': {
+                    '[{top, mid, adc, support}]': 'InnerChampionRole',
+                    'error': 'InnerChampionRole'
+                }
+            },
+
+            '[{mid}]': {
+                'state': 'MidInfo',
+                '`Mid laners are often mages or assassins with strong burst damage and crowd control. They have a big impact on the game, and their ability to roam and help other lanes is crucial. If you like dealing lots of damage and making plays, this role is for you. Interested in other roles?`': {
+                    '[{top, jungle, adc, support}]': 'InnerChampionRole',
+                    'error': 'InnerChampionRole'
+                }
+            },
+
+            '[{adc}]': {
+                'state': 'ADCInfo',
+                '`ADCs, or Attack Damage Carries, are ranged champions that deal consistent physical damage. Their main goal is to dish out damage while staying safe in team fights. If you enjoy positioning and kiting, this role is perfect for you. Want to learn about other roles?`': {
+                    '[{top, jungle, mid, support}]': 'InnerChampionRole',
+                    'error': 'InnerChampionRole'
+                }
+            },
+
+            '[{support}]': {
+                'state': 'SupportInfo',
+                '`Supports protect their team and provide utility through healing, crowd control, and vision control. They are the backbone of the team and help set up plays. If you like helping your teammates and controlling the game, this role is for you. Curious about other roles?`': {
+                    '[{top, jungle, mid, adc}]': 'InnerChampionRole',
+                    'error': 'InnerChampionRole'
+                }
+            },
+
+            '[{esport, esports}]': 'IntroduceEsports',
+
+            'error': {
+                '`I\'m sorry, I didn\'t catch that. If you want to know more about the different champions roles, just let me know!`': 'InnerChampionRole'
+            }
+        }
+    }
+
+    IntroduceObjectives = {
+        'state': 'IntroduceObjectives',
+        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base.Ultimately, the goal is to destroy the enemy Nexus.Would you like to know more about the esports scene or are you ready to try the game?`': {
+            'state': 'InnerObjectives',
+            '[{turrets}]': 'turrets',
+            '[{dragons}]': {
+                'state': 'dragons',
+                '`Dragons are powerful neutral monsters that grant buffs to the team that slays them. There are four elemental dragons: Infernal, Cloud, Mountain, and Ocean, each providing different bonuses. There\'s also the Elder Dragon, which enhances the elemental buffs and deals true damage. Want to learn about other objectives?`': 'InnerObjectives'
+            },
+            '[{Baron, Nashor}]': {
+                'state': 'NashorBaron',
+                '`Baron Nashor is a powerful neutral monster that grants a significant buff called Hand of Baron to the team that defeats it. This buff empowers minions, making them stronger and harder to kill. Taking Baron can turn the tide of a game. Are you curious about other objectives?`': 'InnerObjectives'
+            },
+            '[{esports, scene}]': 'IntroduceEsports',
+            '[{try, game}]': 'ReadyToTry',
+            'error': 'IntroduceLeague',
+
         }
     }
 
@@ -406,77 +453,6 @@ def doesntKnowLeague():
         }
     }
 
-    ChampionRoles = {
-        'state': 'ChampionRoles',
-        'In a team, champions play specific roles based on their strengths and abilities. The roles are Top, Jungle, Mid, ADC, and Support. Each role contributes to the overall success of the team. Which role sounds interesting to you?': {
-            'state': 'InnerChampionRole',
-            '[{top}]': {
-                'state': 'TopInfo',
-                'Top lane is usually home to tanky fighters or bruisers. They tend to have high survivability and often engage in duels with their lane opponents. It\'s an exciting role if you enjoy 1v1 combat. What other roles intrigue you?': {
-                    '[{jungle, mid, adc, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{jungle}]': {
-                'state': 'JungleInfo',
-                '`Junglers roam the map, farming neutral monsters and helping teammates by ganking lanes. They play a pivotal role in securing objectives and controlling the map. It\'s a great role if you enjoy being a playmaker. Are you curious about other roles?`': {
-                    '[{top, mid, adc, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{mid}]': {
-                'state': 'MidInfo',
-                '`Mid laners are often mages or assassins with strong burst damage and crowd control. They have a big impact on the game, and their ability to roam and help other lanes is crucial. If you like dealing lots of damage and making plays, this role is for you. Interested in other roles?`': {
-                    '[{top, jungle, adc, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{adc}]': {
-                'state': 'ADCInfo',
-                '`ADCs, or Attack Damage Carries, are ranged champions that deal consistent physical damage. Their main goal is to dish out damage while staying safe in team fights. If you enjoy positioning and kiting, this role is perfect for you. Want to learn about other roles?`': {
-                    '[{top, jungle, mid, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{support}]': {
-                'state': 'SupportInfo',
-                '`Supports protect their team and provide utility through healing, crowd control, and vision control. They are the backbone of the team and help set up plays. If you like helping your teammates and controlling the game, this role is for you. Curious about other roles?`': {
-                    '[{top, jungle, mid, adc}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{esport, esports}]': 'IntroduceEsports',
-
-            'error': {
-                '`I\'m sorry, I didn\'t catch that. If you want to know more about the different champions roles, just let me know!`': 'InnerChampionRole'
-            }
-        }
-    }
-
-    IntroduceObjectives = {
-        'state': 'IntroduceObjectives',
-        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base.Ultimately, the goal is to destroy the enemy Nexus.Would you like to know more about the esports scene or are you ready to try the game?`': {
-            'state': 'InnerObjectives',
-            '[{turrets}]': 'turrets',
-            '[{dragons}]': {
-                'state': 'dragons',
-                '`Dragons are powerful neutral monsters that grant buffs to the team that slays them. There are four elemental dragons: Infernal, Cloud, Mountain, and Ocean, each providing different bonuses. There\'s also the Elder Dragon, which enhances the elemental buffs and deals true damage. Want to learn about other objectives?`': 'InnerObjectives'
-            },
-            '[{Baron, Nashor}]': {
-                'state': 'NashorBaron',
-                '`Baron Nashor is a powerful neutral monster that grants a significant buff called Hand of Baron to the team that defeats it. This buff empowers minions, making them stronger and harder to kill. Taking Baron can turn the tide of a game. Are you curious about other objectives?`': 'InnerObjectives'
-            },
-            '[{esports, scene}]': 'IntroduceEsports',
-            '[{try, game}]': 'ReadyToTry',
-            'error': 'IntroduceEsports'
-
-        }
-    }
 
     IntroduceEsports = {
         'state': 'IntroduceEsports',
@@ -521,7 +497,7 @@ def doesntKnowLeague():
                                     },
                                     '[{playing, game}]': 'StartPlaying',
                                     '[{lot, large, huge}]': {
-                                        '`Yeah, it\'s worth it. The pro players make a good living from salaries, sponsorships, and prize money, and some of the top players are even considered celebrities in their home countries.`': 'LeagueInfoTransit'
+                                        '`Yeah, it\'s worth it. The pro players make a good living from salaries, sponsorships, and prize money, and some of the top players are even considered celebrities in their home countries.`': 'IntroduceLeague',
                                     },
                                     'error': {
                                         '`I\'m sorry, I didn\'t catch that. If you want to know more about watching e-sports on streaming platforms or how to get into playing the game, just let me know!`': 'InnerEsportLiving'
@@ -543,7 +519,7 @@ def doesntKnowLeague():
                 'state': 'EndEsports',
                 '`That\'s totally fine! If you ever want to learn more about the esports scene or anything else related to League of Legends, feel free to ask.Have a great time playing the game!`': 'end'
             },
-            'error': 'SpecificTeams'
+            'error': 'IntroduceLeague',
         }
     }
 
@@ -580,7 +556,7 @@ def doesntKnowLeague():
         '`I\'d recommend starting with the regional leagues, like the LEC, LCS, or LCK. This will give you a good introduction to the teams and players, as well as the overall competitive landscape. From there, you can move on to international events like MSI and Worlds. If you\'re interested in playing the game, it\'s free and there are plenty of resources available to help you learn!`': {
             'state': 'InnerStartWatching',
             '[you, {watch, enjoy}]': {
-                '`Absolutely! It\'s a big part of the experience. Fans can watch live matches, replays, and highlights, as well as follow their favorite players and teams. Some pro players even stream their own gameplay and interact with fans during their downtime.`': 'LeagueInfoTransit'
+                '`Absolutely! It\'s a big part of the experience. Fans can watch live matches, replays, and highlights, as well as follow their favorite players and teams. Some pro players even stream their own gameplay and interact with fans during their downtime.`': 'IntroduceLeague',
             },
             '[{playing, game}]': 'StartPlaying',
             'error': {
@@ -672,4 +648,4 @@ def doesntKnowLeague():
         'opponents nexus, they win the game.`': 'end'
     }
 
-    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching, LeagueInfoTransit
+    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching
