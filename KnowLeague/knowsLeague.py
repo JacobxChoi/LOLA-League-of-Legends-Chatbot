@@ -4,8 +4,9 @@ def knowsLeague():
         'state': 'favPlayer',
         '`Do you have a favorite professional player, and what do you think about them?`': {
             'state': 'playerCondition',
-            '[keria]':{
-                '`I agree! I love keria too!`': 'keria'
+            '[{keria}]': 'keria',
+            '[{no, not, dont, cant, none, nothing}]': {
+                '`No worries.`': 'casual'
             },
             '[$FAV_PLAYER=#ONT(leagues), {bad, terrible, [not good], [not doing well], [not doing good], [not been doing well], [not been doing well lately], [not been doing too well], [not been doing good], [not been doing too good]}]':{
                 '`Why do you think` $FAV_PLAYER `has been doing poorly?`': {
@@ -21,7 +22,8 @@ def knowsLeague():
                 '`I love $FAV_PLAYER` too. Do you watch any tournaments?`': 'favRegion'
             },
             '[$FAV_PLAYER=#ONT(leagues)]':{
-                '`What do you think about`$FAV_PLAYER':{
+                'score': 0.9,
+                '`What do you like about`$FAV_PLAYER':{
                     '[{good, well, plays, capable, knows, [not bad]}]':{
                         '`I agree,` $FAV_PLAYER `is one of the most skilled players out there. How do you think they\'ll do in the future?`':{
                             'state':'playerFuture',
@@ -81,6 +83,9 @@ def knowsLeague():
                         'Sorry, could you rephrase what you said?':'firstSuggestion'
                     }
                 }
+            },
+            '[{no, not, dont, doesnt, nah}]': {
+                '`That\'s all good.`': 'casual'
             },
             'error':{ #TODO: FIX TRANSITION
                 '`Sorry, I don\'t know any games from that region. Is there another region you might watch?`':'favRegion2'

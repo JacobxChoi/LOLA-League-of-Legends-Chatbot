@@ -1,12 +1,11 @@
 def casual():
     casual = {
         'state': 'casual', #at this point, they don't have a favorite professional player. They have a favorite region, but are not watching any games currently
-        '#GATE`I\'ll share some of my personal favorites. Keria is my favorite player, but my favorite team is Edward Gaming. They\'re very fun to watch`': { #user will ask questions
+        '#GATE`I\'ll share some of my personal favorites. Keria is my favorite player, but my favorite team is Edward Gaming. They\'re very fun to watch.`': { #user will ask questions
             'score': 0.6,
             'state':'share',
-            '{[like, {edg, them, team, edward}]}': 'EDG', #USER: I like them too!
-            '{[like, {keria, him}]}': {  # USER: I like them too!
-            },
+            '{[{like,love}, {edg, them, team, edward}]}': 'EDG', #USER: I like them too!
+            '[{keria, him, he}]': 'keria',
             '{[you, like]}':{ #USER: What do you like about them?
                 '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What about you?`':{
                     '{[like,{too, also}], [also, like]}':{ #I like Edward Gaming too!
@@ -346,7 +345,107 @@ def casual():
         }
     }
 
-    return casual, edg
+
+    keria = {
+        'state': 'keria',
+        '`Awesome! Tell me what you like about him.`': {
+            'state': 'keria2',
+            '[{playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion}]': {
+                '`Can you explain further?`': {
+                    '[{no, not, dont, wont, cant}]': {
+                        '`Well, I think that he\'s the best support in the world, and maybe even the best player in the world. Do you think he\'s stronger mechanically or with macro?`': {
+                            '[{[{stronger, better}, {mechanically, mechanics}]}, {[{weaker, worse}, {macro, macroplay, strategy}]}]': {
+                                '`I also think his strongest attribute is his mechanical skill. His macro and awareness is also world-class.`': {
+                                    '{[{what, how}, {good, strong}]}': {
+                                        '`He always engages on winning fights. Each action he takes is precise and sets his team up for victory.`'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    'error': {
+                        '`For sure! I really believe that he\'s the best support, and maybe even the best player in the world. Do you think he\'s stronger mechanically or with macro?`': {
+                            '[{[{stronger, better}, {mechanically, mechanics}]}, {[{weaker, worse}, {macro, macroplay, strategy}]}]': {
+                                '`I also think his strongest attribute is his mechanical skill. His macro and awareness is also world-class.`': {
+                                    '{[{what, how}, {good, strong}]}': {
+                                        '`He always engages on winning fights. Each action he takes is precise and sets his team up for victory.`'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            '[{team, t1, skt}]': {
+                '`Can you explain further?`': {
+                    '[{no, not, dont, wont, cant}]': {
+                        '`Well, I think that T1 is a really strong team. They always seem to win their games. What do you think makes them so strong?`': {
+                            '[{faker, oner, zeus, gumayusi}]': {
+                                '`They are definitely a key part to their success, but Keria seems like he\'s always the carry.`': {
+                                    '[{why, what, how}, {him, he}]': {
+                                        '`He\'s always around the map and makes it seem like it is a 10 v 5. If you need him he\'s there.`': {
+                                            '[{no, not, false, wrong}]': {
+                                                '`I guess that makes sense, but you should check his games out. He gets so many MVPs for a reason.`': 'end'
+                                            },
+                                            '[{yes, yeah, true, correct}]': {
+                                                '`I\m glad you think the same way! I wish I could play with him. We would win every game!`': 'end'
+                                            }
+                                        }
+                                    },
+                                    '[{no, not, false, wrong}]': {
+                                        '`Sorry, but I think Keria is the main reason why they\'re able to win so many matches.`': 'end'
+                                    },
+                                    '[{yes, yeah, true, correct}]': {
+                                        '`I\m glad you think the same way!`': 'end'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    'error': {
+                        '`T1 is definitely a fan-favorite team. They always seem to win their games. What makes them so strong?`': {
+                            '[{faker, oner, zeus, gumayusi}]': {
+                                '`They are definitely a key part to their success, but Keria seems like he\'s always the carry.`': {
+                                    '[{why, what, how}, {him, he}]': {
+                                        '`He\'s always around the map and makes it seem like it is a 10 v 5. If you need him he\'s there.`': {
+                                            '[{no, not, false, wrong}]': {
+                                                '`I guess that makes sense, but you should check his games out. He gets so many MVPs for a reason.`': 'end'
+                                            },
+                                            '[{yes, yeah, true, correct}]': {
+                                                '`I\m glad you think the same way! I wish I could play with him. We would win every game!`': 'end'
+                                            }
+                                        }
+                                    },
+                                    '[{no, not, false, wrong}]': {
+                                        '`Sorry, but I think Keria is the main reason why they\'re able to win so many matches.`': 'end'
+                                    },
+                                    '[{yes, yeah, true, correct}]': {
+                                        '`I\m glad you think the same way!`': 'end'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            },
+            '[{drx, dragon x, dragonx, previous team}]': {
+                '`Although I don\'t know much about him on DRX, I know that he won Rookie of the Year in the LCK that '
+                'year. Even from the start he was a really good player.`': 'end'
+            },
+            '[{fun, entertaining, fast, fastpaced, action, engaging}]': {
+                '`Do you have any moments in particular?`': {
+                    'error': {
+                        '`I gotcha. To me, everytime he plays Thresh, it\'s a masterclass. You should check out any game that he plays that champ.`': 'end'
+                    }
+                }
+            },
+            'error': {
+                '`I don\'t think I caught that. What do you like about him again?`': 'keria2'
+            }
+        }
+    }
+    return casual, edg, keria
 
 #TODO connect these to convo.py
 
