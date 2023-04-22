@@ -192,6 +192,7 @@ df.load_transitions(favoriteTeam)
 df.load_transitions(favoriteRegion)
 df.load_transitions(casual)
 df.load_transitions(edg)
+df.load_transitions(keria)
 df.load_transitions(advanced)
 
 #global transition
