@@ -23,6 +23,12 @@ def babel():
             '[{Abdullah, Yusef, Ahmed}]': {
                 '`Yeah, that scene was interesting to me, because even though the task of killing the jackals was clearly communicated to Yusef and Ahmed, what wasn\'t clearly communicated was the responsibility that had in holding a gun.`': 'babel'
             },
+            '[Santiago, spanish]':{
+                '`I also find it was interesting that Santiago is often switching between English and Spanish. Any other scenes that stand out?`':'babel'
+            },
+            '[border]':{
+                '`You\'re right. I think it\'s also normal that border control speaks in English, but are able to pick up a few phrases in Spanish and use that in their job. I don\'t speak Spanish, but I wonder what it feels like for those that do speak Spanish. Anything else that sicks out to you?`':'babel'
+            },
             'error': {
                 '`Sorry, I don\'t actually remember that scene. Is there another scene that sticks out to you?`':'babel'
             }

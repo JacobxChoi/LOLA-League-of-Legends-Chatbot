@@ -31,7 +31,7 @@ import pickle
 import os
 
 #knowsLeague
-casual, edg = casual()
+casual, edg, keria = casual()
 advanced = advanced()
 favoriteTeam, favoriteRegion = knowsLeague()
 
