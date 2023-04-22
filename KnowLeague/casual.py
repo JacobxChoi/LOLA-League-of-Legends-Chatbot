@@ -22,7 +22,7 @@ def casual():
                                                             '{why, how, what}': {
                                                                 '`By the time one jungler was level six, the enemy top laner was only level two. '
                                                                 'I won\'t spoil the rest of the game so you should give it a watch. Is there anything '
-                                                                'else you wanted to talk about?`': {
+                                                                'else you wanted to talk about?`': { #TODO: EXAPND CONVO
                                                                     '[{nope}]':'end'
                                                                 },
                                                                 'error':'end'
@@ -44,11 +44,11 @@ def casual():
                                                                 }
                                                             },
                                                             'error': {
-                                                                '`Okay I gotcha.`': 'end'
+                                                                '`Okay I gotcha.`': 'end' #TODO: EXPAND CONVO
                                                             }
                                                         }
                                                     },
-                                                    '{no, not, nah, pass, [im, {good, fine}]}': {
+                                                    '{no, not, nah, pass, [im, {good, fine}]}': { #TODO: EXPAND CONVO
                                                         '`Alrighty! I\'ll see you later!`': 'end'
                                                     }
                                                 },
@@ -59,12 +59,12 @@ def casual():
                                                                 '`What team do you wanna talk about then?`': 'describeTeam' #TODO
                                                             },
                                                             '{[{recent, recently, past}, {match, game}]}': {
-                                                                '`Which match?`': 'describeMatch' #TODO
+                                                                '`Which match?`': 'describeMatch' #TODO EXPAND CONVO
                                                             },
                                                             '{information, info, game, match, league, lol}': {
                                                                 '`What part of league do you want to talk about?`': 'describeLeague' #TODO
                                                             },
-                                                            '{no, not, nah, pass, [im, {good, fine}]}': {
+                                                            '{no, not, nah, pass, [im, {good, fine}]}': { #TODO: REROUTE CONVO
                                                                 '`I\'ll see you later then! Bye!`': 'end'
                                                             },
                                                             '{yes, ok, yeah, sure, fun, alright, cool, [sounds, {fun, good}]}': {
@@ -97,7 +97,12 @@ def casual():
                         '`Awesome! Happy to hear you think that way.`'
                     },
                     '[{think}]':{ #I think they're good too, but I prefer ...
-                        '`That\'s fair.`':'end' #TODO
+                        '`That\'s fair.`':'end' #TODO CONTINUE CONVERSATION
+                    },
+                    '[dont]':{ #I don't really watch EDG TODO: FINISH
+                        '`No worries. What are your thoughts on Keria? Do you like him?`':{
+                            '[yes, like, good, skilled]':'keria'
+                        }
                     },
                     'error':'end'
                 }
@@ -112,32 +117,45 @@ def casual():
                             '[{better, capable, skilled}]':{
                                 '`That\'s fair. I still think Keira is the best though. His ability to carry the team is unparalleled.`':'end'
                             },
-                            '[{worse, unskiled, [as good]}]':{
+                            '[{worse, unskiled, [as good]}]':{ #TODO: FINISH
                                 '``'
                             }
                         }
                     }
                 }
             },
-            'error':'share'
+            '[dont]':{ #I don't really watch keria or EDG
+                '`No worries. What other teams do you prefer watching?`':{ #TODO: FINISH
+
+                }
+            },
+            'error': {
+                '`I didn\'t quite get what you said. Could you reword that?`':'share'
+            }
         },
         # USER didn't watch Lola suggested games, but perhaps they still watched a game from this year
         '#GATE`Are there any games or tournaments that you watched this year?`':{
             'score': 0.5,
             '[{yes, yeah, watched, watch}]':{ #USER: yeah! this year, I watched a game between team1 and team2
                 '`That\'s cool! Who was the highlight of the game?`' :{
+                    'state':'highlight',
                     '[$HIGHLIGHT_PLAYER = #ONT(teams)]':{
                         '`I agree!` $HIGHLIGHT_PLAYER `has been doing well lately. Do you think they\'ll continue to do well?`':{
+                            'state':'playerWellness',
                             '[{yes, well}]':{
                                 '`I agree! Their stats are above average this season, and I think they will help their team go far!`':'casual' #TODO: CONTRADICTION, BECAUSE NO API
                             },
                             '[{no, wont, disagree, [definitely, not], [absolutely, not]}]':{
                                 '`I see. Their stats are below average this season, so maybe they won\'t do too well.`':'casual' #LOOPS BACK TO BEGINNING OF CONVO
                             },
-                            'error':'end' #TODO: HANDLE ERROR
+                            'error':{
+                                '`I\'m, sorry, I didn\'t quite get that. Could you reword what you just said?`':'playerWellness'
+                            }
                         }
                     },
-                    'error': 'end'
+                    'error': {
+                        '`Sorry, I don\'t think I know that player. Do you have someone else in mind?`':'highlight'
+                    }
                 },
                 '`Nice! Who won the game? Was it close?`':{
                     '[{yes, yeah, close}]':{ #USER: yeah, ___ won, and it was a really close game!
@@ -345,12 +363,12 @@ def casual():
         }
     }
 
-
     keria = {
         'state': 'keria',
         '`Awesome! Tell me what you like about him.`': {
             'state': 'keria2',
-            '[{playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion}]': {
+            '[{playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion, good, talented, gifted, skilled}]': {
+                'state':'keriaGameplay',
                 '`Can you explain further?`': {
                     '[{no, not, dont, wont, cant}]': {
                         '`Well, I think that he\'s the best support in the world, and maybe even the best player in the world. Do you think he\'s stronger mechanically or with macro?`': {
