@@ -60,7 +60,12 @@ def knowsLeague():
         'state': 'favRegion',
         '`What about a favorite region to watch?`':{
             'state':'favRegion2',
+            '[yes, yeah]':{
+              '`What region do you watch?`':'favRegion2'
+            },
+            '[no, not, dont]':'noFavRegion',
             '#FAV_REGION':{ #TODO handle case where user doesn't have favorite region
+                'state':'favRegion2Test',
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
                     'state':'firstSuggestion',
                     '[{yes, yeah, did, watched, probably, yea, maybe}]':'advanced', #shows that user actively watches current esports games.
@@ -69,6 +74,7 @@ def knowsLeague():
                             'state':'secondSuggestion',
                             '[{yes, yeah, watch, watched, probably, yea, maybe}]':'advanced',
                             '[{no, [did not], didnt, havent, [have not], nope, dont}]':{ #perhaps they're not watching current games. This will prompt them into the casual branch
+                                'state':'noFavRegion',
                                 '`All good!`':'casual'
                             },
                             'error':{
@@ -88,7 +94,7 @@ def knowsLeague():
                 '`That\'s all good.`': 'casual'
             },
             'error':{ #TODO: FIX TRANSITION
-                '`Sorry, I don\'t know any games from that region. Is there another region you might watch?`':'favRegion2'
+                '`Sorry, I don\'t remember any games from that region this year. Is there another region you might watch?`':'favRegion2'
             }
         }
     }

@@ -166,16 +166,17 @@ class favRegion(Macro):
         team2 = 'T_TEAM2'
         winner = 'T_WINNER'
         loser = 'T_LOSER'
-        t_month = 'T_MONTH'
-        t_day = 'T_DAY'
+        t_date = 'T_DATE'
+        # t_month = 'T_MONTH'
+        # t_day = 'T_DAY'
 
         vars[t_tourney] = ''
         vars[t_typeOfMatch] = ''
         vars[team1] = ''
         vars[team2] = ''
         vars[winner] = ''
-        vars[t_day] = ''
-        vars[t_month] = ''
+        # vars[t_day] = ''
+        # vars[t_month] = ''
 
         # region local variable
         region = ''
@@ -218,7 +219,6 @@ class favRegion(Macro):
             vars[t_tourney] = tourney.replace('_', ' ')
         #TODO: case where region doesn't have any games from this year. Might have to adjust convo like: "I don't think that region played any games this year"
         else:
-            print("REGION HAS NO GAMES")
             return False
 
         # pulling game info from ontology. Last index -1 means most recent game. LOLA should remember which game was suggested
@@ -243,6 +243,8 @@ class favRegion(Macro):
         date = game['time'][0:10]
         month = date[5:7]
         day = date[-2:]
+        year = date[0:4]
+        vars[t_date] = month + '/' + day + '/' + year
 
         #gets winners and loser
         if vars[winner] == game['teams'][1]:
@@ -257,23 +259,26 @@ class favRegion(Macro):
         else:
             vars[t_typeOfMatch] = typeOfMatch.lower()
 
-        # change numerical month to month name
-        if month == '01':
-            vars[t_month] = 'January'
-        elif month == '02':
-            vars[t_month] = 'February'
-        elif month == '03':
-            vars[t_month] = 'March'
-        elif month == '04':
-            vars[t_month] = 'April'
+        print(vars)
 
-        # rd, st, th for days
-        if day[-1:] == '2' or day[-1:] == '3':
-            vars[t_day] = day + "rd"
-        elif day[-1:] == 1:
-            vars[t_day] = day + "st"
-        else:
-            vars[t_day] = day + "th"
+
+        # change numerical month to month name
+        # if month == '01':
+        #     vars[t_month] = 'January'
+        # elif month == '02':
+        #     vars[t_month] = 'February'
+        # elif month == '03':
+        #     vars[t_month] = 'March'
+        # elif month == '04':
+        #     vars[t_month] = 'April'
+        #
+        # # rd, st, th for days
+        # if day[-1:] == '2' or day[-1:] == '3':
+        #     vars[t_day] = day + "rd"
+        # elif day[-1:] == 1:
+        #     vars[t_day] = day + "st"
+        # else:
+        #     vars[t_day] = day + "th"
 
         return True
 

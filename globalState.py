@@ -28,6 +28,10 @@ def globalState():
         '[bean]':{ #DEBUGGING - JUMP TO ANY STATE
             'score':2,
             '`okay.`':'casual'
+        },
+        '[stew]':{
+            'score': 2,
+            '`okay.`': 'favRegion2Test'
         }
     }
     return global_transitions
