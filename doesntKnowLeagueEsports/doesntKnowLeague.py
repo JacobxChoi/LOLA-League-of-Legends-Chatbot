@@ -180,9 +180,9 @@ def doesntKnowLeague():
 
     IntroduceGame = {
         'state': 'IntroduceGame',
-        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. What would you like to know more about: the different types of champions, in-game objectives, or the roles in the game?`': {
+        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents.`': {
             '[{champions, types}]': 'IntroduceChampions',
-            '[{objectives}]': 'IntroduceObjectives',
+            '[{objectives, goal, win}]': 'IntroduceObjectives',
             '[{roles, positions}]': 'ChampionRoles',
             '[{lane, lanes}]': 'laneInfo',
             '[{items, item}]': 'items',
@@ -205,7 +205,6 @@ def doesntKnowLeague():
                         'state': 'EndIntroduceGame',
                         '`Feel free to ask me, if you have another questions!ヽ( ° ▽°)ノ`': 'IntroduceLeague',
                     },
-
                     'error': 'IntroduceLeague',
                 }
             }
@@ -266,16 +265,43 @@ def doesntKnowLeague():
 
     IntroduceObjectives = {
         'state': 'IntroduceObjectives',
-        '`In-game objectives are crucial to winning in League of Legends. The main objectives are turrets, inhibitors, dragons, the Rift Herald, Baron Nashor, and the enemy Nexus. Turrets and inhibitors defend each team\'s base, while dragons and the Rift Herald grant powerful buffs to the team that defeats them.Baron Nashor grants a powerful buff to the entire team, helping them push lanes and destroy the enemy base.Ultimately, the goal is to destroy the enemy Nexus.Would you like to know more about the esports scene or are you ready to try the game?`': {
+        '#GameGoalAnalogy': {
             'state': 'InnerObjectives',
+            '[{obstacles, hindrance, barrier, barricade, block}]': {
+                'state': 'obstacles',
+                '`There are turrets for both teams in each lane to block our road to enemies\'s base. The enemy champions will also try to beat us down to block our attack`': {
+                    '[{turret}]': 'turrets',
+                    '[{lane}]': 'laneInfo',
+                    '[{side mission, side}]': 'sideMissions',
+                    'error':{
+                        '`If you have any question over any confusing term in my explanation. Just let me know`': 'IntroduceLeague'
+                    }
+
+                }
+
+            },
+
+            '[{side mission, side}]':{
+                'state': 'sideMissions',
+                '`To gain advantages over the enemy champions, we can beat neural monsters, like dragons and Baron Nashor, on the map to gain more golds and buffs`': {
+                    '[{monsters, comp}]': 'neutralMonsters',
+                    '[{dragons}]': 'dragons',
+                    '[{Baron, Nashor}]': 'NashorBaron',
+
+                }
+
+            },
+
+            '[{resource, resources}]': 'resource',
+            '[{monsters}]': 'neutralMonsters',
             '[{turrets}]': 'turrets',
             '[{dragons}]': {
                 'state': 'dragons',
-                '`Dragons are powerful neutral monsters that grant buffs to the team that slays them. There are four elemental dragons: Infernal, Cloud, Mountain, and Ocean, each providing different bonuses. There\'s also the Elder Dragon, which enhances the elemental buffs and deals true damage. Want to learn about other objectives?`': 'InnerObjectives'
+                '`Dragons are powerful neutral monsters that grant buffs to the team that slays them. There are four elemental dragons: Infernal, Cloud, Mountain, and Ocean, each providing different bonuses. There\'s also the Elder Dragon, which enhances the elemental buffs and deals true damage. Want to learn about other monsters?`': 'InnerObjectives'
             },
-            '[{Baron, Nashor}]': {
+            '[{Baron Nashor}]': {
                 'state': 'NashorBaron',
-                '`Baron Nashor is a powerful neutral monster that grants a significant buff called Hand of Baron to the team that defeats it. This buff empowers minions, making them stronger and harder to kill. Taking Baron can turn the tide of a game. Are you curious about other objectives?`': 'InnerObjectives'
+                '`Baron Nashor is a powerful neutral monster that grants a significant buff called Hand of Baron to the team that defeats it. This buff empowers minions, making them stronger and harder to kill. Taking Baron can turn the tide of a game. Are you curious about other monsters?`': 'InnerObjectives'
             },
             '[{esports, scene}]': 'IntroduceEsports',
             '[{try, game}]': 'ReadyToTry',

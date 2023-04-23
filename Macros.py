@@ -630,11 +630,11 @@ class MacroGoalAnalogy(Macro):
         vn = 'GameType'
         GameTypeResponseDic = {
             'RPG': {
-                'GameGoalSim': 'You can conceive it as a 30 min mini role play game with real person friends and foes, where each hero has different sets of power to achieve the ultimate goal: destroy the enemy nexus with your teammates. Along the process, side missions are seizing the available resources, ambushing the enemy champions, and getting buffs from neutral monsters, upgrading the weapons and defense... '
+                'GameGoalSim': 'You can conceive it as a 30 min Mini role play game with real person friends and foes, \n where each hero has different sets of power to achieve the ultimate goal: destroy the enemy nexus with your teammates. \n Along the process, side missions are seizing the available resources, ambushing the enemy champions, and getting buffs \n from neutral monsters, upgrading the weapons and defense... '
             },
 
             'shooter': {
-                'GameGoalSim': 'It\'s really similar to the shooter games like CS or Overwatch, as teammates shall cooperate in a competitive environment to achieve the ultimate goal. In here, it\'s destroying the turrets and finally the enemy nexus  '
+                'GameGoalSim': 'It\'s really similar to the shooter games like CS or Overwatch, as teammates cooperate \n in a competitive environment to achieve the ultimate goal. In here, it\'s destroying the turrets and finally the enemy nexus  '
             },
 
             'towerDefense': {
@@ -642,9 +642,13 @@ class MacroGoalAnalogy(Macro):
             },
 
             'other': {
-                'GameGoalSim': 'You can conceive turrets are defensive organs like skin, bones, meninges that protect your brain, the nexus in bases, from being attacked (*´▽`*) And with evil or hypocritical ends, you must destroy the "brain" of the other team'
+                'GameGoalSim': 'The main goal of league of legends is to destroy the other team\'s base. And, of course, there are many obstacles on the way to final goal and side missions.'
             }
         }
+
+        if vn not in vars:
+            vars[vn] = 'Role play Game'
+
 
         # TODO: include a category based on the gpt output
 
@@ -655,9 +659,9 @@ class MacroGoalAnalogy(Macro):
             return GameTypeResponseDic['towerDefense']['GameGoalSim']
 
         if vars[vn] == 'Role play Game':
-            return GameTypeResponseDic['towerDefense']['GameGoalSim']
+            return GameTypeResponseDic['RPG']['GameGoalSim']
         else:
-            return GameTypeResponseDic['other']['GameGoalSim']
+            return GameTypeResponseDic['RPG']['GameGoalSim']
 
 class MacroEsportAttitudeResponse(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
@@ -705,3 +709,35 @@ class MacroEsportAttitudeResponse(Macro):
 
         else:
             return EsportAttitudeResponseDic['other']['EsportAttitudeSim']
+
+class MacroEsportAttitudeResponse(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        n = random.randint(0, 4)
+
+        ErrorDic = {
+            1: {"error": 'I\'m sorry, we have to stay quiet around the fierce creatures, what do you want to know, the origin of the creature or power it beholds, \nor you want to continue the journey to behold more mysterious creatures'
+                },
+            2: {"error": 'Don\'t move further, it notice us. Let us first moves further from those irrational monsters. By the way, do you have other questions \n or you just want to move away from the burning place'
+                },
+            3: {"error": 'My apologies, my attentions are completely drawn away from those adorable monsters. Do you see their scales glittering under the sunshine. \n That\'s definitely breathetaking. By the way, do you have questions over the origin of those creatures. \n If you want to move to another place, just let me know'
+                },
+            4: {"error": 'The wind is too loud there at rift, I didn\t hear you much just then. Could you repeat your questions or you want to continue our trip to visit other monsters'
+                },
+            5: {"error": 'We seemed to rushed into its territory. Let\'s first get rid of there... What questions did you have or you just want to leave'
+                },
+        }
+
+        match n:
+            case 0:
+                return ErrorDic[1]
+            case 1:
+                return ErrorDic[2]
+            case 2:
+                return ErrorDic[3]
+            case 3:
+                return ErrorDic[4]
+            case 4:
+                return ErrorDic[5]
+
+
+

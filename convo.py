@@ -127,9 +127,9 @@ macros = {
         {'Agreement': 'no'}
     ),
     'GET_NAME_GPT': MacroGPTJSON(
-        'What is the user\'s name? And what do they enjoy doing?',
+        'What is the user\'s name? And what do they enjoy doing? If the user doesn\'t mention what they enjoy, just give a random habit ',
         {'FIRSTNAME': 'Jacob', 'ROLE': 'being a student'},
-        {'FIRSTNAME': 'NA', 'ROLE': 'NA'}
+        {'FIRSTNAME': 'NA', 'ROLE': 'being a human'}
     ),
     # 'SET_NAME_GPT':
 

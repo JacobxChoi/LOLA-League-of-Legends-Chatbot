@@ -25,6 +25,21 @@ def globalState():
             'score':2,
             '`Sure!`':'babelTransition'
         },
+
+        '[{monsters}, {trip}]': 'TripStart',
+
+        '[{exit, bye}]': {
+            'score': 2,
+            '`Bye!` #NAME `hope to see you again`': 'end'
+        },
+
+
+        '[bean]': { #DEBUGGING - JUMP TO ANY STATE
+            'score': 2,
+            '`okay.`': 'IntroduceObjectives',
+        },
+
+
         '[bean]':{ #DEBUGGING - JUMP TO ANY STATE
             'score':2,
             '`okay.`':'casual'
