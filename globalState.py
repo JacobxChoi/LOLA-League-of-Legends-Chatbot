@@ -34,15 +34,9 @@ def globalState():
         },
 
 
-        '[bean]': { #DEBUGGING - JUMP TO ANY STATE
-            'score': 2,
-            '`okay.`': 'IntroduceObjectives',
-        },
-
-
         '[bean]':{ #DEBUGGING - JUMP TO ANY STATE
             'score':2,
-            '`okay.`':'casual'
+            '`okay.`': 'VisitNashor'
         },
         '[stew]':{
             'score': 2,

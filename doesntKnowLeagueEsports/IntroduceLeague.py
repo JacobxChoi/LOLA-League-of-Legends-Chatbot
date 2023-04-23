@@ -4,6 +4,7 @@ def IntroduceLeague():
         'score': '0.5',
         '`I\'m sorry, I\'m not very sure about what you want, but I can give you a brief introduction of the '
         'game goal, champion selection, and some advice for improving in-game skills.`': {
+            'state': 'InnerIntroduceLeague',
 
             '[{no, not, dont, nothing}]': {
 
@@ -136,12 +137,16 @@ def IntroduceLeague():
                                                                         'score': '0.5',
                                                                         'state': 'TripStart',
                                                                         '#IF(#POSITIVE_AGREEMENT) `Welcome to the one and only Summoners Rift Safari Tour! We\'re embarking on a thrilling adventure through the realm of \n epic battles, legendary creatures, and stunning landscapes. Please make sure your seatbelts are fastened \n and your cameras are ready because we\'re about to witness the most gorgeous monsters you\'ve ever laid eyes on! \n Throughout the tour, please don\'t hesitate to ask any questions you may have about the monsters\' origins, powers, or roles in the Rift. \n It\'s not every day that you get to witness such a diverse and fascinating array of creatures, so let\'s make the most \n of this unforgettable adventure!`': {
+                                                                            '[{quit,leave}]': {
+                                                                                '`No worry, you can always visiting our Summoners Rift Safri Tour, if you call on the name. Do you have other questions regarding to league and league esports`': 'IntroduceLeeague'
+                                                                            },
+
                                                                             'error': {
                                                                                 '`Our first stop will be the picturesque Blue Sentinel\'s lair. Be prepared to be amazed by the beautiful and majestic Blue Sentinel, \n an enormous golem adorned with shimmering crystals. Be sure to snap a photo as it lumbers around, but don\'t get too close, \n for it might just smash you with its powerful fists!`': {
                                                                                     'state': 'MonsterFirstGlance',
-                                                                                    '[{blue，sentinel}]': {
+                                                                                    '[{blue, sentinel}]': {
                                                                                         'score': '0.5',
-                                                                                        '` It\'s a fearsome monsters guarding the power of energy and mana regeneration, but tempting treasures for greedy, novice hunters.`': 'MonsterFirstGlance'
+                                                                                        '`It\'s a fearsome monsters guarding the power of energy and mana regeneration, but tempting treasures for greedy, novice hunters.`': 'MonsterFirstGlance'
                                                                                     },
 
                                                                                     '[{energy, mana}]': {
@@ -169,12 +174,12 @@ def IntroduceLeague():
                                                                                     '[{next, continue, move, away}]': {
                                                                                         '`Moving along, we\'ll pass by the fascinating Brambleback family. Observe the captivating Crimson Brambleback, a giant, red-scaled lizard \n with molten rocks protruding from its back, and its two adorable Cinderlings. Make sure to hold onto your hats as they unleash bursts of fire, \n demonstrating their fierce territorial instincts.`': {
                                                                                             'state': 'MonsterSecond',
-                                                                                            '[{crimson}]': {
+                                                                                            '[{crimson, brambleback}]': {
                                                                                                 'score': '0.5',
                                                                                                 '`Dwelling in the dense foliage of the Rift, the Crimson Brambleback is a formidable beast, resembling a cross between a lizard \n and a volcanic rock formation. Its deep, red scales emit an eerie glow, and the molten rocks on its back showcase its fiery temperament. \n  When provoked, this fierce creature can unleash a torrent of flames to defend its territory. The Crimson Brambleback is the guardian of the Red Buff, \n providing the Crest of Cinders to empower the attacks of the champion who bests it in combat.`': 'MonsterSecond',
                                                                                             },
 
-                                                                                            '[{cinderlings}]': {
+                                                                                            '[{cinderlings, cinderling}]': {
                                                                                                 'score': '0.5',
                                                                                                 '`The adorable, yet feisty offspring of the Crimson Brambleback, Cinderlings are small, fiery creatures that aid their parent in defending their home. \n With their miniature molten-rock armor and tiny bursts of flame, these little rascals may be small in size, but they are mighty in spirit. \n It is said that a single touch from their flaming breath can set an enemy ablaze.`': 'MonsterSecond',
                                                                                             },
@@ -187,7 +192,7 @@ def IntroduceLeague():
 
                                                                                             '[{power}]': {
                                                                                                 'score': '0.7',
-                                                                                                '`The Crimson Brambleback, or you can call it red, is the guardian of the Red Buff, providing the Crest of Cinders to empower \n the attacks of the champion who bests it in combat. `': 'MonsterFirstGlance'
+                                                                                                '`The Crimson Brambleback, or you can call it red, is the guardian of the Red Buff, providing the Crest of Cinders to empower \n the attacks of the champion who bests it in combat. `': 'MonsterSecond'
 
                                                                                             },
 
@@ -215,7 +220,7 @@ def IntroduceLeague():
                                                                                                         '`Next, we venture into the haunting and mysterious Dragon\'s pit. Here, you\'ll witness the breathtaking Elemental Drakes – \n Cloud, Infernal, Ocean, and Mountain – each with its unique powers and mesmerizing appearance. \n Don\'t forget to ask about the mighty Elder Dragon, whose fearsome presence sends chills down the spines of even the most seasoned summoners.`': {
                                                                                                             'state': 'visitDrake',
 
-                                                                                                            '[{drakes}]': {
+                                                                                                            '[{drakes,dragon, drake, dragons}]': {
                                                                                                                 'score': '0.5',
                                                                                                                 '`I can guide you to know each of the drakes, which one do you want to visit first`': 'visitDrake',
                                                                                                             },
@@ -246,7 +251,7 @@ def IntroduceLeague():
 
                                                                                                             '[{elder}]': {
                                                                                                                 'score': '0.7',
-                                                                                                                '`Behold the Elder Dragon, a majestic titan of unfathomable power and scale. Its colossal, sinewy body stretches across the horizon, \n adorned with intricate, glowing runes that pulsate with the primal energy of the elements. The Elder Dragon\'s iridescent scales shimmer \n in the faint light, a kaleidoscope of colors that dance and shift with each subtle movement.': 'visitDrake'
+                                                                                                                '`Behold the Elder Dragon, a majestic titan of unfathomable power and scale. Its colossal, sinewy body stretches across the horizon, \n adorned with intricate, glowing runes that pulsate with the primal energy of the elements. The Elder Dragon\'s iridescent scales shimmer \n in the faint light, a kaleidoscope of colors that dance and shift with each subtle movement.`': 'visitDrake'
 
                                                                                                             },
 
@@ -269,23 +274,23 @@ def IntroduceLeague():
 
                                                                                                                     '[{nashor, baron}]': {
                                                                                                                         'score': '0.7',
-                                                                                                                        '`The Baron Nashor\'s massive head looms above us, its myriad of razor-sharp teeth and vicious, barbed tentacles casting a \n terrifying shadow. Its eyes burn with a malevolent intelligence, observing our every move as though evaluating our worth as adversaries.`': 'visitNashor'
+                                                                                                                        '`The Baron Nashor\'s massive head looms above us, its myriad of razor-sharp teeth and vicious, barbed tentacles casting a \n terrifying shadow. Its eyes burn with a malevolent intelligence, observing our every move as though evaluating our worth as adversaries.`': 'VisitNashor'
 
                                                                                                                     },
 
                                                                                                                     '[{origin, from, role}]': {
                                                                                                                         'score': '0.7',
-                                                                                                                        '`The origins of the Baron Nashor are steeped in the mythology of the cosmos. Born from the tumultuous battle between the gods of Runeterra, \n it is a living embodiment of chaos and destruction. Drawn to the Summoners Rift by the potent magic that saturates the land, the Baron Nashor \n has made its home in the dark recesses of the Rift, waiting to test the mettle of those who dare to challenge its might.`': 'visitNashor'
+                                                                                                                        '`The origins of the Baron Nashor are steeped in the mythology of the cosmos. Born from the tumultuous battle between the gods of Runeterra, \n it is a living embodiment of chaos and destruction. Drawn to the Summoners Rift by the potent magic that saturates the land, the Baron Nashor \n has made its home in the dark recesses of the Rift, waiting to test the mettle of those who dare to challenge its might.`': 'VisitNashor'
 
                                                                                                                     },
 
                                                                                                                     '[{power}]': {
                                                                                                                         'score': '0.7',
-                                                                                                                        '`The Baron Nashor\'s primary power lies in the "Hand of Baron" buff it bestows upon the team that manages to defeat it. \n This extraordinary buff greatly empowers the champions and their minions, granting increased attack damage, ability power, and enhanced recall speed. \n It also empowers nearby allied minions, making them more resilient and powerful. The Hand of Baron can completely shift \n the momentum of a battle, enabling a team to siege their opponents\' base with relentless ferocity.`': 'visitDrake'
+                                                                                                                        '`The Baron Nashor\'s primary power lies in the "Hand of Baron" buff it bestows upon the team that manages to defeat it. \n This extraordinary buff greatly empowers the champions and their minions, granting increased attack damage, ability power, and enhanced recall speed. \n It also empowers nearby allied minions, making them more resilient and powerful. The Hand of Baron can completely shift \n the momentum of a battle, enabling a team to siege their opponents\' base with relentless ferocity.`': 'VisitNashor'
                                                                                                                     },
 
                                                                                                                     '[{continue, leave, move, away, next}]': {
-                                                                                                                        '`A sullen imaginative trip ends there, you don\'t understand what the non-sense you\'ve experienced just now. But sanity tells you it\'s the time for asking more questions over the game and its god-know-what esport`': 'IntroduceLeague'
+                                                                                                                        '`A sullen imaginative trip ends there, you don\'t understand what the non-sense you\'ve experienced just now. But sanity tells you it\'s the time for asking more questions over the game and its god-know-what esport`': 'InnerIntroduceLeague'
                                                                                                                     },
 
                                                                                                                     'error': {
@@ -318,8 +323,6 @@ def IntroduceLeague():
                                                                                 }
 
                                                                             },
-
-                                                                            'error': 'suddenFirst'
                                                                         },
                                                                         '#IF(#NEGATIVE_AGREEMENT)': {
                                                                             '`No worry, the wonderful monster trip will always be there if you call on its name`': 'IntroduceLeague'

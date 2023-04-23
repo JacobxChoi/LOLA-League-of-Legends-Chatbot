@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError
 
 #imports babel conversation
 import babel
@@ -149,7 +149,9 @@ macros = {
         'Write the user a haiku in the following format:',
         {'HAIKU':'love between us is - speech and breath. loving you is - a long river running.'},
         {'HAIKU':'NA'}
-    )
+    ),
+
+    'FunTripError': MacroFunTripError(),
 }
 
 df = DialogueFlow('start', end_state='end')

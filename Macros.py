@@ -710,7 +710,7 @@ class MacroEsportAttitudeResponse(Macro):
         else:
             return EsportAttitudeResponseDic['other']['EsportAttitudeSim']
 
-class MacroEsportAttitudeResponse(Macro):
+class MacroFunTripError(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         n = random.randint(0, 4)
 
@@ -729,15 +729,17 @@ class MacroEsportAttitudeResponse(Macro):
 
         match n:
             case 0:
-                return ErrorDic[1]
+                return ErrorDic[1]['error']
             case 1:
-                return ErrorDic[2]
+                return ErrorDic[2]['error']
             case 2:
-                return ErrorDic[3]
+                return ErrorDic[3]['error']
             case 3:
-                return ErrorDic[4]
+                return ErrorDic[4]['error']
             case 4:
-                return ErrorDic[5]
+                return ErrorDic[5]['error']
+
+        return True
 
 
 
