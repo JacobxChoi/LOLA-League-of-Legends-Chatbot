@@ -16,15 +16,15 @@ def doesntKnowLeague():
                         # ontology for favorite champion. Does not unfortunately handle cases where user has no favorite champion
                         '$FAV_CHAMP `is fun to play!` Why do you like playing them?`': {
                             'error':{
-                                '`I agree! $PLAYER_RECCOMEND Also plays them really well! Are you interested in learning about esports?`':{
+                                '`I agree! $PLAYER_RECCOMEND Also plays them really well! Are you interested in learning about esports?`': {
                                     'state':'learnEsports',
-                                    '[{yes, yeah, do, learn, know}]':{
-                                        '`Okay, nice!`':'casual'
+                                    '[{yes, yeah, do, learn, know, sure, ok, okay}]': {
+                                        '`Okay, nice!`': 'casual'
                                     },
-                                    '[{no, dont, not}]':{
-                                        '`No worries! What do you like about league?`':{
-                                            'error':{
-                                                '`That\'s dope. I got good pretty fast after watching a lot of esports players and teams, and`':'casual'
+                                    '[{no, dont, not, nah, nope}]':{
+                                        '`No worries! What do you like about league?`': {
+                                            'error': {
+                                                '`That\'s dope. I got good pretty fast after watching a lot of esports players and teams, and`': 'casual'
                                             }
                                         }
                                     },
