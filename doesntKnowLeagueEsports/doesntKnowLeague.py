@@ -16,7 +16,7 @@ def doesntKnowLeague():
                         # ontology for favorite champion. Does not unfortunately handle cases where user has no favorite champion
                         '$FAV_CHAMP `is fun to play! Why do you like playing them?`': {
                             'error': {
-                                '`I agree! $PLAYER_RECOMMEND Also plays them really well! Are you interested in learning about esports?`': {
+                                '`I agree!` $PLAYER_RECOMMEND `is a pro player who plays` $FAV_CHAMP `really well! Are you interested in learning about esports?`': {
                                     'state':'learnEsports',
                                     '[{yes, yeah, do, learn, know, sure, ok, okay}]': {
                                         '`Okay, nice!`': 'casual'
@@ -43,7 +43,7 @@ def doesntKnowLeague():
             },
             # TODO: add new branch here
             '[{heard, [video game]}]': {
-                '`Yeah, it\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game that\'s played by millions of people, and it has a thriving e-sports scene. Would you like to learn more about the game or the esports scene?`': {
+                '`Yeah, it\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game that\'s played by millions of people, and it has a thriving esports scene. Would you like to learn more about the game or the esports scene?`': {
                     '[{game, learn}]': 'IntroduceGame',
                     '[{esports, scene}]': 'IntroduceEsports',
                     'error': 'IntroduceGame'
@@ -59,9 +59,9 @@ def doesntKnowLeague():
                     '[#FAV_GAMETYPE]': {
                         '`Wow, I tried other` #GET_FAV_GAME `like` $OtherGame `before, but haven\'t touched` $GameName `yet. May I know why you love it?`': {
                             'error': {
-                                '`Great! I heard that` #GET_REASON_FAV_GAME` That is definitely amazing! Is there some tips you can give to the new beginner`': {
+                                '`Great! I heard that` #GET_REASON_FAV_GAME` That is definitely amazing! Do you have any tips for a new player?`': {
                                     'error': {
-                                        '`Thank you so much, I\'ll definitely follow that! Besides, what do you think of league of legends`': {
+                                        '`Thank you so much, I\'ll definitely keep that in mind! Besides, what do you think of League of Legends`': {
                                             'error': 'transit'
                                         }
                                     }
@@ -147,7 +147,7 @@ def doesntKnowLeague():
                     },
                 },
 
-                '`Let me give you a brief introduction to League of Legends. It\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving e-sports scene. Do you want to know more about the game or its e-sports scene?`': {
+                '`Let me give you a brief introduction to League of Legends. It\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving esports scene. Do you want to know more about the game or its esports scene?`': {
                     'score': '0.5',
                     '[{sure, yes, definitely, ok, okey}]': {
                         '`So do you want to know more about the game mechanics?`': {
@@ -183,7 +183,7 @@ def doesntKnowLeague():
         '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. What would you like to know more about: the different types of champions, in-game objectives, or the roles in the game?`': {
             '[{champions, types}]': 'IntroduceChampions',
             '[{objectives}]': 'IntroduceObjectives',
-            '[{roles, positions}]': 'IntroduceRoles',
+            '[{roles, positions}]': 'ChampionRoles',
             '[{lane, lanes}]': 'laneInfo',
             '[{items, item}]': 'items',
             '[{map, layout}]': 'IntroduceMap',
