@@ -79,7 +79,7 @@ transitions = {
 # This transition distributes the users to different branches of transitions based on their acquistion levels
 transitionDiverging = {
     'state': 'DIVERGE',
-    '`Do you keep up with league of legends esports? What do you think about it? `': {
+    '`Do you keep up with League of Legends esports? What do you think about it? `': {
         '[#AgreementChecker]': {
             '#IF(#POSITIVE_AGREEMENT) `Nice.`': 'favPlayer',
             '#IF(#NEGATIVE_AGREEMENT) `That\'s fine.`': 'doesntKnowLeagueEsports'
