@@ -19,7 +19,7 @@ def knowsLeague():
                 '`I agree. I think`$FAV_PLAYER`is doing pretty well too. Do you watch any tournaments?`':'favRegion'
             },
             '[{like}, $FAV_PLAYER=#ONT(leagues)]': {
-                '`I love $FAV_PLAYER` too. Do you watch any tournaments?`': 'favRegion'
+                '`I love` $FAV_PLAYER `too. Do you watch any tournaments?`': 'favRegion'
             },
             '[$FAV_PLAYER=#ONT(leagues)]':{
                 'score': 0.9,
