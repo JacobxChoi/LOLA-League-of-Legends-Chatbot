@@ -259,9 +259,6 @@ class favRegion(Macro):
         else:
             vars[t_typeOfMatch] = typeOfMatch.lower()
 
-        print(vars)
-
-
         # change numerical month to month name
         # if month == '01':
         #     vars[t_month] = 'January'
@@ -709,6 +706,11 @@ class MacroEsportAttitudeResponse(Macro):
 
         else:
             return EsportAttitudeResponseDic['other']['EsportAttitudeSim']
+
+class GetBestPlayer(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        date = 'T_DATE'
+        vars[date]
 
 class MacroFunTripError(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
