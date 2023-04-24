@@ -450,7 +450,7 @@ def casual():
         'state': 'keria',
         '`Awesome! Tell me what you like about him.`': {
             'state': 'keria2',
-            '[{playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion, good, talented, gifted, skilled, creative, champion pool}]': {
+            '[{yes, yeah, good, yea, playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion, good, talented, gifted, skilled, creative, champion pool}]': {
                 'state':'keriaGameplay',
                 '`Can you explain further?`': {
                     '[{no, not, dont, wont, cant}]': {
@@ -553,7 +553,7 @@ def casual():
                 }
             },
             'error': {
-                '`I don\'t think I caught that. What do you like about him again?`': 'keria2'
+                '`I don\'t think I caught that. Do you think he\'s skilled?`': 'keria2'
             }
         }
     }
