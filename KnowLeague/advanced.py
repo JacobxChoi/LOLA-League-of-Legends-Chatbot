@@ -60,6 +60,10 @@ def advanced():
             'error': {
                 '`I\'m not sure if I understood.`': 'advanced'
             }
+            },
+
+            'error': {
+                #TODO: I guess error state is useful there when the user give other response than "good"...
             }
 
         },

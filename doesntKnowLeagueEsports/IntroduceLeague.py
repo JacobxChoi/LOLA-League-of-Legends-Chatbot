@@ -222,6 +222,7 @@ def IntroduceLeague():
 
                                                                                                             '[{drakes,dragon, drake, dragons}]': {
                                                                                                                 'score': '0.5',
+                                                                                                                'state': 'dragon',
                                                                                                                 '`I can guide you to know each of the drakes, which one do you want to visit first`': 'visitDrake',
                                                                                                             },
 
@@ -274,6 +275,7 @@ def IntroduceLeague():
 
                                                                                                                     '[{nashor, baron}]': {
                                                                                                                         'score': '0.7',
+                                                                                                                        'state': 'BaronNashorx',
                                                                                                                         '`The Baron Nashor\'s massive head looms above us, its myriad of razor-sharp teeth and vicious, barbed tentacles casting a \n terrifying shadow. Its eyes burn with a malevolent intelligence, observing our every move as though evaluating our worth as adversaries.`': 'VisitNashor'
 
                                                                                                                     },
