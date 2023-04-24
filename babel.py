@@ -30,7 +30,7 @@ def babel():
             '[border]': {
                 '`You\'re right. I think it\'s also normal that border control speaks in English, but are able to pick up a few phrases in Spanish and use that in their job. I don\'t speak Spanish, but I wonder what it feels like for those that do speak Spanish. Anything else that sticks out to you?`': 'babelScenes'
             },
-            '[{lol, league}]': 'choseLeague',
+            '[{lol, league}]': 'start',
             '[{no, none, nothing, not}]': {
                 '`All good.`': 'babel'
             },
@@ -84,7 +84,7 @@ def babel():
         },
         '`Would you like to talk about League of Legends now?`': {
             'score': '0.5',
-            'error': 'choseLeague'
+            'error': 'start'
         }
     }
 

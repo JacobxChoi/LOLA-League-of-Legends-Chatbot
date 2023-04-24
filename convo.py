@@ -88,7 +88,7 @@ transitionDiverging = {
             '#IF(#NEGATIVE_AGREEMENT) `That\'s fine.`': 'doesntKnowLeagueEsports'
         },
         'error': {
-            '`Sorry, I didn\'t understand you.`': 'start'
+            '`Sorry, I didn\'t understand you.`': 'DIVERGE'
         }
     }
 }
