@@ -35,7 +35,7 @@ def babel():
                 '`Yeah, that was interesting.`': 'babelTransition'
             }
         },
-        '#GATE `Why do you think the title of the movie is "Babel?"`': {
+        '#GATE `Why do you think the title of the movie is \"Babel?\"`': {
             'score': '1',
             '[{tower}]': {
                 '`Yeah, I also think it\'s related to the story of the Tower of Babel.`': 'babelTransition'

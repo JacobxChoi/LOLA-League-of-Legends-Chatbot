@@ -5,9 +5,9 @@ def knowsLeague():
         '`Do you have a favorite professional player, and what do you think about them?`': {
             'state': 'playerCondition',
             '[{keria}]': 'keria',
-            '[{no, not, dont, cant, none, nothing}]': {
-                '`No worries.`': 'casual'
-            },
+            # '[{no, not, dont, cant, none, nothing}]': {
+            #     '`No worries.`': 'casual'
+            # },
             '[$FAV_PLAYER=#ONT(leagues), {bad, terrible, [not good], [not doing well], [not doing good], [not been doing well], [not been doing well lately], [not been doing too well], [not been doing good], [not been doing too good]}]':{
                 '`Why do you think` $FAV_PLAYER `has been doing poorly?`': {
                     'error': {
@@ -52,7 +52,7 @@ def knowsLeague():
                     }
                 }
             },
-            '[{no, dont have, do not, dont}]':'favRegion',
+            '[{no, dont have, do not, dont}, player]':'favRegion',
             'error':'favRegion' #if user doesn't have favorite player, go to favorite region
         }
     }
@@ -68,7 +68,7 @@ def knowsLeague():
                 'state':'favRegion2Test',
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
                     'state':'firstSuggestion',
-                    '[{yes, yeah, did, watched, probably, yea, maybe}]':'advanced', #shows that user actively watches current esports games.
+                    '[{yes, yeah,  watched, probably, yea, maybe}]':'advanced', #shows that user actively watches current esports games.
                     '[{no, [did not], didnt, havent, [have not], nope, dont}]':{ #next favorite region?
                         '#RANDGAME `No Worries. How about the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
                             'state':'secondSuggestion',

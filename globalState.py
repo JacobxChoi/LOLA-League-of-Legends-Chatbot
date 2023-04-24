@@ -17,7 +17,7 @@ def globalState():
             'score': 2,
             '`Test start`': 'Directed_Questions'
         },
-        '[haiku]':{
+        '[haiku]':{ #someone asked me if our bot could write a haiku, so I just implemented this real quick
             'score': 2,
             '#GET_HAIKU $HAIKU':'DIVERGE'
         },
@@ -40,7 +40,7 @@ def globalState():
         },
         '[stew]':{
             'score': 2,
-            '`okay.`': 'favRegion2Test'
+            '`okay.`': 'advanced'
         }
     }
     return global_transitions
