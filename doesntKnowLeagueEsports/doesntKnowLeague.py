@@ -12,11 +12,12 @@ def doesntKnowLeague():
             '[{yes, yeah, yup}]': {
                 'state': 'familiarity',
                 '`Who\'s your favorite champion?`': {
+                    'state':'userPicksChamp',
                     '#UserChamp': {
                         # ontology for favorite champion. Does not unfortunately handle cases where user has no favorite champion
                         '$FAV_CHAMP `is fun to play! Why do you like playing them?`': {
                             'error': {
-                                '`I agree!` $PLAYER_RECOMMEND `is a pro player who plays` $FAV_CHAMP `really well! Are you interested in learning about esports?`': {
+                                '`I agree! By the way,` $PLAYER_RECOMMEND `is a pro player who happens to play` $FAV_CHAMP `really well. Are you interested in learning about esports?`': {
                                     'state':'learnEsports',
                                     '[{yes, yeah, do, learn, know, sure, ok, okay}]': {
                                         '`Okay, nice!`': 'casual'
@@ -38,7 +39,9 @@ def doesntKnowLeague():
                     '[{dont, no, not}]': {
                         '`All good. My favorite champion is Irelia. I like playing aggressively and getting kills, so I find playing Irelia pretty fun. Just curious`': 'knowsLeague'
                     },
-                    'error': 'end'
+                    'error': {
+                        '`I\'m sorry, I don\'t think I know that champion. Do you have another champion in mind?`': 'userPicksChamp'
+                    }
                 }
             },
             # TODO: add new branch here

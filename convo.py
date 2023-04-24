@@ -83,12 +83,13 @@ transitions = {
 transitionDiverging = {
     'state': 'DIVERGE',
     '`Do you keep up with League of Legends esports? What do you think about it? `': {
+        'state':'agreeOrNot',
         '[#AgreementChecker]': {
             '#IF(#POSITIVE_AGREEMENT) `Nice.`': 'favPlayer',
             '#IF(#NEGATIVE_AGREEMENT) `That\'s fine.`': 'doesntKnowLeagueEsports'
         },
         'error': {
-            '`Sorry, I didn\'t understand you.`': 'DIVERGE'
+            '`Sorry, I didn\'t quite understand. Do you keep up with league esports?`': 'agreeOrNot'
         }
     }
 }
