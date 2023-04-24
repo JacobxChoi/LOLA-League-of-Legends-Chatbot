@@ -1,7 +1,7 @@
 def babel():
     babel_transition = {
         'state': 'babel',
-        '#GATE `What specific scenes from the movie regarding communication between the characters stood out to you?`': {
+        '#GATE`What specific scenes from the movie regarding communication between the characters stood out to you?`': {
             'score': '1',
             'state': 'babelScenes',
             '[{chieko}]': {
@@ -21,8 +21,8 @@ def babel():
             '[doctor, morocco]': {
                 '`I agree. What stood out to me in that scene was when the tour guide was translating the doctor. I don\'t know the exact translation, but I\'m curious what the tour guide had to "filter out". Was there another scene you wanted to talk about?`': 'babelScenes'
             },
-            '[{abdullah, yussef, ahmed}]': {
-                '`Yeah, that scene was interesting to me, because even though the task of killing the jackals was clearly communicated to Yussef and Ahmed, what wasn\'t clearly communicated was the responsibility that had in holding a gun.`': 'babel'
+            '[{abdullah, yusef, ahmed}]': {
+                '`Yeah, that scene was interesting to me, because even though the task of killing the jackals was clearly communicated to Yusef and Ahmed, what wasn\'t clearly communicated was the responsibility that had in holding a gun.`': 'babel'
             },
             '[{santiago, spanish}]': {
                 '`I also find it was interesting that Santiago is often switching between English and Spanish. Any other scenes that stand out?`': 'babelScenes'
@@ -43,12 +43,8 @@ def babel():
             '[{tower}]': {
                 '`Yeah, I also think it\'s related to the story of the Tower of Babel. It\'s pretty interesting looking at the parallels between the story and the movie.`': 'babel'
             },
-            '[{not sure, no idea, -know}]': {
-                '`I\'m pretty sure it\'s related to the story of the Tower of Babel, are you familiar with the story?`': 'towerOfBabel'
-            },
             'error': {
-                '`That\'s interesting. I feel like it\'s related to the story of the Tower of Babel, are you familiar with it?`': {
-                    'state': 'towerOfBabel',
+                '`That\'s interesting. It\'s definitely related to the story of the Tower of Babel, are you familiar with it?`': {
                     '[#AgreementChecker]': {
                         '#IF(#POSITIVE_AGREEMENT)': {
                             '`Yeah, I think it\'s pretty interesting looking at the parallels between that story and the movie.`': 'babel'
@@ -58,26 +54,6 @@ def babel():
                                 '`Yeah, I think it\'s pretty interesting looking at the parallels between that story and the movie.`': 'babel'
                             }
                         }
-                    }
-                }
-            }
-        },
-        '#GATE `What sorts of themes do you think were important in the movie?`': {
-            'score': '1',
-            '[{communication, barrier, barriers}]': {
-                '`Yeah, I think it\'s interesting looking at both interlingual barriers, like between Richard and the Moroccans, and intralingual barriers, like between Chieko and her father.`': {
-                    'error': {
-                        '`For sure.`': 'babel'
-                    }
-                }
-            },
-            '[{gun, connect, link}]': {
-                '`Definitely, all the storylines were brought together by their shared interactions with the gun. I read an analysis that talked about the Butterfly Effect, like how Chieko\'s father deciding to give Hassan the gun eventually led to Amelia getting deported.`'
-            },
-            'error': {
-                '`I hadn\'t thought about that, can you tell me more?`': {
-                    'error': {
-                        '`That\'s really interesting, thanks for sharing!`': 'babel'
                     }
                 }
             }
