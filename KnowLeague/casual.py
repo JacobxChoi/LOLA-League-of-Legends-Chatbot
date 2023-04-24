@@ -30,25 +30,39 @@ def casual():
                                                                     },
                                                                     '[{yes, yeah, ok, sure, watch}]': {
                                                                         '`Nice! I hope you have a good time. Bye bye!`': 'end'
+                                                                    },
+                                                                    'error': {
+                                                                        '`I\'m not sure I caught that. Can you try rewording that?`': 'acceptGame'
                                                                     }
 
                                                                 },
-                                                                'error':'end'
+                                                                'error': 'end'
                                                             },
                                                             '{yes, ok, yeah, sure, fun, alright, cool, [sounds, {fun, good}]}': {
                                                                 #TODO: Store the match
                                                                 '`Alrighty! Let me know what you think of it later!`': 'end'
                                                             },
                                                             '{no, not, nah, pass, [im, {good, fine}]}': {
-                                                                '`Oh, ok... Do you want another game or team to watch?`': {
-                                                                    '#RANDGAME':{
-                                                                        'state':'suggestGame',
-                                                                        '`Sure, how about the`$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
-                                                                            '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]':'suggestGame',
-                                                                            '[{yes, yeah, ok, sure, watch}}]':'end'
+                                                                '`Oh, ok... Do you want another game to watch?`': {
+                                                                    '[{yes, yeah, ok, sure, watch}]': {
+                                                                        'state': 'suggestGame',
+                                                                        '#RANDGAME':{
+                                                                            '`How about the`$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
+                                                                                'state': 'acceptGame',
+                                                                                '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]': 'suggestGame',
+                                                                                '[{yes, yeah, ok, sure, watch, sounds good, sounds fun}]': {
+                                                                                    '`I gotcha. Check it out and I\'ll see you next time!`': 'end'
+                                                                                },
+                                                                                'error': {
+                                                                                    '`I\'m not sure I caught that. Can you try rewording that?`': 'acceptGame'
+                                                                                }
+                                                                            }
                                                                         }
                                                                     },
-                                                                    'error':'end' #user doesn't say 'yes' or 'yeah' TODO: use chatgpt to handle user input
+
+                                                                    'error': {
+                                                                        '`I\'m not sure I caught that. Can you try rewording that?`': 'acceptGame'
+                                                                    }
                                                                 }
                                                             },
                                                             'error': {
@@ -120,6 +134,37 @@ def casual():
                     '[prefer]':{ #I prefer _____
                         '`That\'s fair.`': 'favTeamQuestion'
                     },
+                    '[t1]': {
+                        '`I think they\'re a really strong team. Keria makes them one of the best in the world. Do you wanna talk about him?`': {
+                            '[{yes, yeah, sure, ok, i do, yep}]': 'keria',
+                            '[{no, nope, im good, i am good, not, cant, cannot, dont}]': {
+                                '`That\'s all good. Do you watch T1 games?`': {
+                                    '[{yes, yeah, sure, ok, i do, yep}]': {
+                                        '`Do you remember any good ones?`': {
+                                            '[{no, nope, im good, i am good, not, cant, cannot, dont}]': {
+                                                '`All good. I\'m sure there are a lot that you can watch. I think every game where Keria plays Thresh is a masterclass. You should watch one of those. See ya!`': 'end'
+                                            },
+                                            'error': {
+                                                '`What happened in that game?`': {
+                                                    'error': {
+                                                        '`I think I will check that game out. Thanks for letting me know!`': 'end'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    '[{no, nope, im good, i am good, not, cant, cannot, dont}]': {
+                                        '`I see. Would you like any recommendations?`': {
+                                            '[{no, nope, im good, i am good, not, cant, cannot, dont}]': {
+                                                '`All good. I hope to see you again soon!`': 'end'
+                                            },
+                                            '[{yes, yeah, ok, sure, watch}]': 'suggestGame'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     '[dont, disagree, dislike]':{ #I don't really watch EDG
                         '`That\'s fair. What are your thoughts on Keria then. Do you like him?`':{
                             'state':'thoughtsOnKeria',
@@ -127,7 +172,7 @@ def casual():
                             '[no, dislike, dont, not]':{
                                 '`Do you have a favorite team, then?`':{
                                     'state':'otherFavTeam',
-                                    '[yes, yeah, [I do], yep, yea]':'favTeamQuestion',
+                                    '[yes, yeah, [i do], yep, yea]':'favTeamQuestion',
                                     '[no, nope, [do not], dont]':{
                                         '`What other player do you think is currently good at the moment then?`':'otherPlayer',
                                     },
@@ -415,6 +460,9 @@ def casual():
                                     'state': 'keria3',
                                     '[{<{what, how}, {good, strong, way}>}]': {
                                         '`He always engages on winning fights. Each action he takes is precise and sets his team up for victory.`':'end'
+                                    },
+                                    'error': {
+                                        '`I don\'t think that anyone comes close to him in the support role. Talking to you was a lot of fun! Hopefully Keria continues to win games for us.`': 'end'
                                     }
                                 }
                             }
