@@ -2,6 +2,7 @@ def babel():
     babel_transition = {
         'state': 'babelTransition',
         '#GATE `What specific scenes from the movie regarding communication between the characters stood out to you?`': {
+            'score': '1',
             'state': 'babel',
             '[{chieko}]': {
                 '`I\'m sorry. Could you repeat what scenes Chieko was in that stood out to you? `': 'babel'
@@ -35,6 +36,7 @@ def babel():
             }
         },
         '#GATE `Why do you think the title of the movie is "Babel?"`': {
+            'score': '1',
             '[{tower}]': {
                 '`Yeah, I also think it\'s related to the story of the Tower of Babel.`': 'babelTransition'
             },
