@@ -142,7 +142,7 @@ def casual():
                             '[{better, capable, skilled}]':{
                                 '`That\'s fair. I still think Keira is the best though. His ability to carry the team is unparalleled.`':'end'
                             },
-                            '[{worse, unskiled, [as good]}]':{ #TODO: FINISH
+                            '[{worse, unskilled, [as good]}]':{ #TODO: FINISH
                                 '``'
                             }
                         }
@@ -162,7 +162,7 @@ def casual():
         '#GATE`Are there any games or tournaments that you watched this year?`':{
             'score': 0.5,
             '[{yes, yeah, watched, watch}]':{ #USER: yeah! this year, I watched a game between team1 and team2
-                '`That\'s cool! Who was the highlight of the game?`' :{
+                '`That\'s cool! Who was the highlight of the game?`': {
                     'state':'highlight',
                     '[$HIGHLIGHT_PLAYER = #ONT(teams)]':{
                         '`I agree!` $HIGHLIGHT_PLAYER `has been doing well lately. Do you think they\'ll continue to do well?`':{
@@ -196,9 +196,9 @@ def casual():
             },
             'error':'end'
         }, #TODO: handle gate
-        '`End of gate`':{
+        '`error`':{
             'score':0.1,
-            'state':'end'
+            'state':'casual'
         }
     }
 
