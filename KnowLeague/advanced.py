@@ -3,7 +3,7 @@ def advanced():
         'state': 'advanced',
         '`What did you think about the game?`': { #TODO: HANDLE CASES LIKE "I LIKED IT"
             '{good, competitive, close, fun, well}': {
-                '#CLOSE `Who do you think performed the best?`': {
+                '`Who do you think performed the best?`': {
                     # Should reply with if the game was close or not
                     'state': 'perform',
                     '[$BEST_PLAYER = #ONT(teams)]': {
@@ -45,28 +45,13 @@ def advanced():
                                     }
                                 }
                             },
-                        }
 
                     }
+
                 }
             },
             '{boring, bad, #LEM(stomp), [not close]}': {
-                '#CLOSE2` Who do you think was the winning factor for the game?`': { #Should reply with if the game was close or not
-                    '[$BEST_PLAYER=#BESTPLAYER]': {
-                        '`I thought so too! What did he do well in particular?`': {
-                            'error': {
-                                '`Wait, could you elaborate more?`': {
-                                    '[{no, not, dont, wont, cant}]': {
-                                        '`I see`'
-                                    },
-                                    'error': {
-                                        '`Yeah that makes a lot of sense. You seem to know what you\'re talking about! I'
-                                        ' had a lot of fun talking about the game with you! I hope to see you again soon!`': 'end'
-                                    }
-                                }
-                            }
-                        }
-                    },
+                '#CLOSE2` Who do you think was the winning factor for the game? I personally think it was` #BESTPLAYER': { #Should reply with if the game was close or not
                     '[$BEST_PLAYER=#ONT(teams)]': {
 
                     }
@@ -75,7 +60,11 @@ def advanced():
             'error': {
                 '`I\'m not sure if I understood.`': 'advanced'
             }
+            },
 
+            'error': {
+                #TODO: I guess error state is useful there when the user give other response than "good"...
+            }
 
         },
         '#GATE `Do you think anyone showed a lot of improvement over their last game?`': {

@@ -295,13 +295,29 @@ def doesntKnowLeague():
             '[{resource, resources}]': 'resource',
             '[{monsters}]': 'neutralMonsters',
             '[{turrets}]': 'turrets',
-            '[{dragons}]': {
+            '[{dragons, drakes, dragon, drake}]': {
                 'state': 'dragons',
-                '`Dragons are powerful neutral monsters that grant buffs to the team that slays them. There are four elemental dragons: Infernal, Cloud, Mountain, and Ocean, each providing different bonuses. There\'s also the Elder Dragon, which enhances the elemental buffs and deals true damage. Want to learn about other monsters?`': 'InnerObjectives'
+                '`Dragons or drakes are one of the powerful neutral monsters. Do you want to know more about the cretures with an virtual safari trip ?`': {
+                    '[#AgreementChecker]': {
+                        '#IF(#POSITIVE_AGREEMENT)': 'TripStart',
+                        '#IF(#NEGATIVE_AGREEMENT)': 'dragon',
+
+                        'error': 'neutralMonsters',
+
+                    }
+                }
             },
             '[{Baron Nashor}]': {
                 'state': 'NashorBaron',
-                '`Baron Nashor is a powerful neutral monster that grants a significant buff called Hand of Baron to the team that defeats it. This buff empowers minions, making them stronger and harder to kill. Taking Baron can turn the tide of a game. Are you curious about other monsters?`': 'InnerObjectives'
+                '`Baron Nashor is one of the powerful neutral monster. Do you want to know more about the cretures with an virtual safari trip ? `': {
+                    '[#AgreementChecker]': {
+                        '#IF(#POSITIVE_AGREEMENT)': 'TripStart',
+                        '#IF(#NEGATIVE_AGREEMENT)': 'BaronNashorx',
+
+                        'error': 'neutralMonsters',
+
+                    }
+                }
             },
             '[{esports, scene}]': 'IntroduceEsports',
             '[{try, game}]': 'ReadyToTry',

@@ -36,7 +36,7 @@ def globalState():
 
         '[bean]':{ #DEBUGGING - JUMP TO ANY STATE
             'score':2,
-            '`okay.`': 'VisitNashor'
+            '`okay.`': 'InnerObjectives'
         },
         '[stew]':{
             'score': 2,
