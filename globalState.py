@@ -23,7 +23,7 @@ def globalState():
         },
         '[babel]':{
             'score':2,
-            '`Sure!`':'babelTransition'
+            '`Sure!`':'babel'
         },
 
         '[{monsters}, {trip}]': 'TripStart',
