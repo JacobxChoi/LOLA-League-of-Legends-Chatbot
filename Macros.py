@@ -75,7 +75,15 @@ class MacroGetNewName(Macro):
 
 class MacroPushName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        return vars['FIRSTNAME']
+        return vars['FIRSTNAME'] + '.'
+
+class GetPlayerActivity(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        role = 'ROLE'
+        if 'NA' in vars[role] or 'enjoyment not mentioned' in vars[role] or 'unknown' in vars[role]:
+            return
+        else:
+            return 'That\'s really cool!'
 
 class MacroEsportsOrLeague(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
