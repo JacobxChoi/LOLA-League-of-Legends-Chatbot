@@ -68,7 +68,7 @@ def load(df: DialogueFlow, varfile: str):
 transitions = {
     'state': 'start',
     ##Welcoming section
-    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you tell me a bit about yourself?`': {
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you tell me your name and a bit about yourself?`': {
         '#GET_NAME_GPT #GET_NAME': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `. I like` $ROLE `too!`': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end'  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
