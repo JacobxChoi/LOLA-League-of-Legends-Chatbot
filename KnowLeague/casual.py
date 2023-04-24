@@ -44,8 +44,8 @@ def casual():
                                                                     '#RANDGAME':{
                                                                         'state':'suggestGame',
                                                                         '`Sure, how about the`$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
-                                                                            '[no, dont]':'suggestGame',
-                                                                            '[yes, yeah]':'end'
+                                                                            '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]':'suggestGame',
+                                                                            '[{yes, yeah, ok, sure, watch}}]':'end'
                                                                         }
                                                                     },
                                                                     'error':'end' #user doesn't say 'yes' or 'yeah' TODO: use chatgpt to handle user input
