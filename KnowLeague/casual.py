@@ -16,16 +16,22 @@ def casual():
                                 '`What do you like about it specifically?`': {
                                     '[{aggressive, fastpaced, fun, skilled, flashy, technical, informational, fast paced}]': {
                                         '`If you like that then you should also check out T1! They\'re really calculated in their plays.`': {
-                                            '{<already, {watch, watched}>, have}': {
+                                            'state': 'watchT1',
+                                            '{<already, {watch, watched, know}>, have}': {
                                                 '`Nice! Do you want any more similar suggestions?`': {
                                                     '{yes, ok, yeah, sure, fun, alright, [sounds, {fun, good}]}': {
                                                         '`Check out FNC\'s game against GAM during the 2017 World\'s group stage. '
                                                         'It had one of the craziest starts to a game I have ever seen.`': {
                                                             '{why, how, what}': {
                                                                 '`By the time one jungler was level six, the enemy top laner was only level two. '
-                                                                'I won\'t spoil the rest of the game so you should give it a watch. Is there anything '
-                                                                'else you wanted to talk about?`': { #TODO: EXAPND CONVO
-                                                                    '[{nope}]':'end'
+                                                                'I won\'t spoil the rest of the game, but you should give it a watch.`': { #TODO: EXAPND CONVO
+                                                                    '[{nope, no, not, cant, wont, dont, cannot}]': {
+                                                                        '`Alrighty. I really think you should give it a watch. Have a good rest of your day!`': 'end'
+                                                                    },
+                                                                    '[{yes, yeah, ok, sure, watch}]': {
+                                                                        '`Nice! I hope you have a good time. Bye bye!`': 'end'
+                                                                    }
+
                                                                 },
                                                                 'error':'end'
                                                             },
@@ -50,7 +56,7 @@ def casual():
                                                             }
                                                         }
                                                     },
-                                                    '{no, not, nah, pass, [im, {good, fine}]}': { #TODO: EXPAND CONVO
+                                                    '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]': { #TODO: EXPAND CONVO
                                                         '`Alrighty! I\'ll see you later!`': 'end'
                                                     }
                                                 },
@@ -82,7 +88,7 @@ def casual():
                                                 '`Come back after you check them out! I\'ll catch ya later!`':'end'
                                             },
                                             'error': {
-
+                                                '`I\'m not sure if I caught that, can you reword it?`': 'watchT1'
                                             }
                                         },
                                     },
@@ -93,7 +99,14 @@ def casual():
                             },
                             '[{personalities, personality, character, charisma}]': {
                                 '`In what way?`': {
-
+                                    'error': {
+                                        '`Are there any videos where I can see their personalities?`': {
+                                            'error': {
+                                                '`Gotcha. I didn\'t know that about them. They seem like a lot of fun. '
+                                                'As a matter of fact, I\'ll go check them out right now. See ya!`': 'end'
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
