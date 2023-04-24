@@ -9,23 +9,29 @@ def casual():
             '{[{what, why}, you, like]}':{ #USER: What do you like about them?
                 '`I like how they\'re very aggressive. They hardly make mistakes, and they\'re really fun to watch. What about you?`':{
                     'state':'LolaLikesEDG',
-                    '{[like,{too, also}], [also, like]}':{ #I like Edward Gaming too!
+                    '{<{like, watch, prefer}, {too, also}>}':{ #I like Edward Gaming too!
                         'state':'reciprocateEDG',
                         '`Do you like them for their personality or gameplay?`': {
                             '[{playstyle, play, style, skills, abilities, gameplay}]': {
                                 '`What do you like about it specifically?`': {
                                     '[{aggressive, fastpaced, fun, skilled, flashy, technical, informational, fast paced}]': {
                                         '`If you like that then you should also check out T1! They\'re really calculated in their plays.`': {
-                                            '{[already, watch],[watch, already]}': {
+                                            'state': 'watchT1',
+                                            '{<already, {watch, watched, know}>, have}': {
                                                 '`Nice! Do you want any more similar suggestions?`': {
                                                     '{yes, ok, yeah, sure, fun, alright, [sounds, {fun, good}]}': {
                                                         '`Check out FNC\'s game against GAM during the 2017 World\'s group stage. '
                                                         'It had one of the craziest starts to a game I have ever seen.`': {
                                                             '{why, how, what}': {
                                                                 '`By the time one jungler was level six, the enemy top laner was only level two. '
-                                                                'I won\'t spoil the rest of the game so you should give it a watch. Is there anything '
-                                                                'else you wanted to talk about?`': { #TODO: EXAPND CONVO
-                                                                    '[{nope}]':'end'
+                                                                'I won\'t spoil the rest of the game, but you should give it a watch.`': { #TODO: EXAPND CONVO
+                                                                    '[{nope, no, not, cant, wont, dont, cannot}]': {
+                                                                        '`Alrighty. I really think you should give it a watch. Have a good rest of your day!`': 'end'
+                                                                    },
+                                                                    '[{yes, yeah, ok, sure, watch}]': {
+                                                                        '`Nice! I hope you have a good time. Bye bye!`': 'end'
+                                                                    }
+
                                                                 },
                                                                 'error':'end'
                                                             },
@@ -50,7 +56,7 @@ def casual():
                                                             }
                                                         }
                                                     },
-                                                    '{no, not, nah, pass, [im, {good, fine}]}': { #TODO: EXPAND CONVO
+                                                    '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]': { #TODO: EXPAND CONVO
                                                         '`Alrighty! I\'ll see you later!`': 'end'
                                                     }
                                                 },
@@ -79,7 +85,10 @@ def casual():
                                                     }
                                             },
                                             '{yes, ok, yeah, sure, fun, alright, [sounds, {fun, good}]}': {
-
+                                                '`Come back after you check them out! I\'ll catch ya later!`':'end'
+                                            },
+                                            'error': {
+                                                '`I\'m not sure if I caught that, can you reword it?`': 'watchT1'
                                             }
                                         },
                                     },
@@ -90,7 +99,14 @@ def casual():
                             },
                             '[{personalities, personality, character, charisma}]': {
                                 '`In what way?`': {
-
+                                    'error': {
+                                        '`Are there any videos where I can see their personalities?`': {
+                                            'error': {
+                                                '`Gotcha. I didn\'t know that about them. They seem like a lot of fun. '
+                                                'As a matter of fact, I\'ll go check them out right now. See ya!`': 'end'
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -149,21 +165,20 @@ def casual():
                     }
                 }
             },
-            '[dont]':{ #I don't really watch keria or EDG
+            '[no, not, cant, wont, dont]':{ #I don't really watch keria or EDG
                 '`No worries. What other teams do you prefer watching?`':{ #TODO: FINISH
 
                 }
             },
-            'error': {
-                '`I didn\'t quite get what you said. Could you reword that?`':'share'
-            }
+            'error': 'casual'
         },
         # USER didn't watch Lola suggested games, but perhaps they still watched a game from this year
-        '#GATE`Are there any games or tournaments that you watched this year?`':{
+        '#GATE`By the way, are there any games or tournaments that you watched this year?`':{
             'score': 0.5,
             '[{yes, yeah, watched, watch}]':{ #USER: yeah! this year, I watched a game between team1 and team2
                 '`That\'s cool! Who was the highlight of the game?`': {
-                    'state':'highlight',
+                    'state': 'testing',
+                    #'state':'highlight',
                     '[$HIGHLIGHT_PLAYER = #ONT(teams)]':{
                         '`I agree!` $HIGHLIGHT_PLAYER `has been doing well lately. Do you think they\'ll continue to do well?`':{
                             'state':'playerWellness',
@@ -183,22 +198,20 @@ def casual():
                     }
                 },
                 '`Nice! Who won the game? Was it close?`':{
-                    '[{yes, yeah, close}]':{ #USER: yeah, ___ won, and it was a really close game!
-                        '`Wow! I\'m sure TEAM put up a really good fight.`':'end' #TODO: HANDLE ERROR
+                    'score': 2.0,
+
+                    '[$WINNINGTEAM=#ONT(teams),{beat, won, defeated}]':{ #USER: yeah, ___ won, and it was a really close game!
+                        '`Wow! I\'m sure that was a really satisfying win for`$WINNINGTEAM`.`':'end' #TODO: HANDLE ERROR
                     },
                     '[{no, not, wasnt}]':{ #USER: no, the game wasnt really close
                         '`Dang. I\'m not a fan of one-sided games either.`':'end'
                     }
                 }
             },
-            '[{no, did not, didnt}]':{
-                '`No worries!`':'casual'
+            '[{no, not, nope, cannot, didnt, cant, wont, dont}]':{
+                '`That\'s a shame, I don\'t have much to talk about then. Try coming back after watching a game so that we can talk! See ya!`':'end'
             },
             'error':'end'
-        }, #TODO: handle gate
-        '`error`':{
-            'score':0.1,
-            'state':'casual'
         }
     }
 
@@ -453,19 +466,25 @@ def casual():
                                 '`They are definitely a key part to their success, but Keria seems like he\'s always the carry.`': {
                                     '[{why, what, how}, {him, he}]': {
                                         '`He\'s always around the map and makes it seem like it is a 10 v 5. If you need him he\'s there.`': {
-                                            '[{no, not, false, wrong}]': {
+                                            '[{nno, not, dont, false, incorrect, wrong}]': {
                                                 '`I guess that makes sense, but you should check his games out. He gets so many MVPs for a reason.`': 'end'
                                             },
-                                            '[{yes, yeah, true, correct}]': {
+                                            '[{yes, yeah, true, correct, agree, yep}]': {
                                                 '`I\m glad you think the same way! I wish I could play with him. We would win every game!`': 'end'
+                                            },
+                                            'error': {
+                                                '`Gotcha. It was nice talking to you! I enjoyed our conversation a lot. See ya!`': 'end'
                                             }
                                         }
                                     },
-                                    '[{no, not, false, wrong}]': {
-                                        '`Sorry, but I think Keria is the main reason why they\'re able to win so many matches.`': 'end'
+                                    '[{no, not, dont, false, incorrect, wrong}]': {
+                                        '`Well, I think Keria is the main reason why they\'re able to win so many matches.`': 'end'
                                     },
-                                    '[{yes, yeah, true, correct}]': {
+                                    '[{yes, yeah, true, correct, agree, yep}]': {
                                         '`I\m glad you think the same way!`': 'end'
+                                    },
+                                    'error': {
+                                        '`Gotcha. It was nice talking to you! I enjoyed our conversation a lot. See ya!`': 'end'
                                     }
                                 }
                             }
@@ -493,9 +512,3 @@ def casual():
     return casual, edg, keria
 
 #TODO connect these to convo.py
-
-def favTeam():
-    favTeam = {
-        'state': 'favTeam'
-    }
-    return favTeam
