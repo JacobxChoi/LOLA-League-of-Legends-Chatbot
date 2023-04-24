@@ -53,8 +53,9 @@ def doesntKnowLeague():
                 'state': 'transit',
                 # Casual questions to collect related infos
                 # TODO: rewrite the casual converstaion part to add depth and smooth transitions
-                '#GATE `By the way, what\'s your favorite game?`': {
+                '#GATE `By the way, what\'s your favorite video game?`': {
                     'score': '0.8',
+                    'state': 'favGame',
                     # TODO: catch circumstance if the user do not have favorite game
                     '[#FAV_GAMETYPE]': {
                         '`Wow, I tried other` #GET_FAV_GAME `like` $OtherGame `before, but haven\'t touched` $GameName `yet. May I know why you love it?`': {
@@ -164,7 +165,7 @@ def doesntKnowLeague():
                         }
                     },
                     '[{game, learn}]': 'IntroduceGame',
-                    '[{esports, scene}]': 'IntroduceEsports',
+                    '[{esports, scene, esport}]': 'IntroduceEsports',
                     'error': 'IntroduceGame'
                 }
 
