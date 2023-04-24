@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError, GetPlayerActivity
 
 #imports babel conversation
 import babel
@@ -68,24 +68,15 @@ def load(df: DialogueFlow, varfile: str):
 transitions = {
     'state': 'start',
     ##Welcoming section
-    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Would you like to talk about Babel or League of Legends?`': {
-        'state': 'chooseBorL',
-        '[{league, lol}]': {
-            'state': 'choseLeague',
-            '`Could you tell me your name and a bit about yourself?`': {
-                '#GET_NAME_GPT #GET_NAME': {
-                    '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `. I like` $ROLE `too!`': 'DIVERGE',
-                    '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'end',  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
-                },
-                'error': {
-                    'Nice to meet you!': 'DIVERGE'
-                }
+    '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you tell me your name and a bit about yourself?`': {
+        '#GET_NAME_GPT #GET_NAME': {
+            '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `. I like` $ROLE `too!`': 'DIVERGE',
+            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'DIVERGE',  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
+            'error': {
+                '`Nice to meet you!`': 'DIVERGE'
             }
-        },
-        'error': {
-            '`Sorry, I didn\'t catch that. Do you wanna talk about Babel or League of Legends?`': 'chooseBorL'
         }
-    }
+    },
 }
 
 # This transition distributes the users to different branches of transitions based on their acquistion levels
