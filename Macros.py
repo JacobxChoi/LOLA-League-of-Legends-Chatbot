@@ -80,7 +80,7 @@ class MacroPushName(Macro):
 class GetPlayerActivity(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         role = 'ROLE'
-        if 'NA' in vars[role] or 'enjoyment not mentioned' in vars[role] or 'unknown' in vars[role]:
+        if 'NA' in vars[role] or 'enjoyment not mentioned' in vars[role] or 'unknown' in vars[role] or 'unknown (no mention of interests)' in vars[role]:
             return
         else:
             return 'That\'s really cool!'

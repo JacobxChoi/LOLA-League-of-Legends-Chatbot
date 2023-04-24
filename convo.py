@@ -70,7 +70,7 @@ transitions = {
     ##Welcoming section
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you tell me your name and a bit about yourself?`': {
         '#GET_NAME_GPT #GET_NAME': {
-            '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME `. I like` $ROLE `too!`': 'DIVERGE',
+            '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME #PlayerActivity': 'DIVERGE',
             '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'DIVERGE',  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
             'error': {
                 '`Nice to meet you!`': 'DIVERGE'
@@ -155,12 +155,13 @@ macros = {
     ),
 
     'FunTripError': MacroFunTripError(),
+    'PlayerActivity': GetPlayerActivity()
 }
 
 df = DialogueFlow('start', end_state='end')
 #ontology
 df.knowledge_base().load_json_file('resources/teams.json')
-df.knowledge_base().load_json_file('resources/gameType.json')
+# df.knowledge_base().load_json_file('resources/gameType.json')
 
 #funny diversions
 funny_diversions = {

@@ -75,7 +75,7 @@ def babel():
                 '`Definitely, all the storylines were brought together by their shared interactions with the gun. I read an analysis that talked about the Butterfly Effect, like how Chieko\'s father deciding to give Hassan the gun eventually led to Amelia getting deported.`'
             },
             'error': {
-                '`I hadn\'t thought about that, can you tell me more?`': {
+                '`I hadn\'t thought about that, can you tell me specifically about communication, or perhaps the symbolism behind the gun?`': {
                     'error': {
                         '`That\'s really interesting, thanks for sharing!`': 'babel'
                     }
