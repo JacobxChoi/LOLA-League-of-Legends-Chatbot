@@ -43,18 +43,18 @@ def babel():
             '[{tower}]': {
                 '`Yeah, I also think it\'s related to the story of the Tower of Babel. It\'s pretty interesting looking at the parallels between the story and the movie.`': 'babel'
             },
-            # '[{not sure, no idea, -know}]': {
-            #     '`I\'m pretty sure it\'s related to the story of the Tower of Babel, are you familiar with the story?`': {
-            #         '[#AgreementChecker]': {
-            #             '#IF(#POSITIVE_AGREEMENT) `Yeah, I think it\'s pretty interesting looking at the parallels between that story and the movie.`': 'babel'
-            #             '#IF(#NEGATIVE_AGREEMENT) `I\'ll give a quick summary. Long ago, a group of humans all speaking the same language wanted to build a tower with it\'s top in the sky. The ancient Levantine deity Yahweh struck down the tower and scattered the people\'s speech, which is why we all speak different languages today.`': {
-            #                 'error': {
-            #                     '`Yeah, I think it\'s pretty interesting looking at the parallels between that story and the movie.`': 'babel'
-            #                 }
-            #             }
-            #         }
-            #     }
-            # },
+            '[{not sure, no idea, -know}]': {
+                '`I\'m pretty sure it\'s related to the story of the Tower of Babel, are you familiar with the story?`': {
+                    '[#AgreementChecker]': {
+                        '#IF(#POSITIVE_AGREEMENT) `Yeah, I think it\'s pretty interesting looking at the parallels between that story and the movie.`': 'babel',
+                        '#IF(#NEGATIVE_AGREEMENT) `I\'ll give a quick summary. Long ago, a group of humans all speaking the same language wanted to build a tower with it\'s top in the sky. The ancient Levantine deity Yahweh struck down the tower and scattered the people\'s speech, which is why we all speak different languages today.`': {
+                            'error': {
+                                '`Yeah, I think it\'s pretty interesting looking at the parallels between that story and the movie.`': 'babel'
+                            }
+                        }
+                    }
+                }
+            },
             'error': {
                 '`That\'s interesting. I feel like it\'s related to the story of the Tower of Babel, are you familiar with it?`': {
                     'state': 'towerOfBabel',
