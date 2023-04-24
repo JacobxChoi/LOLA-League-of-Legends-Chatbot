@@ -405,7 +405,7 @@ def casual():
         'state': 'keria',
         '`Awesome! Tell me what you like about him.`': {
             'state': 'keria2',
-            '[{playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion, good, talented, gifted, skilled}]': {
+            '[{playmaking, best, macro, mechanics, micro, macroplay, microplay, teamwork, champions, champion, good, talented, gifted, skilled, creative, champion pool}]': {
                 'state':'keriaGameplay',
                 '`Can you explain further?`': {
                     '[{no, not, dont, wont, cant}]': {

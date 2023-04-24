@@ -75,7 +75,15 @@ class MacroGetNewName(Macro):
 
 class MacroPushName(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        return vars['FIRSTNAME']
+        return vars['FIRSTNAME'] + '.'
+
+class GetPlayerActivity(Macro):
+    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
+        role = 'ROLE'
+        if 'NA' in vars[role] or 'enjoyment not mentioned' in vars[role] or 'unknown' in vars[role] or 'unknown (no mention of interests)' in vars[role]:
+            return
+        else:
+            return 'That\'s really cool!'
 
 class MacroEsportsOrLeague(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
@@ -167,6 +175,9 @@ class favRegion(Macro):
         winner = 'T_WINNER'
         loser = 'T_LOSER'
         t_date = 'T_DATE'
+        winner_code = 'WINNER_CODE'
+        loser_code = 'LOSER_CODE'
+
         # t_month = 'T_MONTH'
         # t_day = 'T_DAY'
 
@@ -175,6 +186,8 @@ class favRegion(Macro):
         vars[team1] = ''
         vars[team2] = ''
         vars[winner] = ''
+        vars[winner_code] = ''
+        vars[loser_code] = ''
         # vars[t_day] = ''
         # vars[t_month] = ''
 
@@ -244,13 +257,20 @@ class favRegion(Macro):
         month = date[5:7]
         day = date[-2:]
         year = date[0:4]
+        # adds date to vars
         vars[t_date] = month + '/' + day + '/' + year
+
+        # print(vars)
 
         #gets winners and loser
         if vars[winner] == game['teams'][1]:
             vars[loser] = game['teams'][0]
+            vars[loser_code] = game['teamCodes'][0]
+            vars[winner_code] = game['teamCodes'][1]
         else:
             vars[loser] = game['teams'][1]
+            vars[loser_code] = game['teamCodes'][1]
+            vars[winner_code] = game['teamCodes'][0]
 
         # playoffs
         if typeOfMatch[0:8] == 'Playoffs':
@@ -710,7 +730,18 @@ class MacroEsportAttitudeResponse(Macro):
 class GetBestPlayer(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         date = 'T_DATE'
-        vars[date]
+        dateTourney = vars[date]
+
+        f = open('resources/tourneys.json', )
+        tourneys = json.load(f)
+
+        f = open('resources/lcsPlayerStatsPerGame.json', )
+        playerStats = json.load(f)
+
+        for player in playerStats:
+            pass
+            # if dateTourney in player and
+
 
 class MacroFunTripError(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):

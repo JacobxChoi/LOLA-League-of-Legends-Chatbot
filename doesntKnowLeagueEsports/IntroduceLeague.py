@@ -133,9 +133,9 @@ def IntroduceLeague():
                                                                         'score': '1.0',
                                                                         '`I\'m just kidding. So, are you ready to set out on the safari trip around Summoners Rift?`': 'MonsterTrip'
                                                                     },
+                                                                    'state': 'TripStart',
                                                                     '[#AgreementChecker]': {
                                                                         'score': '0.5',
-                                                                        'state': 'TripStart',
                                                                         '#IF(#POSITIVE_AGREEMENT) `Welcome to the one and only Summoners Rift Safari Tour! We\'re embarking on a thrilling adventure through the realm of \n epic battles, legendary creatures, and stunning landscapes. Please make sure your seatbelts are fastened \n and your cameras are ready because we\'re about to witness the most gorgeous monsters you\'ve ever laid eyes on! \n Throughout the tour, please don\'t hesitate to ask any questions you may have about the monsters\' origins, powers, or roles in the Rift. \n It\'s not every day that you get to witness such a diverse and fascinating array of creatures, so let\'s make the most \n of this unforgettable adventure!`': {
                                                                             '[{quit,leave}]': {
                                                                                 '`No worry, you can always visiting our Summoners Rift Safri Tour, if you call on the name. Do you have other questions regarding to league and league esports`': 'IntroduceLeeague'
@@ -165,7 +165,7 @@ def IntroduceLeague():
 
                                                                                     },
 
-                                                                                    '[{power}]': {
+                                                                                    '[{power,buffs}]': {
                                                                                         'score': '0.7',
                                                                                         '`As an ancient guardian, it holds the Crest of Insight, which bestows the gift of mana regeneration and cooldown reduction upon those brave enough to defeat it. `': 'MonsterFirstGlance'
 
