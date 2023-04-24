@@ -36,8 +36,11 @@ class MacroGetName(Macro):
         vn_FN = 'FIRSTNAME'
         vn_PI = 'PLAYERINFO'
 
-        firstname = vars[vn_FN]
-        vn_firstname = firstname.capitalize()
+        if vn_FN not in vars:
+            pass
+        else:
+            firstname = vars[vn_FN]
+            vn_firstname = firstname.capitalize()
 
         #if 'FIRSTNAME' var isn't in vars
         # if vn_FN not in vars:
@@ -545,7 +548,7 @@ class MacroGPTJSON(Macro):
         examples = f'{self.full_ex} or {self.empty_ex} if unavailable' if self.empty_ex else self.full_ex
         prompt = f'{self.request} Respond in the JSON schema such as {examples}: {ngrams.raw_text().strip()}'
         output = gpt_completion(prompt)
-        # print(output)
+        print(output)
         if not output: return False
 
         try:

@@ -2,11 +2,12 @@ def advanced():
     advanced = { #user has just mentioned that they actively watch the game mentioned in casual.
         'state': 'advanced',
         '`What did you think about the game?`': { #TODO: HANDLE CASES LIKE "I LIKED IT"
-            '{good, competitive, close, fun, well, liked}': {
+            'state':'thoughtsGame',
+            '[{good, competitive, close, fun, well, liked}]': {
                 '`Who do you think performed the best?`': {
                     # Should reply with if the game was close or not
                     'state': 'perform',
-                    '[$BEST_PLAYER = #ONT(teams)]': {
+                    '[$BEST_PLAYER = #ONT(leagues)]': {
                         '#IF(#BESTPLAYER = $BEST_PLAYER)': {
                             '`I agree! I think that` $BEST_PLAYER `was the most efficient player this game. What do you think made his performance so strong?`': {
                                 'state': 'choose_skills',
@@ -70,7 +71,7 @@ def advanced():
                     }
                 }
             },
-            '{boring, bad, #LEM(stomp), [not close]}': {
+            '[{boring, bad, #LEM(stomp), [not close]}]': {
                 '#CLOSE2` Who do you think was the winning factor for the game?`': { #Should reply with if the game was close or not
                     '[$BEST_PLAYER=#ONT(teams)]': {
                         '#IF($BEST_PLAYER = #BESTPLAYER)': {
@@ -93,14 +94,14 @@ def advanced():
                 }
             },
             'error': {
-                '`I\'m not sure if I understood.`': 'advanced'
+                '`I\'m not sure if I understood. Did you think the game was good, or bad?`': 'thoughtsGame'
                 # TODO: I guess error state is useful there when the user give other response than "good"...
             },
 
         },
         '#GATE `Do you think anyone showed a lot of improvement over their last game?`': {
             'score': 0.9,
-            '[$MOST_IMPROVED=#ONT(teams)]': {
+            '[$MOST_IMPROVED=#ONT(leagues)]': {
                 '`What did they do to improve the most?`': {
 
                 }
@@ -112,7 +113,7 @@ def advanced():
         '#GATE `Do you think anyone has been performing worse than usual?`': {
             'score': 0.8,
             'state': 'worst',
-            '[$UNDERPERFORMING=#ONT(teams)]': {
+            '[$UNDERPERFORMING=#ONT(leagues)]': {
                 '`What have they been struggling with the most lately?`': {
                     '[$WORSE_SKILL = {laning, fighting, objective control, vision control, roaming, itemization, wave management}]': {
                         '`I agree.`$UNDERPERFORMING `has been lacking in that department.`': 'end'
