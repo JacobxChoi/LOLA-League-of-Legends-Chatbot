@@ -127,13 +127,14 @@ def IntroduceLeague():
                                                         '`There are many different types of neutral monsters distributed \n nearly symmetrically across the map. You can gain gold, experience, and buffs from defeating them.`': {
                                                             'state': 'MonstersInfo',
                                                             '[{type, different}]': {
-                                                                '`Great, I can guide you across the Summoner\'s Rift to \n see the ecology of the monsters. You can always stop me for further information \n and feel free to take off the safari vehicles. We will leave you around the monsters (=^-ω-^=). \n Are you prepared to set out on the journey?`': {
+                                                                'state': 'TripStart',
+                                                                '`Great, I can guide you across the Summoner\'s Rift to \n see the ecology of the monsters. You can always stop me for further information about the monsters such as its origin and power \n and feel free to take off the safari vehicles. We will leave you around the monsters (=^-ω-^=). \n Are you prepared to set out on the journey?`': {
                                                                     'state': 'MonsterTrip',
                                                                     '[{ecology, trip, funny, weird}]': {
                                                                         'score': '1.0',
                                                                         '`I\'m just kidding. So, are you ready to set out on the safari trip around Summoners Rift?`': 'MonsterTrip'
                                                                     },
-                                                                    'state': 'TripStart',
+
                                                                     '[#AgreementChecker]': {
                                                                         'score': '0.5',
                                                                         '#IF(#POSITIVE_AGREEMENT) `Welcome to the one and only Summoners Rift Safari Tour! We\'re embarking on a thrilling adventure through the realm of \n epic battles, legendary creatures, and stunning landscapes. Please make sure your seatbelts are fastened \n and your cameras are ready because we\'re about to witness the most gorgeous monsters you\'ve ever laid eyes on! \n Throughout the tour, please don\'t hesitate to ask any questions you may have about the monsters\' origins, powers, or roles in the Rift. \n It\'s not every day that you get to witness such a diverse and fascinating array of creatures, so let\'s make the most \n of this unforgettable adventure!`': {
@@ -142,10 +143,11 @@ def IntroduceLeague():
                                                                             },
 
                                                                             'error': {
-                                                                                '`Our first stop will be the picturesque Blue Sentinel\'s lair. Be prepared to be amazed by the beautiful and majestic Blue Sentinel, \n an enormous golem adorned with shimmering crystals. Be sure to snap a photo as it lumbers around, but don\'t get too close, \n for it might just smash you with its powerful fists!`': {
+                                                                                '`Our first stop will be the picturesque Blue Sentinel\'s lair. Be prepared to be amazed by the beautiful and majestic Blue Sentinel, \n an enormous golem adorned with shimmering crystals. Be sure to snap a photo as it lumbers around, but don\'t get too close, \n for it might just smash you with its powerful fists! Do you want to know more about its origin and power, or yo9u want to move to vist another monster?`': {
                                                                                     'state': 'MonsterFirstGlance',
                                                                                     '[{blue, sentinel}]': {
                                                                                         'score': '0.5',
+                                                                                        'state': 'blueBuff',
                                                                                         '`It\'s a fearsome monsters guarding the power of energy and mana regeneration, but tempting treasures for greedy, novice hunters.`': 'MonsterFirstGlance'
                                                                                     },
 
@@ -165,7 +167,7 @@ def IntroduceLeague():
 
                                                                                     },
 
-                                                                                    '[{power,buffs}]': {
+                                                                                    '[{power, buffs, buff}]': {
                                                                                         'score': '0.7',
                                                                                         '`As an ancient guardian, it holds the Crest of Insight, which bestows the gift of mana regeneration and cooldown reduction upon those brave enough to defeat it. `': 'MonsterFirstGlance'
 
@@ -190,7 +192,7 @@ def IntroduceLeague():
 
                                                                                             },
 
-                                                                                            '[{power}]': {
+                                                                                            '[{power, buff, buffs}]': {
                                                                                                 'score': '0.7',
                                                                                                 '`The Crimson Brambleback, or you can call it red, is the guardian of the Red Buff, providing the Crest of Cinders to empower \n the attacks of the champion who bests it in combat. `': 'MonsterSecond'
 
@@ -211,7 +213,7 @@ def IntroduceLeague():
 
                                                                                                     },
 
-                                                                                                    '[{power}]': {
+                                                                                                    '[{power, buff, buffs}]': {
                                                                                                         'score': '0.7',
                                                                                                         '`The Crimson Brambleback, or you can call it red, is the guardian of the Red Buff, providing the Crest of Cinders to empower \n the attacks of the champion who bests it in combat. `': 'VisitCrab'
                                                                                                     },
@@ -495,15 +497,19 @@ def IntroduceLeague():
                     },
                     '[#AgreementChecker]': {
                         'score': '0.5',
-                        '#IF(#POSITIVE_AGREEMENT) `Wow! Could you explain it to me? I guess different people understand it in different ways.`': 'IntroduceLeague',
-                        '#IF(#NEGATIVE_AGREEMENT)': 'GameGoal',
+                        '#IF(#POSITIVE_AGREEMENT) `Wow! Could you explain it to me? I guess different people understand it in different ways.`': {
+                            'error': {
+                                '`Great! It seems like that you already know much about its objectives, do you want to know more about the side missions in the game or monsters in rift`': 'InnerIntroduceLeague'
+                            }
+                        },
+                        '#IF(#NEGATIVE_AGREEMENT)': 'IntroduceObjectives',
                         'error': {
-                            '`Forgive me for my inability to understand you, but do you know the goal of a game of League of Legends?`': 'Directed_Questions'
+                            '`Forgive me for my inability to understand you, but do you know the goal of a game of League of Legends?`': 'IntroduceObjectives'
                         }
                     },
 
                     'error': {
-                        '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'Directed_Questions',
+                        '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerIntroduceLeague',
                     }
                 }
             },
@@ -511,23 +517,33 @@ def IntroduceLeague():
             '[{esports, scene}]': 'IntroduceEsports',
             '[{champions, champs, types, champion}]': 'IntroduceChampions',
             '[{objectives, goal, win}]': 'IntroduceObjectives',
-            '[{roles, positions, lanes}]': 'IntroduceRoles',
+            '[{roles, positions, lanes}]': 'laneInfo',
             '[{map, layout}]': 'IntroduceMap',
-            '[{specific, champions}]': 'SpecificChampions',
-            '[{roles, team}]': 'ChampionRoles',
+            '[{roles, team}]': 'laneInfo',
+            '[{top}]': 'topLane',
+            '[{mid}]': 'midLaneInfo',
+            '[{jungle}]':'jungleInfo' ,
+            '[{adc, bot, bottom}]': 'botLaneInfo',
+            '[{support}]': 'laneInfoSupport',
+            '[tank, tanks]': 'laneInfoTank',
+            '[duelist, duelists]':  'laneInfoDuelist',
+            '[{assassin, assassins}]':'laneInfoAssassin',
             '[{types, categories}]': 'ChampionTypes',
             '[{popular, favorite}]': 'PopularChampions',
             '[{turrets}]': 'TurretsInfo',
-            '[{explain, what}{dragons}]': 'DragonsInfo',
-            '[{explain, what}{Baron, Nashor}]': 'BaronInfo',
+            '[{explain, what}{dragons}]': 'dragons',
+            '[{explain, what}{Baron, Nashor}]': 'NashorBaron',
+            '[{resource, resources}]': 'resource',
+            '[{monsters}]': 'neutralMonsters',
             '[{try}]': 'ReadyToTry',
+            '[{blue, buff, sentinel}]': 'blueBuff',
             '[{qualify, events}]': 'QualifyCompetitions',
             '[{living}]': 'EsportsLiving',
             '[destroy,{nexus, base, turrets}]': 'DestroyNexus',
             '[{minion, minions}]': 'Minions',
             '[{watching, streaming}]': 'StreamingPlatforms',
-            '[{role, lane}]': 'laneInfo',
             '[{item}]': 'items',
+            '[recommend]': 'InnerChampionRecom',
             # TODO: HANDLE CASE WHERE USER SAYS NO
             'error': {
                 '`Sorry, I didn\'t catch that, could you say it again?`': 'IntroduceLeague'

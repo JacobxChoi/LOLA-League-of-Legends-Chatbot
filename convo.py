@@ -18,6 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError,getChampionRecommendReason
     PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError, GetPlayerActivity
 
 #imports babel conversation
@@ -38,7 +39,7 @@ favoriteTeam, favoriteRegion = knowsLeague()
 babel = babel()
 
 #doesntKnowLeague
-doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes, ChampionRoles, StartPlaying, StartWatching = doesntKnowLeague()
+doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes, ChampionRoles, StartPlaying, StartWatching = doesntKnowLeague()
 
 #global transition
 globalState = globalState()
@@ -83,7 +84,6 @@ transitions = {
 transitionDiverging = {
     'state': 'DIVERGE',
     '`Do you keep up with League of Legends esports? What do you think about it? `': {
-        'state':'agreeOrNot',
         '[#AgreementChecker]': {
             '#IF(#POSITIVE_AGREEMENT) `Nice.`': 'favPlayer',
             '#IF(#NEGATIVE_AGREEMENT) `That\'s fine.`': 'doesntKnowLeagueEsports'

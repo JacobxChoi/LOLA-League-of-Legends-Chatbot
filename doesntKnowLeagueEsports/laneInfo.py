@@ -10,7 +10,7 @@ def laneInfo():
                 'state': 'topLane',
                 '`Top lane is often considered as the Lone Wolf. If you\'re a 1v1 enthusiast who wants to '
                 'lean on your own skills and tactics to win the game by pouring tons of pressure on '
-                'your foes, then it\'s a great choice for you!`': {
+                'your foes, then it\'s a great choice for you! Do you want to know more about it`': {
                     '[{enjoy, interesting, yes, yeah}]': {
                         'state': 'topArchetypes',
                         '`Great! Sounds like you are an 1v1 combat fans who want to overwhelm you foes with '
@@ -19,7 +19,10 @@ def laneInfo():
                             'state': 'topArchsInner',
                             '[tank, tanks]': {
                                 'state': 'laneInfoTank',
-                                '`Tanks excel in shrugging off incoming damage and focus on disrupting their enemies, protecting their allies in the process. Popular tanks include Malphite, Ornn, and Sion. Would you like to hear about a different lane?`': {
+                                '`Tanks excel in shrugging off incoming damage and focus on disrupting their enemies, protecting their allies in the process. Popular tanks include Malphite, Ornn, and Sion. Would you like to hear about a different lane or specific tank champion?`': {
+                                    '[#RecommendTank]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[{mid, middle}]': 'midLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
                                     '[{jg, jungle}]': 'jungleInfo',
@@ -32,7 +35,10 @@ def laneInfo():
                             },
                             '[duelist, duelists]': {
                                 'state': 'laneInfoDuelist',
-                                '`Duelists are mobile melee champions that focus on damaging their opponents up close. Popular duelists include Fiora, Jax, and Gwen. Would you like to hear about a different lane?`': {
+                                '`Duelists are mobile melee champions that focus on damaging their opponents up close. Popular duelists include Fiora, Jax, and Gwen. Would you like to hear about a different lane or specific duelist champion?`': {
+                                    '[#RecommendDuelist]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[{mid, middle}]': 'midLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
                                     '[{jg, jungle}]': 'jungleInfo',
@@ -44,18 +50,22 @@ def laneInfo():
                                 }
                             },
                             'error': {
-                                '`Sorry, I didn\'t catch that. Can you say that again for me?`': 'topArchsInner'
+                                '`Sorry, I didn\'t catch that. Can you say that again for me?`': 'InnerIntroduceLeague'
                             }
                         }
 
                     },
+
                     'error': {
                         '`Would you like to hear more about top lane champions?`': {
                             '[{yeah, yes, yup, yep, sure, ok}]': {
                                 '`There are actually 2 main archetypes of top lane champs: tanks and duelists. Which would you like to hear about?`': 'topArchsInner'
                             },
                             '[{no, nah, nope, not really}]': {
-                                '`Alright, do you want to hear about a different lane?`': {
+                                '`Alright, do you want to hear about a different lane or learn more about the specific top champion?`': {
+                                    '[#RecommendTop]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[{mid, middle}]': 'midLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
                                     '[{jg, jungle}]': 'jungleInfo',
@@ -72,7 +82,7 @@ def laneInfo():
             '[{mid, middle}]': {
                 'state': 'midLaneInfo',
                 '`Mid lane is usually filled by fast, high damage champions. If you like playing quickly and '
-                'dealing a lot of burst damage, then Mid would be a great choice for you!`': {
+                'dealing a lot of burst damage, then Mid would be a great choice for you! Do you want to know more about it`': {
                     '[{enjoy, interesting, yes, yeah}]': {
                         'state': 'midArchetypes',
                         '`Nice, seems you like the sound of Mid lane! Most Mid lane champions are mages that '
@@ -81,7 +91,10 @@ def laneInfo():
                             'state': 'midArchsInner',
                             '[{mage, mages, ability power}]': {
                                 'state': 'laneInfoMage',
-                                '`Mages are the spellcasters of the game, wielding powerful magic to obliterate their enemies. Popular mages include Lux, Veigar, and Annie. Would you like to hear about a different lane?`': {
+                                '`Mages are the spellcasters of the game, wielding powerful magic to obliterate their enemies. Popular mages include Lux, Veigar, and Annie. Would you like to hear about a different lane or know more about the specific champion?`': {
+                                    '[#RecommendMid]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[top]': 'topLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
                                     '[{jg, jungle}]': 'jungleInfo',
@@ -94,7 +107,10 @@ def laneInfo():
                             },
                             '[{assassin, assassins}]': {
                                 'state': 'laneInfoAssassin',
-                                '`Assassins are like ninjas - fast, sneaky, and deadly! They excel at picking off high-value targets. Popular assassins include Zed, Katarina, and Fizz. Would you like to hear about a different lane?`': {
+                                '`Assassins are like ninjas - fast, sneaky, and deadly! They excel at picking off high-value targets. Popular assassins include Zed, Katarina, and Fizz. Would you like to hear about a different lane or specific champions?`': {
+                                    '[#RecommendAssassin]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[top]': 'topLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
                                     '[{jg, jungle}]': 'jungleInfo',
@@ -106,7 +122,7 @@ def laneInfo():
                                 }
                             },
                             'error': {
-                                '`Sorry, I didn\'t catch that. Can you say that again for me?`': 'midArchsInner'
+                                '`Sorry, I didn\'t catch that. Can you say that again for me?`': 'InnerIntroduceLeague'
                             }
                         }
 
@@ -117,7 +133,10 @@ def laneInfo():
                                 '`There are actually 2 main archetypes of mid lane champs: mages and assassins. Which would you like to hear about?`': 'midArchsInner'
                             },
                             '[{no, nah, nope, not really}]': {
-                                '`Alright, do you want to hear about a different lane?`': {
+                                '`Alright, do you want to hear about a different lane or specific mid champion?`': {
+                                    '[#RecommendMid]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[top]': 'topLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
                                     '[{jg, jungle}]': 'jungleInfo',
@@ -141,7 +160,10 @@ def laneInfo():
                     'state': 'botLaneInfoInner',
                     '[{adc}]': {
                         'state': 'laneInfoADC',
-                        '`ADCs (also called Marksmen) are the sharpshooters of the game, dealing consistent damage from a distance. Popular ADCs include Ashe, Miss Fortune, and Jhin. Would you like to hear about a different lane?`': {
+                        '`ADCs (also called Marksmen) are the sharpshooters of the game, dealing consistent damage from a distance. Popular ADCs include Ashe, Miss Fortune, and Jhin. Would you like to hear about a different lane or specific champion?`': {
+                            '[#RecommendADC]': {
+                                '$ChampionRecommendReason': 'IntroduceChampions'
+                            },
                             '[top]': 'topLaneInfo',
                             '[{mid, middle}]': 'midLaneInfo',
                             '[{jg, jungle}]': 'jungleInfo',
@@ -154,7 +176,10 @@ def laneInfo():
                     },
                     '[{supp, support}]': {
                         'state': 'laneInfoSupport',
-                        '`Supports are the unsung heroes of the game, providing utility, protection, and vision for their team. Popular supports include Soraka, Thresh, and Lulu. Would you like to hear about a different lane?`': {
+                        '`Supports are the unsung heroes of the game, providing utility, protection, and vision for their team. Popular supports include Soraka, Thresh, and Lulu. Would you like to hear about a different lane or specific champion?`': {
+                            '[#RecommendSupport]': {
+                                '$ChampionRecommendReason': 'IntroduceChampions'
+                            },
                             '[top]': 'topLaneInfo',
                             '[{mid, middle}]': 'midLaneInfo',
                             '[{jg, jungle}]': 'jungleInfo',
@@ -166,7 +191,7 @@ def laneInfo():
                         }
                     },
                     'error': {
-                        '`Sorry, I didn\'t catch that. Could you repeat that for me?`': 'botLaneInfoInner'
+                        '`Sorry, I didn\'t catch that. Could you repeat that for me?`': 'InnerIntroduceLeague'
                     }
                 }
             },
@@ -175,7 +200,7 @@ def laneInfo():
                 '`The Jungler is focused on defeating neutral monsters in the jungle to collect buffs for their '
                 'team. They also roam between lanes to support their teammates in their individual lanes, which '
                 'is also called ganking. If you like being active across the whole map, then Jungle would be a '
-                'great choice for you!`': {
+                'great choice for you! Do you want to know more about it`': {
                     '[{enjoy, interesting, yes, yeah}]': {
                         'state': 'jgArchetypes',
                         '`Cool! Looks like you would be into Jungle! Jungle champs are usually divided in to early game '
@@ -183,7 +208,10 @@ def laneInfo():
                             'state': 'jgArchetypesInner',
                             '[early]': {
                                 'state': 'laneInfoEarlyJG',
-                                '`Early game junglers are good at skirmishes, so they try to start up fights before the game goes too long. Popular early game junglers include Rek\'sai, Rengar, and Elise. Would you like to hear about a different lane?`': {
+                                '`Early game junglers are good at skirmishes, so they try to start up fights before the game goes too long. Popular early game junglers include Rek\'sai, Rengar, and Elise. Would you like to hear about a different lane or specific jungle champion?`': {
+                                    '[#RecommendJungle]': {
+                                        '$ChampionRecommendReason': 'IntroduceChampions'
+                                    },
                                     '[top]': 'topLaneInfo',
                                     '[{mid, middle}]': 'midLaneInfo',
                                     '[{bot, bottom, supp, support}]': 'botLaneInfo',
@@ -208,7 +236,7 @@ def laneInfo():
                                 }
                             },
                             'error': {
-                                '`Sorry, I didn\'t catch that. Could you repeat that for me?`': 'jgArchetypesInner'
+                                '`Sorry, I didn\'t catch that. Could you repeat that for me?`': 'InnerIntroduceLeague'
                             }
                         }
 
@@ -240,7 +268,8 @@ def laneInfo():
                     '[{objectives, in-game}]': 'IntroduceObjectives',
                     '[{roles, positions}]': 'IntroduceRoles',
                     '[{map, layout}]': 'IntroduceMap',
-                    '[{no, none, nothing, fine}]': 'EndIntroduceGame',
+                    '[{no, none, nothing, fine}]': 'IntroduceLeague',
+                    'error': 'IntroduceLeague',
                 }
             },
             'error': {

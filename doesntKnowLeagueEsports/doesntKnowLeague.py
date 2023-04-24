@@ -151,7 +151,7 @@ def doesntKnowLeague():
                     },
                 },
 
-                '`Let me give you a brief introduction to League of Legends. It\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game played by millions of people, and it has a thriving esports scene. Do you want to know more about the game or its esports scene?`': {
+                '`Let me give you a brief introduction to League of Legends. It\'s actually one of the most popular video games in the world! \n It\'s a competitive, team-based game played by millions of people, and it has a thriving esports scene. \n Do you want to know more about the game mechanics? \n (Remember just say Bye, if you want to quit the bot)`': {
                     'score': '0.5',
                     '[{sure, yes, definitely, ok, okey}]': {
                         '`So do you want to know more about the game mechanics?`': {
@@ -184,13 +184,11 @@ def doesntKnowLeague():
 
     IntroduceGame = {
         'state': 'IntroduceGame',
-        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents.`': {
+        '`In League of Legends, there are five main roles: Top, Jungle, Mid, AD Carry, and Support. Each role has specific responsibilities and champion types. Damage dealers focus on dealing damage to enemy champions, tanks absorb damage and protect their teammates, and supports provide utility to their team through healing, crowd control, and vision control. The map is divided into three lanes and a jungle area. Players must work together, communicate, and strategize to secure objectives and outplay their opponents. Do you want to know how people win a game or the basic info about each lane, or the description for champions`': {
             '[{champions, types}]': 'IntroduceChampions',
             '[{objectives, goal, win}]': 'IntroduceObjectives',
-            '[{roles, positions}]': 'ChampionRoles',
-            '[{lane, lanes}]': 'laneInfo',
+            '[{lane, lanes, roles, positions}]': 'laneInfo',
             '[{items, item}]': 'items',
-            '[{map, layout}]': 'IntroduceMap',
             '[{no, nothing, fine}]': 'EndIntroduceGame',
             '[{complicated}]': {
                 '`It can be at first, but once you get the hang of it, it\'s really fun. You choose a champion to play as, and each one has unique abilities and playstyles.`': 'IntroduceLeague',
@@ -200,15 +198,15 @@ def doesntKnowLeague():
             },
             'error': {
                 'state': 'IntroduceGameRepeat',
-                '`I\'m sorry, I didn\'t quite understand your question. Would you like to know more about the different types of champions, in-game objectives, roles in the game, or the map layout?`': {
+                '`I\'m sorry, I didn\'t quite understand your question. Would you like to know more about the different types of champions, in-game objectives, roles in the game, or monsters in the rift?`': {
                     '[{champions, types}]': 'IntroduceChampions',
                     '[{objective, ingame, goal, win}]': 'IntroduceObjectives',
-                    '[{roles, positions, lanes}]': 'ChampionRoles',
-                    '[{map, layout}]': 'IntroduceMap',
+                    '[{roles, positions, lanes}]': 'laneInfo',
                     '[{no, nothing, fine}]': {
                         'state': 'EndIntroduceGame',
-                        '`Feel free to ask me, if you have another questions!ヽ( ° ▽°)ノ`': 'IntroduceLeague',
+                        '`Feel free to ask me, if you have another questions!ヽ( ° ▽°)ノ`': 'InnerIntroduceLeague',
                     },
+                    '[{monsters, monster}]': 'neutralMonsters',
                     'error': 'IntroduceLeague',
                 }
             }
@@ -217,55 +215,8 @@ def doesntKnowLeague():
 
     ChampionRoles = {
         'state': 'ChampionRoles',
-        '`In a team, champions play specific roles based on their strengths and abilities. The roles are Top, Jungle, Mid, ADC, and Support. Each role contributes to the overall success of the team. Which role sounds interesting to you?`': {
-            'state': 'InnerChampionRole',
-            '[{top}]': {
-                'state': 'TopInfo',
-                '`Top lane is usually home to tanky fighters or bruisers. They tend to have high survivability and often engage in duels with their lane opponents. It\'s an exciting role if you enjoy 1v1 combat. What other roles intrigue you?`': {
-                    '[{jungle, mid, adc, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{jungle}]': {
-                'state': 'JungleInfo',
-                '`Junglers roam the map, farming neutral monsters and helping teammates by ganking lanes. They play a pivotal role in securing objectives and controlling the map. It\'s a great role if you enjoy being a playmaker. Are you curious about other roles?`': {
-                    '[{top, mid, adc, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{mid}]': {
-                'state': 'MidInfo',
-                '`Mid laners are often mages or assassins with strong burst damage and crowd control. They have a big impact on the game, and their ability to roam and help other lanes is crucial. If you like dealing lots of damage and making plays, this role is for you. Interested in other roles?`': {
-                    '[{top, jungle, adc, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{adc}]': {
-                'state': 'ADCInfo',
-                '`ADCs, or Attack Damage Carries, are ranged champions that deal consistent physical damage. Their main goal is to dish out damage while staying safe in team fights. If you enjoy positioning and kiting, this role is perfect for you. Want to learn about other roles?`': {
-                    '[{top, jungle, mid, support}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{support}]': {
-                'state': 'SupportInfo',
-                '`Supports protect their team and provide utility through healing, crowd control, and vision control. They are the backbone of the team and help set up plays. If you like helping your teammates and controlling the game, this role is for you. Curious about other roles?`': {
-                    '[{top, jungle, mid, adc}]': 'InnerChampionRole',
-                    'error': 'InnerChampionRole'
-                }
-            },
-
-            '[{esport, esports}]': 'IntroduceEsports',
-
-            'error': {
-                '`I\'m sorry, I didn\'t catch that. If you want to know more about the different champions roles, just let me know!`': 'InnerChampionRole'
-            }
+        '`In a team, champions play specific roles based on their strengths and abilities. The roles are Top, Jungle, Mid, ADC, and Support. Each role contributes to the overall success of the team. Which role sounds interesting to you?`': 'laneInfo'
         }
-    }
 
     IntroduceObjectives = {
         'state': 'IntroduceObjectives',
@@ -332,9 +283,9 @@ def doesntKnowLeague():
 
     IntroduceChampions = {
         'state': 'IntroduceChampions',
-        '`League of Legends has over 150 unique champions, each with their own abilities and playstyle! It\'s so diverse and exciting. (ゝ∀･)b`': {
+        '`By the way, League of Legends has over 150 unique champions, each with their own abilities and playstyle! It\'s so diverse and exciting. (ゝ∀･)b`': {
             'state': 'InnerIntroduceChampions',
-            '[{specific, champions}]': 'SpecificChampions',
+            '[{recommend}]': 'RecommendChampions',
             '[{roles, team}]': 'ChampionRoles',
             '[{types, categories}]': 'ChampionTypes',
             '[{popular, favorite}]': 'PopularChampions',
@@ -344,35 +295,20 @@ def doesntKnowLeague():
         }
     }
 
-    SpecificChampions = {
-        'state': 'SpecificChampions',
-        '`For beginners, I recommend trying Garen (a strong fighter), Ashe (a skilled marksman), and Lux (a powerful mage). These champs have straightforward mechanics, so it\'s easier for new players to learn the ropes.(っ＾▿＾)っ Interested in more champ suggestions for each role?`': {
-            'state': 'InnerSpecificChamp',
-            '[{yes, sure, recommend}]': 'RecommendChampions',
-            '[{no, not now, later}]': {
-                'state': 'EndSpecificChampions',
-                '`No worries! If you ever have questions about champions or anything else related to League of Legends, just ask anytime. Enjoy exploring the game! (ゝ∀･)b`': 'end'
-            },
-            'error': {
-                '`I\'m sorry, I didn\'t catch that. If you have any questions about champions, feel free to ask!`': 'InnerSpecificChampions'
-            }
-        }
-    }
-
     ChampionTypes = {
         'state': 'ChampionTypes',
         '`Champions are grouped into six main classes: assassins, fighters, mages, marksmen, supports, and tanks. Each class offers a unique playstyle. Is there a specific class you\'d like to know more about?`': {
             'state': 'InnerChampionTypes',
-            '[{assassins}]': {
+            '[{assassins, jungle}]': {
                 'state': 'AssassinsInfo',
                 '`Assassins are like ninjas - fast, sneaky, and deadly! They excel at picking off high-value targets. Popular assassins include Zed, Katarina, and Fizz. Feel free to ask about other champion types or anything else about the game!`': {
                     '[{other types, champion types}]': 'ChampionTypes',
                     '[{roles}]': 'ChampionRoles',
                     '[{objectives}]': 'IntroduceObjectives',
-                    'error': 'AssassinsInfo'
+                    'error': 'IntroduceLeague'
                 }
             },
-            '[{fighters}]': {
+            '[{fighters, top}]': {
                 'state': 'FightersInfo',
                 '`Fighters are like brawlers - strong and resilient! They excel in close combat and can take a beating while dishing out damage. Popular fighters include Darius, Garen, and Illaoi. Feel free to ask about other champion types or anything else about the game!`': {
                     'state': 'InnerFighters',
@@ -380,11 +316,11 @@ def doesntKnowLeague():
                     '[{roles}]': 'ChampionRoles',
                     '[{objectives}]': 'IntroduceObjectives',
                     'error': {
-                        '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerFighters'
+                        '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerIntroduceLeague'
                     }
                 }
             },
-            '[{mages}]': {
+            '[{mages, mid}]': {
                 'state': 'MagesInfo',
                 '`Mages are the spellcasters of the game, wielding powerful magic to obliterate their enemies. Popular mages include Lux, Veigar, and Annie. Curious about other champion types or any other aspect of the game? Just ask!`': {
                     'state': 'InnerMage',
@@ -392,11 +328,11 @@ def doesntKnowLeague():
                     '[{roles}]': 'ChampionRoles',
                     '[{objectives}]': 'IntroduceObjectives',
                     'error': {
-                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerMage',
+                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerIntroduceLeague'
                     }
                 }
             },
-            '[{marksmen}]': {
+            '[{marksmen, ad}]': {
                 'state': 'MarksmenInfo',
                 '`Marksmen are the sharpshooters of the game, dealing consistent damage from a distance. Popular marksmen include Ashe, Miss Fortune, and Jhin. Feel free to ask about other champion types or anything else about the game!`': {
                     'state': 'InnerMarksmen',
@@ -404,11 +340,11 @@ def doesntKnowLeague():
                     '[{roles}]': 'ChampionRoles',
                     '[{objectives}]': 'IntroduceObjectives',
                     'error': {
-                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerMarksmen'
+                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerIntroduceLeague'
                     }
                 }
             },
-            '[{supports}]': {
+            '[{supports, support}]': {
                 'state': 'SupportsInfo',
                 '`Supports are the unsung heroes of the game, providing utility, protection, and vision for their team. Popular supports include Soraka, Thresh, and Lulu. Feel free to ask about other champion types or anything else about the game!`': {
                     'state': 'InnerSupports',
@@ -416,7 +352,7 @@ def doesntKnowLeague():
                     '[{roles}]': 'ChampionRoles',
                     '[{objectives}]': 'IntroduceObjectives',
                     'error': {
-                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerSupports'
+                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerIntroduceLeague'
                     }
                 }
             },
@@ -428,12 +364,12 @@ def doesntKnowLeague():
                     '[{roles}]': 'ChampionRoles',
                     '[{objectives}]': 'IntroduceObjectives',
                     'error': {
-                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerTanks'
+                         '`(≧∀≦)ゞ I\'m really sorry, I didn\'t catch that. Could you explain what you\'re asking again?`': 'InnerIntroduceLeague'
                     }
                 }
             },
             'error': {
-                '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerChampionTypes'
+                '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerIntroduceLeague'
             }
         }
     }
@@ -448,11 +384,11 @@ def doesntKnowLeague():
                     '[{yes, try, play}]': {
                         'state': 'GiveAhriTry',
                         # TODO
-                        '`Great! Have fun mastering Ahri\'s abilities and charming your way to victory! Remember, practice makes perfect. If you have any questions or want to learn about other aspects of the game, just let me know!`': 'end'
+                        '`Great! Have fun mastering Ahri\'s abilities and charming your way to victory! Remember, practice makes perfect. If you have any questions or want to learn about other aspects of the game, just let me know!`': 'InnerIntroduceLeague'
                     },
                     '[{other champions, more champions}]': 'PopularChampions',
                     'error': {
-                        '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerAhri',
+                        '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerIntroduceLeague'
                     }
                 }
             },
@@ -462,11 +398,11 @@ def doesntKnowLeague():
                     'state': 'InnerYasuo',
                     '[{yes, try, play}]': {
                         'state': 'GiveYasuoTry',
-                        '`Awesome! Enjoy mastering Yasuo\'s swift moves and sharp skills. Just like Yasuo, stay focused and you\'ll soon become a force to be reckoned with! If you need help or want to learn more about the game, I\'m here to help!`': 'end'
+                        '`Awesome! Enjoy mastering Yasuo\'s swift moves and sharp skills. Just like Yasuo, stay focused and you\'ll soon become a force to be reckoned with! If you need help or want to learn more about the game, I\'m here to help!`': 'InnerIntroduceLeague'
                     },
                     '[{other champions, more champions}]': 'PopularChampions',
                     'error': {
-                        '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerYasuo',
+                        '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerIntroduceLeague'
                     }
                 }
             },
@@ -479,7 +415,7 @@ def doesntKnowLeague():
                     '[{objectives}]': 'IntroduceObjectives',
                     '[{champion types, types}]': 'ChampionTypes',
                     'error': {
-                        '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerLux'
+                        '`I\'m sorry, I didn\'t catch that. If you want to know more about a specific class, just let me know!`': 'InnerIntroduceLeague'
                     }
                 }
             },
@@ -492,10 +428,25 @@ def doesntKnowLeague():
 
     RecommendChampions = {
         'state': 'RecommendChampions',
-        '`Here\' s a list of easy - to - learn champions for each role: 🌟Top: Garen, Malphite, Darius - Jungle: Warwick, Amumu, Vi - Mid: Annie, Lux, Veigar - ADC: Ashe, Miss Fortune, Sivir - Support: Soraka, Leona, Morgana.Try them out and find the ones that fit your playstyle best! ε(*´･∀･｀)зﾞReady to learn about the in -game objectives?`': {
-            '[{yes, objectives, sure}]': 'IntroduceObjectives',
-            '[{no, not now, later}]': 'EndObjectives',
-            'error': 'IntroduceObjectives'
+        '`Here\' s a list of easy - to - learn champions for each role: \n🌟Top: Garen, Malphite, Darius \n- Jungle: Warwick, Amumu, Vi \n- Mid: Annie, Lux, Veigar \n- ADC: Ashe, Miss Fortune, Sivir \n- Support: Soraka, Leona, Morgana.\nTry them out and find the ones that fit your playstyle best! ε(*´･∀･｀)зﾞDo you wan to know more about any of those champions`': {
+            'state': 'InnerChampionRecom',
+            '#GetChampion': {
+                '#RecommendChampion': 'InnerIntroduceLeague',
+            },
+
+            '[{yes, sure, okey}]': {
+                '`Which champion do you want to know more about`': {
+                    '[$FAN_CHAMP=#ONT(top), champion]': {
+                        '`My apologies, could you repeat the champion name again?` $FAN_CHAMP': {
+                            '#RecommendChampion': 'InnerIntroduceLeague',
+                        }
+                    },
+                }
+            },
+
+            'error':{
+                '`I\'m sorry, I didn\'t catch that. If you want to know more about champions, just let me know!`': 'InnerIntroduceLeague'
+            }
         }
     }
 
@@ -503,11 +454,11 @@ def doesntKnowLeague():
     IntroduceEsports = {
         'state': 'IntroduceEsports',
         '`Oh man, the esports scene is huge. The two biggest international events are the Mid-Season Invitational and the League of Legends World Championship.`': {
-            '[{teams, specific}]': 'SpecificTeams',
-            '[{players, specific}]': 'SpecificPlayers',
-            '[{game, works}]': 'IntroduceChampions',
+            '[{teams, team}]': 'SpecificTeams',
+            '[{players, player}]': 'SpecificPlayers',
+            '[{game, event, works}]': 'IntroduceChampions',
             '[{qualify}]': 'QualifyCompetitions',
-            '[{professional, teams}]': {
+            '[{professional}]': {
                 'state': 'ProTeamsInfo',
                 '`In the LoL e-sports scene, teams usually have coaches, analysts, and support staff to help them prepare for matches. They practice together, work on strategies, and scout their opponents to find weaknesses they can exploit. Most regions have their own professional leagues, like the LEC in Europe, LCS in North America, and LCK in Korea. Are you interested in major international competitions or how teams qualify for them?`': {
                     'state': 'InnerProTeams',
@@ -518,7 +469,7 @@ def doesntKnowLeague():
                             '[{qualify, earn, award}]': 'QualifyCompetitions',
                             '[{living}]': 'EsportsLiving',
                             'error': {
-                                '`I\'m sorry, I didn\'t catch that. If you want to know more about how teams qualify for events or how players make a living from e-sports, just let me know!`': 'InnerInternationalCompetitions',
+                                '`I\'m sorry, I didn\'t catch that. If you want to know more about how teams qualify for events or how players make a living from e-sports, just let me know!`': 'InnerIntroduceLeague'
                             }
                         }
                     },
@@ -537,33 +488,33 @@ def doesntKnowLeague():
                                             '[{watch, watching}]': 'StartWatching',
                                             '[{play, playing}]': 'StartPlaying',
                                             'error': {
-                                                '`I\'m sorry, I didn\'t catch that. If you want to know more about how to start watching League of Legends e-sports or how to start playing the game, just let me know!`': 'InnerStreamingPlatforms'
+                                                '`I\'m sorry, I didn\'t catch that. If you want to know more about how to start watching League of Legends e-sports or how to start playing the game, just let me know!`': 'InnerIntroduceLeague'
                                             }
                                         }
                                     },
                                     '[{playing, game}]': 'StartPlaying',
                                     '[{lot, large, huge}]': {
-                                        '`Yeah, it\'s worth it. The pro players make a good living from salaries, sponsorships, and prize money, and some of the top players are even considered celebrities in their home countries.`': 'IntroduceLeague',
+                                        '`Yeah, it\'s worth it. The pro players make a good living from salaries, sponsorships, and prize money, and some of the top players are even considered celebrities in their home countries.`': 'InnerIntroduceLeague'
                                     },
                                     'error': {
-                                        '`I\'m sorry, I didn\'t catch that. If you want to know more about watching e-sports on streaming platforms or how to get into playing the game, just let me know!`': 'InnerEsportLiving'
+                                        '`I\'m sorry, I didn\'t catch that. If you want to know more about watching e-sports on streaming platforms or how to get into playing the game, just let me know!`': 'InnerIntroduceLeague'
                                     }
                                 }
                             },
                             '[{watching, esports}]': 'StartWatching',
                             'error': {
-                                '`I\'m sorry, I didn\'t catch that. If you want to know more about the financial aspect of e-sports or how to start watching LoL e-sports, just let me know!`': 'InnerQualification',
+                                '`I\'m sorry, I didn\'t catch that. If you want to know more about the financial aspect of e-sports or how to start watching LoL e-sports, just let me know!`': 'InnerIntroduceLeague'
                             }
                         }
                     },
                     'error': {
-                        '`I\'m sorry, I didn\'t catch that. If you want to know more about international competitions or how teams qualify for them, just let me know!`': 'InnerProTeams',
+                        '`I\'m sorry, I didn\'t catch that. If you want to know more about international competitions or how teams qualify for them, just let me know!`': 'InnerIntroduceLeague'
                     }
                 }
             },
             '[{no, not now, later}]': {
                 'state': 'EndEsports',
-                '`That\'s totally fine! If you ever want to learn more about the esports scene or anything else related to League of Legends, feel free to ask.Have a great time playing the game!`': 'end'
+                '`That\'s totally fine! If you ever want to learn more about the esports scene or anything else related to League of Legends, feel free to ask.Have a great time playing the game!`': 'InnerIntroduceLeague'
             },
             'error': 'IntroduceLeague',
         }
@@ -577,7 +528,7 @@ def doesntKnowLeague():
                 'state': 'EndPlayers',
                 '`Okay! If you ever want to know more about specific players or anything else related to League of Legends, just let me know. Enjoy your journey into the world of League of Legends!`': 'end'
             },
-            'error': 'SpecificPlayers'
+            'error': 'InnerIntroduceLeague'
         }
     }
 
@@ -593,7 +544,7 @@ def doesntKnowLeague():
                 'state': 'EndReadyToTry',
                 '`No worries! If you ever decide to give League of Legends a try, or if you have any more questions, feel free to ask. Have a great day!`': 'end'
             },
-            'error': 'ReadyToTry'
+            'error': 'InnerIntroduceLeague'
         }
     }
 
@@ -606,7 +557,7 @@ def doesntKnowLeague():
             },
             '[{playing, game}]': 'StartPlaying',
             'error': {
-                '`I\'m sorry, I didn\'t catch that. If you want to know more about playing the game, just let me know!`': 'InnerStartWatching',
+                '`I\'m sorry, I didn\'t catch that. If you want to know more about playing the game, just let me know!`': 'InnerIntroduceLeague'
             }
         }
     }
@@ -619,7 +570,7 @@ def doesntKnowLeague():
                 '`Cool!`':'casual'
             },
             'error': {
-                '`I\'m sorry, I didn\'t catch that. If you want to know more about playing the game or anything else related to League of Legends, just let me know!`': 'InnerStartPlaying'
+                '`I\'m sorry, I didn\'t catch that. If you want to know more about playing the game or anything else related to League of Legends, just let me know!`': 'InnerIntroduceLeague'
             }
         }
     }
@@ -694,4 +645,4 @@ def doesntKnowLeague():
         'opponents nexus, they win the game.`': 'end'
     }
 
-    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificChampions, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching
+    return doesntKnowLeague, items, base, laneInfo, IntroduceLeague, IntroduceGame, IntroduceChampions, IntroduceEsports, IntroduceObjectives, ChampionRoles, SpecificTeams, SpecificPlayers, RecommendChampions, PopularChampions, ChampionTypes,ChampionRoles, StartPlaying, StartWatching
