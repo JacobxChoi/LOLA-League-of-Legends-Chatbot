@@ -18,7 +18,7 @@ from doesntKnowLeagueEsports.laneInfo import laneInfo
 #macros
 from Macros import MacroEsportsOrLeague, UserInputChampion, MacroGetName, MacroGetOldName, \
     MacroGetNewName, MacroPushName, favRegion, MacroGPTJSON, getFavGame, MacroNLG,getReason,getActivityWithFriends, \
-    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError,getChampionRecommendReason
+    PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError,getChampionRecommendReason, \
     PositiveAgreement, NegativeAgreement, MacroGoalAnalogy, getRandomGame, getSportsEvent,MacroEsportAttitudeResponse, MacroGPTHAIKU, MacroFunTripError, GetPlayerActivity
 
 #imports babel conversation
@@ -184,7 +184,6 @@ df.load_transitions(IntroduceEsports)
 df.load_transitions(IntroduceObjectives)
 df.load_transitions(ChampionRoles)
 df.load_transitions(SpecificTeams)
-df.load_transitions(SpecificChampions)
 df.load_transitions(SpecificPlayers)
 df.load_transitions(RecommendChampions)
 df.load_transitions(PopularChampions)
