@@ -423,7 +423,7 @@ def doesntKnowLeague():
 
     RecommendChampions = {
         'state': 'RecommendChampions',
-        '`Here\' s a list of easy - to - learn champions for each role: \n🌟Top: Garen, Malphite, Darius \n- Jungle: Warwick, Amumu, Vi \n- Mid: Annie, Lux, Veigar \n- ADC: Ashe, Miss Fortune, Sivir \n- Support: Soraka, Leona, Morgana.\nTry them out and find the ones that fit your playstyle best! ε(*´･∀･｀)зﾞDo you wan to know more about any of those champions`': {
+        '`Here\' s a list of easy-to-learn champions for each role: \n🌟Top: Garen, Malphite, Darius \n- Jungle: Warwick, Amumu, Vi \n- Mid: Annie, Lux, Veigar \n- ADC: Ashe, Miss Fortune, Sivir \n- Support: Soraka, Leona, Morgana.\nTry them out and find the ones that fit your playstyle best! ε(*´･∀･｀)зﾞDo you wan to know more about any of those champions`': {
             'state': 'InnerChampionRecom',
             '#GetChampion': {
                 '#RecommendChampion': 'InnerIntroduceLeague',
