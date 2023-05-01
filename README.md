@@ -9,5 +9,5 @@ This is our group's final project for CS/LING-329: Computational Linguistics. Lo
 ### How to run LoLa
 
 1. Clone the repo to your local machine
-2. fill resources/openai_api.txt with your OpenAI API key
-3. run convo.py 
+2. Fill resources/openai_api.txt with your OpenAI API key
+3. Run convo.py 
