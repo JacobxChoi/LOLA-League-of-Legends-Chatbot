@@ -40,7 +40,7 @@ def globalState():
         },
         '[stew]':{
             'score': 2,
-            '`okay.`': 'casual'
+            '`Okay.`': 'casual'
         }
     }
     return global_transitions

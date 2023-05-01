@@ -44,7 +44,6 @@ def doesntKnowLeague():
                     }
                 }
             },
-            # TODO: add new branch here
             '[{heard, [video game]}]': {
                 '`Yeah, it\'s actually one of the most popular video games in the world! It\'s a competitive, team-based game that\'s played by millions of people, and it has a thriving esports scene. Would you like to learn more about the game or the esports scene?`': {
                     '[{game, learn}]': 'IntroduceGame',
@@ -55,11 +54,9 @@ def doesntKnowLeague():
             '[{no, nope, not, dont, never, barely, little bit}]': {
                 'state': 'transit',
                 # Casual questions to collect related infos
-                # TODO: rewrite the casual converstaion part to add depth and smooth transitions
                 '#GATE `By the way, what\'s your favorite video game?`': {
                     'score': '0.8',
                     'state': 'favGame',
-                    # TODO: catch circumstance if the user do not have favorite game
                     '[#FAV_GAMETYPE]': {
                         '`Wow, I tried other` #GET_FAV_GAME `like` $OtherGame `before, but haven\'t touched` $GameName `yet. May I know why you love it?`': {
                             'error': {
@@ -92,11 +89,10 @@ def doesntKnowLeague():
                     '[{fun, challenging, exciting, interesting}]': {
                         '`For sure! After all, the adrenaline rush after watching an exciting matches is true. Do you enjoy the watching other sports events as well?`': {
                             '[#SportEvents]': {
-                                # TODO to add different attitude toward different games
                                 '`(^ρ^)/, Wow,I love` #GET_SportsEvent `too. My emotions get quickly driven by the players, and I love that feeling !`': {
                                     'state': 'SportEvents',
                                     '[{too, [as well], yeah, sure, true, definitely}]': {
-                                        'score': '0.5', #TODO - FIX TYPO
+                                        'score': '0.5',
                                         '`Yeah, the feeling of being is definitely fun, even it\'s online. `': {
 
                                             '[{yeah,well,true,too,similar}]': {
@@ -383,7 +379,6 @@ def doesntKnowLeague():
                     'state': 'InnerAhri',
                     '[{yes, try, play}]': {
                         'state': 'GiveAhriTry',
-                        # TODO
                         '`Great! Have fun mastering Ahri\'s abilities and charming your way to victory! Remember, practice makes perfect. If you have any questions or want to learn about other aspects of the game, just let me know!`': 'InnerIntroduceLeague'
                     },
                     '[{other champions, more champions}]': 'PopularChampions',
@@ -537,7 +532,6 @@ def doesntKnowLeague():
         '`Some legendary players in the history of League of Legends esports are Faker (mid laner for T1), Uzi (former ADC for Royal Never Give Up), Caps (mid laner for G2 Esports), and Doublelift (former ADC for Team SoloMid and Team Liquid). These players have had successful careers and have made a significant impact on the esports scene. I can also share some of my favorite players and teams if you\'re interested.`': {
             '[{yes, know}]': { #yes, I'd like to know about your favorite teams/players as well
                 'state': 'ReadyToTry',
-                # TODO: fix transition between doesntKnowLeague and knowsLeague
                 '`Great!`': 'casual'
             },
             '[{no, not now, later}]': {
@@ -565,7 +559,7 @@ def doesntKnowLeague():
     StartPlaying = {
         'state': 'StartPlaying',
         '`While there is a learning curve, the game is free to play, and there are plenty of resources available to help you learn. You can find guides, tutorials, and community forums online to help you improve your skills. Plus, playing with friends can make the experience more enjoyable. If you ever have any questions or want to play together, just let me know! Lastly, would you happen to be interested in learning a bit about the esports scene as well? I can introduce my favorite players and teams too!`': {
-            'state': 'InnerStartPlaying', #TODO improve transition between doesntKnowLeague and knowsLeague
+            'state': 'InnerStartPlaying',
             '[{yes, ready}]':{
                 '`Cool!`':'casual'
             },
@@ -634,7 +628,6 @@ def doesntKnowLeague():
                 '`I\'m sorry, I didn\'t understand that. Can you say it again please?`': 'itemQuestions'
             }
         }
-        # TODO: add info about items
     }
 
     base = {

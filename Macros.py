@@ -111,10 +111,6 @@ class UserInfo(Macro):
         vars[playerRec] = ''
         vars[visits] = 1
 
-class favPlayer(Macro):
-    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        json.load('resources/teams.json')
-
 class favRegion(Macro):
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
         userResponse = ngrams.text()
@@ -169,7 +165,6 @@ class favRegion(Macro):
                 }
 
         # labeled T because they're temporary variables that are not meant to be stored.
-        # TODO make a macro to remove unnecessary variables
 
         t_tourney = 'T_TOURNEY'
         t_typeOfMatch = 'T_MATCH'
@@ -226,14 +221,12 @@ class favRegion(Macro):
                     tourney = tourney[random.randrange(len(tourney))]
                 else:
                     hasTourney = False
-                #TODO: handle case where there are tourneys, but no games
                 if noTourney >= 17:
                     print("NO GAMES IN TOURNEY")
                     return False
 
             #stores tourney into vars
             vars[t_tourney] = tourney.replace('_', ' ')
-        #TODO: case where region doesn't have any games from this year. Might have to adjust convo like: "I don't think that region played any games this year"
         else:
             return False
 
@@ -303,8 +296,6 @@ class favRegion(Macro):
         return True
 
 class getRandomGame(Macro):
-    #TODO: CODE IS REDUNDANT AS PREVIOUS MACRO. CLEAN UP IF POSSIBLE
-    #TODO: USE CHATGPT TO HANDLE USER RESPONSE
     def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
 
         print(ngrams)
@@ -350,7 +341,6 @@ class getRandomGame(Macro):
 
                 # stores tourney into vars
                 vars[t_tourney] = tourney.replace('_', ' ')
-            # TODO: case where region doesn't have any games from this year. Might have to adjust convo like: "I don't think that region played any games this year"
             else:
                 print("REGION HAS NO GAMES")
                 return False
@@ -670,7 +660,6 @@ class MacroGoalAnalogy(Macro):
             vars[vn] = 'Role play Game'
 
 
-        # TODO: include a category based on the gpt output
 
         if vars[vn] == 'First-person shooter ':
             return GameTypeResponseDic['shooter']['GameGoalSim']
@@ -729,21 +718,6 @@ class MacroEsportAttitudeResponse(Macro):
 
         else:
             return EsportAttitudeResponseDic['other']['EsportAttitudeSim']
-
-class GetBestPlayer(Macro):
-    def run(self, ngrams: Ngrams, vars: Dict[str, Any], args: List[Any]):
-        date = 'T_DATE'
-        dateTourney = vars[date]
-
-        f = open('resources/tourneys.json', )
-        tourneys = json.load(f)
-
-        f = open('resources/lcsPlayerStatsPerGame.json', )
-        playerStats = json.load(f)
-
-        for player in playerStats:
-            pass
-            # if dateTourney in player and
 
 
 class MacroFunTripError(Macro):

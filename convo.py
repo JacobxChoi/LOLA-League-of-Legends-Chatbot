@@ -72,7 +72,7 @@ transitions = {
     '`Hi, this is LoLa, your personal chatbot for LoL esports dialogue. Could you tell me your name and a bit about yourself?`': {
         '#GET_NAME_GPT #GET_NAME': {
             '#IF(#GET_NEWNAME) `Nice to meet you,` #NAME #PlayerActivity': 'DIVERGE',
-            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'DIVERGE',  # TODO: UPDATE PLAYER_INFO VAR THROUGHOUT CONVERSATION
+            '#IF(#GET_OLDNAME) `Welcome back!` #NAME `!`': 'DIVERGE',
             'error': {
                 '`Nice to meet you!`': 'DIVERGE'
             }

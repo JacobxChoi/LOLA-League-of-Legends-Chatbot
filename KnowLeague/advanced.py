@@ -1,7 +1,7 @@
 def advanced():
     advanced = { #user has just mentioned that they actively watch the game mentioned in casual.
         'state': 'advanced',
-        '`What did you think about the game?`': { #TODO: HANDLE CASES LIKE "I LIKED IT"
+        '`What did you think about the game?`': {
             'state':'thoughtsGame',
             '[{good, competitive, close, fun, well, liked}]': {
                 '`Who do you think performed the best?`': {
@@ -72,7 +72,7 @@ def advanced():
                 }
             },
             '[{boring, bad, #LEM(stomp), [not close]}]': {
-                '#CLOSE2` Who do you think was the winning factor for the game?`': { #Should reply with if the game was close or not
+                '` Who do you think was the winning factor for the game?`': { #Should reply with if the game was close or not
                     '[$BEST_PLAYER=#ONT(teams)]': {
                         '#IF($BEST_PLAYER = #BESTPLAYER)': {
                             'score': 1.0,
@@ -95,7 +95,6 @@ def advanced():
             },
             'error': {
                 '`I\'m not sure if I understood. Did you think the game was good, or bad?`': 'thoughtsGame'
-                # TODO: I guess error state is useful there when the user give other response than "good"...
             },
 
         },

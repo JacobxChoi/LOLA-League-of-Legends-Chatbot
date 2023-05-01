@@ -24,7 +24,7 @@ def casual():
                                                         'It had one of the craziest starts to a game I have ever seen.`': {
                                                             '{why, how, what}': {
                                                                 '`By the time one jungler was level six, the enemy top laner was only level two. '
-                                                                'I won\'t spoil the rest of the game, but you should give it a watch.`': { #TODO: EXAPND CONVO
+                                                                'I won\'t spoil the rest of the game, but you should give it a watch.`': {
                                                                     '[{nope, no, not, cant, wont, dont, cannot}]': {
                                                                         '`Alrighty. I really think you should give it a watch. Have a good rest of your day!`': 'end'
                                                                     },
@@ -39,9 +39,8 @@ def casual():
                                                                 'error': 'end'
                                                             },
                                                             '{yes, ok, yeah, sure, fun, alright, cool, [sounds, {fun, good}]}': {
-                                                                #TODO: Store the match
                                                                 '`Alrighty! Let me know what you think of it later!`': 'end'
-                                                            },
+                                                           },
                                                             '{no, not, nah, pass, [im, {good, fine}]}': {
                                                                 '`Oh, ok... Do you want another game to watch?`': {
                                                                     '[{yes, yeah, ok, sure, watch}]': {
@@ -66,11 +65,11 @@ def casual():
                                                                 }
                                                             },
                                                             'error': {
-                                                                '`Okay I gotcha.`': 'end' #TODO: EXPAND CONVO
+                                                                '`Okay I gotcha.`': 'end'
                                                             }
                                                         }
                                                     },
-                                                    '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]': { #TODO: EXPAND CONVO
+                                                    '[{no, not, nah, pass, im good, im fine, i am good, i am fine}]': {
                                                         '`Alrighty! I\'ll see you later!`': 'end'
                                                     }
                                                 },
@@ -78,15 +77,15 @@ def casual():
                                                         '`Then do you want to talk about something else? I mainly can talk about teams, recent games, and information about the game`': {
                                                             'state': 'somethingElse',
                                                             '{team, teams}': {
-                                                                '`What team do you wanna talk about then?`': 'describeTeam' #TODO
+                                                                '`What team do you wanna talk about then?`': 'describeTeam'
                                                             },
                                                             '{[{recent, recently, past}, {match, game}]}': {
-                                                                '`Which match?`': 'describeMatch' #TODO EXPAND CONVO
+                                                                '`Which match?`': 'describeMatch'
                                                             },
                                                             '{information, info, game, match, league, lol}': {
-                                                                '`What part of league do you want to talk about?`': 'describeLeague' #TODO
+                                                                '`What part of league do you want to talk about?`': 'describeLeague'
                                                             },
-                                                            '{no, not, nah, pass, [im, {good, fine}]}': { #TODO: REROUTE CONVO
+                                                            '{no, not, nah, pass, [im, {good, fine}]}': {
                                                                 '`I\'ll see you later then! Bye!`': 'end'
                                                             },
                                                             '{yes, ok, yeah, sure, fun, alright, cool, [sounds, {fun, good}]}': {
@@ -203,7 +202,7 @@ def casual():
                             '[{better, capable, skilled}]':{
                                 '`That\'s fair. I still think Keira is the best though. His ability to carry the team is unparalleled.`':'end'
                             },
-                            '[{worse, unskilled, [as good]}]':{ #TODO: FINISH
+                            '[{worse, unskilled, [as good]}]':{
                                 '``'
                             }
                         }
@@ -211,7 +210,7 @@ def casual():
                 }
             },
             '[no, not, cant, wont, dont]':{ #I don't really watch keria or EDG
-                '`No worries. What other teams do you prefer watching?`':{ #TODO: FINISH
+                '`No worries. What other teams do you prefer watching?`':{
 
                 }
             },
@@ -228,7 +227,7 @@ def casual():
                         '`I agree!` $HIGHLIGHT_PLAYER `has been doing well lately. Do you think they\'ll continue to do well?`':{
                             'state':'playerWellness',
                             '[{yes, well}]':{
-                                '`I agree! Their stats are above average this season, and I think they will help their team go far!`':'casual' #TODO: CONTRADICTION, BECAUSE NO API
+                                '`I agree! Their stats are above average this season, and I think they will help their team go far!`':'casual'
                             },
                             '[{no, wont, disagree, [definitely, not], [absolutely, not]}]':{
                                 '`I see. Their stats are below average this season, so maybe they won\'t do too well.`':'casual' #LOOPS BACK TO BEGINNING OF CONVO
@@ -246,7 +245,7 @@ def casual():
                     'score': 2.0,
 
                     '[$WINNINGTEAM=#ONT(teams),{beat, won, defeated}]':{ #USER: yeah, ___ won, and it was a really close game!
-                        '`Wow! I\'m sure that was a really satisfying win for`$WINNINGTEAM`.`':'end' #TODO: HANDLE ERROR
+                        '`Wow! I\'m sure that was a really satisfying win for`$WINNINGTEAM`.`':'end'
                     },
                     '[{no, not, wasnt}]':{ #USER: no, the game wasnt really close
                         '`Dang. I\'m not a fan of one-sided games either.`':'end'
@@ -354,37 +353,37 @@ def casual():
                             '[{fans, fanbase, community}]': {
                                 '`They naturally will have a strong community because they\'re such a good team. Their '
                                 'fan base is the best, probably because I\'m a part of it. On the other hand, who\'s your'
-                                ' favorite player on EDG?`': { #TODO
+                                ' favorite player on EDG?`': {
                                     'state': 'playerEDG',
                                     '[{ale, jia le, jiale, top}]': {
                                         '`That\'s a strong choice. I think he\'s a really talented top laner. EDG Fofo '
-                                        'is still my favorite player on this team though. I think you should check him out too.`': 'end' #TODO
+                                        'is still my favorite player on this team though. I think you should check him out too.`': 'end'
                                     },
                                     '[{jiejie, li jie, lijie, jungle, jungler}]': {
                                         '`That\'s a strong choice. I think he\'s a really talented jungler. His ganks '
                                         'always seems to work. EDG Fofo is still my favorite player on this team '
-                                        'though. I think you should focus on him too.`': 'end' # TODO
+                                        'though. I think you should focus on him too.`': 'end'
                                     },
                                     '[{fofo, chun lan, chunlan, mid, middle, midlaner}]': {
                                         '`That\'s a strong choice. I think he\'s one of the best midlaners in the world. His roam '
                                         'timings, laning, and mechanics are super strong. That\'s why he is my favorite player on this team '
-                                        'I\'m glad we have similar interests.`': 'end' # TODO
+                                        'I\'m glad we have similar interests.`': 'end'
                                     },
                                     '[{leave, hong chao, hongchao, bot, adc, bottom, botlaner}]': {
                                         '`That\'s an interesting choice. I think he\'s a really good adc. His team-fighting '
-                                        'and laning is really strong. However, Meiko makes Leave seem a lot stronger in lane.`': 'end'  # TODO
+                                        'and laning is really strong. However, Meiko makes Leave seem a lot stronger in lane.`': 'end'
                                     },
                                     '[{meiko, tian ye, ye, sup, support}]': {
                                         '`Wow! He\'s also my favorite player on EDG! What makes you think he\'s so good?'
-                                        ' I like him cause of his laning phase.`': 'end'  # TODO
+                                        ' I like him cause of his laning phase.`': 'end'
                                     },
                                     '[{monki, meng qi, mengqi, jungle, jungler}]': {
                                         '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
-                                        'substitute player! You must really watch EDG.`': 'end'  # TODO
+                                        'substitute player! You must really watch EDG.`': 'end'
                                     },
                                     '[{fisher, jeong tae, jeongtae, mid, middle, midlane, midlaner}]': {
                                         '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
-                                        'substitute player! You must really watch EDG.`': 'end'  # TODO
+                                        'substitute player! You must really watch EDG.`': 'end'
                                     },
                                     'error': {
                                         '`I don\'t think that person currently plays for EDG. Try another player.`': 'playerEDG'
@@ -412,33 +411,33 @@ def casual():
             },
             '[{ale, jia le, jiale, top}]': {
                 '`That\'s a strong choice. I think he\'s a really talented top laner. EDG Fofo '
-                'is still my favorite player on this team though. I think you should focus on him too.`': 'end'  # TODO
+                'is still my favorite player on this team though. I think you should focus on him too.`': 'end'
             },
             '[{jiejie, li jie, lijie, jungle, jungler}]': {
                 '`Awesome!. I think Jiejie\'s a really talented jungler. His ganks '
                 'always seems to work. EDG Fofo is still my favorite player on this team '
-                'though. I think you should focus on him too.`': 'end'  # TODO
+                'though. I think you should focus on him too.`': 'end'
             },
             '[{fofo, chun lan, chunlan, mid, middle, midlaner}]': {
                 '`I think Fofo is the key to EDG\'s success. Both his roam '
                 'timers and laning is strong. That\'s why he is my favorite player on this team '
-                'I\'m glad we have similar interests.`': 'end'  # TODO
+                'I\'m glad we have similar interests.`': 'end'
             },
             '[{leave, hong chao, hongchao, bot, adc, bottom, botlaner}]': {
                 '`That\'s an interesting choice. I think he\'s a really good adc. His team-fighting '
-                'and laning is really strong. However, Meiko makes Leave seem a lot stronger in lane.`': 'end'  # TODO
+                'and laning is really strong. However, Meiko makes Leave seem a lot stronger in lane.`': 'end'
             },
             '[{meiko, tian ye, ye, sup, support}]': {
                 '`Wow! He\'s one of my favorite players on EDG! What makes you think he\'s so good?'
-                ' I like him cause of his laning phase.`': 'end'  # TODO
+                ' I like him cause of his laning phase.`': 'end'
             },
             '[{monki, meng qi, mengqi, jungle, jungler}]': {
                 '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
-                'substitute player! You must really watch EDG.`': 'end'  # TODO
+                'substitute player! You must really watch EDG.`': 'end'
             },
             '[{fisher, jeong tae, jeongtae, mid, middle, midlane, midlaner}]': {
                 '`Wow! That is a very interesting choice. I didn\'t expect you to say a '
-                'substitute player! You must really watch EDG.`': 'end'  # TODO
+                'substitute player! You must really watch EDG.`': 'end'
             },
             'error': {
                 '`Are you sure that player currently plays for EDG? I only know players who play for them right now. Try another player.`': 'playerEDG'
@@ -558,5 +557,3 @@ def casual():
         }
     }
     return casual, edg, keria
-
-#TODO connect these to convo.py
