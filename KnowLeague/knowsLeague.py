@@ -68,7 +68,7 @@ def knowsLeague():
                 'state':'favRegion2Test',
                 '`Did you watch the`$T_TOURNEY $T_MATCH `where` $T_WINNER `beat` $T_LOSER `?`': {
                     'state':'firstSuggestion',
-                    '[{yes, yeah,  watched, probably, yea, maybe}]':'advanced', #shows that user actively watches current esports games.
+                    '[{yes, yeah, watched, probably, yea, maybe}]':'advanced', #shows that user actively watches current esports games.
                     '[{no, [did not], didnt, havent, [have not], nope, dont}]':{ #next favorite region?
                         '#RANDGAME `No Worries. How about the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`':{
                             'state':'secondSuggestion',
@@ -78,7 +78,7 @@ def knowsLeague():
                                 '`All good!`':'casual'
                             },
                             'error':{
-                                'Sorry, could you rephrase what you said?': 'secondSuggestion'
+                                '`Sorry, could you rephrase what you said?`': 'secondSuggestion'
                             }
                         }
                     },
@@ -86,7 +86,7 @@ def knowsLeague():
                         '`That\'s awesome. Yeah, it was cool to see` $T_WINNER `win`#RANDGAME `Did you also happe to watch the `$T_TOURNEY $T_MATCH `game where` $T_WINNER `beat` $T_LOSER `?`': 'secondSuggestion'
                     },
                     'error':{
-                        'Sorry, could you rephrase what you said?':'firstSuggestion'
+                        '`Sorry, could you rephrase what you said?`':'firstSuggestion'
                     }
                 }
             },
