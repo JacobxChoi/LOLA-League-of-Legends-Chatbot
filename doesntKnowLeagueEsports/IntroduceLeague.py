@@ -34,7 +34,6 @@ def IntroduceLeague():
                                                         '`The skill is really learned and honed with thinking in actual practice, but for sure I can give you some hints if you\'d like to know.`': {
                                                             '[#AgreementChecker]': {
                                                                 '#IF(#POSITIVE_AGREEMENT) `Wow, it\'s great you have interest in it. I can give you the experience I summarized from playing the game. More is for you to explore`': 'MinionwaveControl',
-                                                                # TODO complete the branch of the dialogue
                                                                 '#IF(#NEGATIVE_AGREEMENT) `That\'s alright. I guess it\'s more important for a beginner to find an interest for the game rather than getting overwhelmed with details. What else do you want to know`': 'IntroduceLeague',
                                                                 'error': {
                                                                     '`Forgive me for my inability to understand you, but do you know the goal of League of Legends?`': 'Directed_Questions'
@@ -59,8 +58,6 @@ def IntroduceLeague():
                                             '[{understand, get}]': {
                                                 '`ξ( ✿＞◡❛)`': 'MinionImportant'
                                             },
-
-                                            # TODO: add more options here
 
                                             'error': {
                                                 '`(◉◞౪◟◉) Pardon my absent-mindedness just then. Could you say that again?': 'minion'
@@ -410,7 +407,7 @@ def IntroduceLeague():
                             },
                             '[{played}, {moba}]': {
                                 '`Wow, which one did you play? Have you played DOTA 2 or Vain Glory ?`': {
-                                    '[dota]': {  # TODO: Expand later
+                                    '[dota]': {
                                         'score': '1.0',
                                         '`Then I guess you\'ll get a handle on League of Legends quicker, since DOTA shares a lot of core elements with LoL despite some of its more complex systems.`': {
                                             'state': 'compareWithDOTA',
@@ -429,7 +426,7 @@ def IntroduceLeague():
                                             }
                                         }
                                     },
-                                    '[vainglory]': {  # TODO: Expand later
+                                    '[vainglory]': {
                                         'score': '1.0',
                                         '`Then I guess you\'ll be able to transition to League of Legends more smoothly, since the core elements are similar between LoL and Vainglory.`': {
                                             'state': 'compareWithVG',
@@ -460,7 +457,7 @@ def IntroduceLeague():
                             '[{what},{moba}]': {
                                 '`MOBA is an acronym for Multiplayer Online Battle Arena. In League of Legends, for example, 5 players on each team are working together in the battlefield of Summoner\'s Rift with the shared goal to destroy the other team\'s Nexus.`': {
 
-                                    '[{arena, battlefield}]': 'mapInfo',  # TODO connect to mapInfos
+                                    '[{arena, battlefield}]': 'mapInfo',
 
                                     '[{understand, get}]': {
                                         '`ξ( ✿＞◡❛) Do you have other questions about League of Legends?`': 'IntroduceLeague'
@@ -544,7 +541,6 @@ def IntroduceLeague():
             '[{watching, streaming}]': 'StreamingPlatforms',
             '[{item}]': 'items',
             '[recommend]': 'InnerChampionRecom',
-            # TODO: HANDLE CASE WHERE USER SAYS NO
             'error': {
                 '`Sorry, I didn\'t catch that, could you say it again?`': 'IntroduceLeague'
             }
